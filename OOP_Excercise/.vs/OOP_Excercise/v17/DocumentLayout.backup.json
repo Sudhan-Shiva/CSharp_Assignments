@@ -5,6 +5,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|solutionrelative:oop_excercise\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\rectangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|solutionrelative:oop_excercise\\rectangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\circle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|solutionrelative:oop_excercise\\circle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\shape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_Excercise.csproj|solutionrelative:oop_excercise\\shape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +34,50 @@
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Program.cs",
               "RelativeDocumentMoniker": "OOP_Excercise\\Program.cs",
-              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Program.cs",
-              "RelativeToolTip": "OOP_Excercise\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Program.cs*",
+              "RelativeToolTip": "OOP_Excercise\\Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-09T11:52:16.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Shape.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Shape.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Shape.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Shape.cs",
+              "RelativeToolTip": "OOP_Excercise\\Shape.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T13:43:31.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Circle.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Circle.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Circle.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Circle.cs",
+              "RelativeToolTip": "OOP_Excercise\\Circle.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T13:45:38.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Rectangle.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Rectangle.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Rectangle.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Rectangle.cs",
+              "RelativeToolTip": "OOP_Excercise\\Rectangle.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T13:45:35.319Z",
               "EditorCaption": ""
             }
           ]
