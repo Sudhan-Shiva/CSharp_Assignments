@@ -1,0 +1,15 @@
+F:\C# Projects\ContactManager\ContactManager\bin\Debug\net8.0\ContactManager.exe
+F:\C# Projects\ContactManager\ContactManager\bin\Debug\net8.0\ContactManager.deps.json
+F:\C# Projects\ContactManager\ContactManager\bin\Debug\net8.0\ContactManager.runtimeconfig.json
+F:\C# Projects\ContactManager\ContactManager\bin\Debug\net8.0\ContactManager.dll
+F:\C# Projects\ContactManager\ContactManager\bin\Debug\net8.0\ContactManager.pdb
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.GeneratedMSBuildEditorConfig.editorconfig
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.AssemblyInfoInputs.cache
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.AssemblyInfo.cs
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.csproj.CoreCompileInputs.cache
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.sourcelink.json
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.dll
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\refint\ContactManager.dll
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.pdb
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ContactManager.genruntimeconfig.cache
+F:\C# Projects\ContactManager\ContactManager\obj\Debug\net8.0\ref\ContactManager.dll
