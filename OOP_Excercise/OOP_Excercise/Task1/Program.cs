@@ -1,4 +1,4 @@
-﻿using OOP_Excercise.Task1.DerivedClass;
+﻿using OOP_TASK1.Task1.DerivedClass;
 
 //Instantiate Object of derived class 'Rectangle'
 Rectangle rectangle = new Rectangle(2,7,"Blue");

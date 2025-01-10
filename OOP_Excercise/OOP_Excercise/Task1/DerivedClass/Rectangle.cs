@@ -1,6 +1,6 @@
-﻿using OOP_Excercise.Task1.BaseClass;
+﻿using OOP_TASK1.Task1.BaseClass;
 
-namespace OOP_Excercise.Task1.DerivedClass
+namespace OOP_TASK1.Task1.DerivedClass
 {
     //Define Derived class 'Rectangle'
     public class Rectangle : Shape

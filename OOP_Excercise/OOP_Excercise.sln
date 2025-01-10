@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Excercise", "OOP_Excercise\OOP_Excercise.csproj", "{36A1B69C-EB22-418F-B284-47A5310B4DB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_TASK1", "OOP_Excercise\OOP_TASK1.csproj", "{36A1B69C-EB22-418F-B284-47A5310B4DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_TASK2", "OOP_TASK2\OOP_TASK2.csproj", "{754ECEFB-F356-43D0-A72C-6A57935CA918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{36A1B69C-EB22-418F-B284-47A5310B4DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A1B69C-EB22-418F-B284-47A5310B4DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A1B69C-EB22-418F-B284-47A5310B4DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{754ECEFB-F356-43D0-A72C-6A57935CA918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{754ECEFB-F356-43D0-A72C-6A57935CA918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{754ECEFB-F356-43D0-A72C-6A57935CA918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{754ECEFB-F356-43D0-A72C-6A57935CA918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\OOP_TASK1.csproj",
-      "projectName": "OOP_TASK1",
-      "projectPath": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\OOP_TASK1.csproj",
+      "projectUniqueName": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\OOP_TASK2.csproj",
+      "projectName": "OOP_TASK2",
+      "projectPath": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\OOP_TASK2.csproj",
       "packagesPath": "C:\\Users\\sudhan.shiva\\.nuget\\packages\\",
-      "outputPath": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\obj\\",
+      "outputPath": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

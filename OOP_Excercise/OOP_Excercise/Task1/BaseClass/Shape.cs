@@ -1,4 +1,4 @@
-﻿namespace OOP_Excercise.Task1.BaseClass
+﻿namespace OOP_TASK1.Task1.BaseClass
 {
     //Define the Base Class 'Shape'
     public abstract class Shape
