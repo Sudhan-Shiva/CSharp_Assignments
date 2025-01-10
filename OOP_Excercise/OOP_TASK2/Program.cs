@@ -8,7 +8,7 @@ Manager manager = new Manager("John",(decimal)60000);
 Developer developer = new Developer("Eren",(decimal)40000);
 
 //Print the details of the object
-Console.WriteLine(manager.PrintDetails());
-Console.WriteLine(developer.PrintDetails());
+Console.WriteLine(manager.PrintDetails);
+Console.WriteLine(developer.PrintDetails);
 Console.WriteLine("Press any key to Exit !!");
 Console.ReadKey();

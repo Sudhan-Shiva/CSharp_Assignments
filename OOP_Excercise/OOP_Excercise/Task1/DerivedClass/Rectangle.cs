@@ -13,11 +13,9 @@ namespace OOP_TASK1.Task1.DerivedClass
             Width = widthOfRectangle;
             Height = heightOfRectangle;
             Colour = colourOfRectangle;
+            ShapeType = "Rectangle";
         }
         //Override the CalculateArea Method
         public override double CalculateArea() => Width * Height;
-        //Override the PrintDetails Method
-        public override string PrintDetails() => $"Shape : Rectangle\nColor:{Colour}\nArea:{CalculateArea()}\n";
     }
-
 }

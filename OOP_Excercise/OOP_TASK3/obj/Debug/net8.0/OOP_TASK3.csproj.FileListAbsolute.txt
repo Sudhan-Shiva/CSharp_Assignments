@@ -1,0 +1,15 @@
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\bin\Debug\net8.0\OOP_TASK3.exe
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\bin\Debug\net8.0\OOP_TASK3.deps.json
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\bin\Debug\net8.0\OOP_TASK3.runtimeconfig.json
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\bin\Debug\net8.0\OOP_TASK3.dll
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\bin\Debug\net8.0\OOP_TASK3.pdb
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.GeneratedMSBuildEditorConfig.editorconfig
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.AssemblyInfoInputs.cache
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.AssemblyInfo.cs
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.csproj.CoreCompileInputs.cache
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.sourcelink.json
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.dll
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\refint\OOP_TASK3.dll
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.pdb
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\OOP_TASK3.genruntimeconfig.cache
+F:\C#_Assignments\OOP_Excercise\OOP_TASK3\obj\Debug\net8.0\ref\OOP_TASK3.dll

@@ -5,12 +5,13 @@
     {
         //Define the property 'Colour'
         public string Colour { get; set; }
+        //Define the property 'ShapeType'
+        public string ShapeType {  get; set; }
         //Define Abstract Method 'CalculateArea'
         public abstract double CalculateArea();
-        //Define Abstract Method 'PrintDetails'
-        public abstract string PrintDetails();
+        //Define Method 'PrintDetails' to print the details of the shape
+        public string PrintDetails => $"Shape : {ShapeType}\nColor:{Colour}\nArea:{CalculateArea()}\n";
     }
-
 }
 
 

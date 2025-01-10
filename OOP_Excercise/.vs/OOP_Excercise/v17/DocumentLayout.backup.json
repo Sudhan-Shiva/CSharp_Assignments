@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "F:\\C#_Assignments\\OOP_Excercise\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|f:\\c#_assignments\\oop_excercise\\oop_task2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|solutionrelative:oop_task2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\task1\\baseclass\\shape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|solutionrelative:oop_excercise\\task1\\baseclass\\shape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|f:\\c#_assignments\\oop_excercise\\oop_task2\\task2\\baseclass\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|solutionrelative:oop_task2\\task2\\baseclass\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\task1\\derivedclass\\circle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|solutionrelative:oop_excercise\\task1\\derivedclass\\circle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|f:\\c#_assignments\\oop_excercise\\oop_task2\\task2\\derivedclass\\developer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|solutionrelative:oop_task2\\task2\\derivedclass\\developer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\task1\\derivedclass\\rectangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|solutionrelative:oop_excercise\\task1\\derivedclass\\rectangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|f:\\c#_assignments\\oop_excercise\\oop_task2\\task2\\derivedclass\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754ECEFB-F356-43D0-A72C-6A57935CA918}|OOP_TASK2\\OOP_TASK2.csproj|solutionrelative:oop_task2\\task2\\derivedclass\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|f:\\c#_assignments\\oop_excercise\\oop_excercise\\task1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36A1B69C-EB22-418F-B284-47A5310B4DB1}|OOP_Excercise\\OOP_TASK1.csproj|solutionrelative:oop_excercise\\task1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,53 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Manager.cs",
-              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\DerivedClass\\Manager.cs",
-              "RelativeDocumentMoniker": "OOP_TASK2\\Task2\\DerivedClass\\Manager.cs",
-              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\DerivedClass\\Manager.cs",
-              "RelativeToolTip": "OOP_TASK2\\Task2\\DerivedClass\\Manager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\Program.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Task1\\Program.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\Program.cs",
+              "RelativeToolTip": "OOP_Excercise\\Task1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T04:14:08.44Z",
+              "WhenOpened": "2025-01-10T07:10:55.877Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Developer.cs",
-              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\DerivedClass\\Developer.cs",
-              "RelativeDocumentMoniker": "OOP_TASK2\\Task2\\DerivedClass\\Developer.cs",
-              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\DerivedClass\\Developer.cs",
-              "RelativeToolTip": "OOP_TASK2\\Task2\\DerivedClass\\Developer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAATAAAAAAAAAA==",
+              "Title": "Rectangle.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\DerivedClass\\Rectangle.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Task1\\DerivedClass\\Rectangle.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\DerivedClass\\Rectangle.cs",
+              "RelativeToolTip": "OOP_Excercise\\Task1\\DerivedClass\\Rectangle.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T04:09:47.958Z",
+              "WhenOpened": "2025-01-10T07:10:14.317Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\BaseClass\\Employee.cs",
-              "RelativeDocumentMoniker": "OOP_TASK2\\Task2\\BaseClass\\Employee.cs",
-              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Task2\\BaseClass\\Employee.cs",
-              "RelativeToolTip": "OOP_TASK2\\Task2\\BaseClass\\Employee.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAZAAAAAAAAAA==",
+              "Title": "Circle.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\DerivedClass\\Circle.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Task1\\DerivedClass\\Circle.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\DerivedClass\\Circle.cs",
+              "RelativeToolTip": "OOP_Excercise\\Task1\\DerivedClass\\Circle.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T04:08:53.571Z",
+              "WhenOpened": "2025-01-10T07:08:46.219Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Program.cs",
-              "RelativeDocumentMoniker": "OOP_TASK2\\Program.cs",
-              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_TASK2\\Program.cs",
-              "RelativeToolTip": "OOP_TASK2\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Title": "Shape.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\BaseClass\\Shape.cs",
+              "RelativeDocumentMoniker": "OOP_Excercise\\Task1\\BaseClass\\Shape.cs",
+              "ToolTip": "F:\\C#_Assignments\\OOP_Excercise\\OOP_Excercise\\Task1\\BaseClass\\Shape.cs*",
+              "RelativeToolTip": "OOP_Excercise\\Task1\\BaseClass\\Shape.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T03:44:58.769Z",
+              "WhenOpened": "2025-01-10T07:08:35.931Z",
               "EditorCaption": ""
             }
           ]

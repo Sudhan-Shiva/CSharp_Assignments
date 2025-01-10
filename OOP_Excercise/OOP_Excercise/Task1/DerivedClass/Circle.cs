@@ -12,11 +12,9 @@ namespace OOP_TASK1.Task1.DerivedClass
         {
             Radius = radiusOfCircle;
             Colour = colourOfCircle;
+            ShapeType = "Circle";
         }
         //Override the CalculateArea Method
         public override double CalculateArea() => Math.PI * Radius * Radius;
-        //Override the PrintDetails Method
-        public override string PrintDetails() => $"Shape : Circle\nColor:{Colour}\nArea:{CalculateArea()}\n";
     }
-
 }

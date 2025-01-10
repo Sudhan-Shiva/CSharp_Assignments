@@ -10,10 +10,9 @@ namespace OOP_TASK2.Task2.DerivedClass
         {
             Name = name;
             Salary = salary;
+            Position = "Developer";
         }
         //Override the CalculateBonus Method
-        public override decimal CalculateBonus() => (decimal)0.01 * Salary;
-        //Override the PrintDetails Method
-        public override string PrintDetails() => $"Position : Developer\nName:{Name}\nSalary:{Salary}\nBonus:{CalculateBonus()}\n";
+        public override decimal CalculateBonus() => (decimal)0.01 * Salary; 
     }
 }
