@@ -50,7 +50,7 @@ namespace InventoryManager.AppFunctions
         {
             Console.WriteLine("Enter the Name of the Product that must be edited :  ");
             string editChoice = Console.ReadLine();
-            Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n [A]ll");
+            Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n");
             Console.Write("Type your Choice: ");
             string editField = Console.ReadLine();
             switch (editField.ToUpper())
