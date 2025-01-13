@@ -32,67 +32,93 @@ namespace InventoryManager.AppFunctions
         //Method to delete products in the list
         public void ProductDeletion(List<Product> productList)
         {
-            Console.Write("Enter the Name of the Product that must be deleted :  ");
-            string deleteChoice = Console.ReadLine();
-            int deleteIndex = indexSearch.ReturnIndex(productList, deleteChoice, true);
-            while (deleteIndex == -1)
+            if (productList.Count > 0)
             {
-                PrintMessages.PrintInvalidInput();
-                deleteChoice = Console.ReadLine();
-                deleteIndex = indexSearch.ReturnIndex(productList, deleteChoice, true);
+                Console.Write("Enter the Name of the Product that must be deleted :  ");
+                string deleteChoice = Console.ReadLine();
+                int deleteIndex = indexSearch.ReturnIndex(productList, deleteChoice, true);
+                while (deleteIndex == -1)
+                {
+                    PrintMessages.PrintInvalidInput();
+                    deleteChoice = Console.ReadLine();
+                    deleteIndex = indexSearch.ReturnIndex(productList, deleteChoice, true);
+                }
+                Console.WriteLine($"The Product Information of {deleteChoice} has been deleted successfully.");
+                productList.RemoveAt(deleteIndex);
             }
-            Console.WriteLine($"The Product Information of {deleteChoice} has been deleted successfully.");
-            productList.RemoveAt(deleteIndex);
+            else
+            {
+                PrintMessages.PrintListIsEmpty();
+            }
         }
 
         //Method to modify product information in the list
         public void ProductModification(List<Product> productList)
         {
-            Console.WriteLine("Enter the Name of the Product that must be edited :  ");
-            string editChoice = Console.ReadLine();
-            Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n");
-            Console.Write("Type your Choice: ");
-            string editField = Console.ReadLine();
-            switch (editField.ToUpper())
+            if (productList.Count > 0)
             {
-                case "N":
-                    Console.WriteLine("Enter the Edited Product Name : ");
-                    productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductName = Console.ReadLine();
-                    break;
-                case "I":
-                    Console.WriteLine("Enter the Edited Product ID : ");
-                    productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductId = dataValidation.CheckDataIsInt(Console.ReadLine());
-                    break;
-                case "P":
-                    Console.WriteLine("Enter the Edited Product Price : ");
-                    productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductPrice = dataValidation.CheckProductPrice(Console.ReadLine());
-                    break;
-                case "Q":
-                    Console.WriteLine("Enter the Edited Product Quantity : ");
-                    productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductQuantity = dataValidation.CheckDataIsInt(Console.ReadLine());
-                    break;
-                default:
-                    Console.WriteLine("The Provided input is invalid !!");
-                    break;
+                Console.WriteLine("Enter the Name of the Product that must be edited :  ");
+                string editChoice = Console.ReadLine();
+                Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n");
+                Console.Write("Type your Choice: ");
+                string editField = Console.ReadLine();
+                switch (editField.ToUpper())
+                {
+                    case "N":
+                        Console.WriteLine("Enter the Edited Product Name : ");
+                        productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductName = Console.ReadLine();
+                        break;
+                    case "I":
+                        Console.WriteLine("Enter the Edited Product ID : ");
+                        productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductId = dataValidation.CheckDataIsInt(Console.ReadLine());
+                        break;
+                    case "P":
+                        Console.WriteLine("Enter the Edited Product Price : ");
+                        productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductPrice = dataValidation.CheckProductPrice(Console.ReadLine());
+                        break;
+                    case "Q":
+                        Console.WriteLine("Enter the Edited Product Quantity : ");
+                        productList[indexSearch.ReturnIndex(productList, editChoice, true)].ProductQuantity = dataValidation.CheckDataIsInt(Console.ReadLine());
+                        break;
+                    default:
+                        Console.WriteLine("The Provided input is invalid !!");
+                        break;
+                }
+            }
+            else
+            {
+                PrintMessages.PrintListIsEmpty();
             }
         }
 
         //Method to sort the products in the list
         public void ProductSort(List<Product> productList)
         {
-            Console.Write("Do you want to sort by Name or ID ?\n[N]ame/[I]d :");
-            string sortOrder = Console.ReadLine();
-            if (sortOrder.ToUpper() == "N")
+            if (productList.Count > 0)
             {
-                List<Product> sortedList = productList.OrderBy(o => o.ProductName).ToList();
-                productList = sortedList;
+                Console.Write("Do you want to sort by Name or ID ?\n[N]ame/[I]d :");
+                string sortOrder = Console.ReadLine();
+                if (sortOrder.ToUpper() == "N")
+                {
+                    List<Product> sortedList = productList.OrderBy(o => o.ProductName).ToList();
+                    productList = sortedList;
+                    Console.WriteLine("The Product List is Sorted Successfully");
+                }
+                else if (sortOrder.ToUpper() == "I")
+                {
+                    List<Product> sortedList = productList.OrderBy(o => o.ProductId).ToList();
+                    productList = sortedList;
+                    Console.WriteLine("The Product List is Sorted Successfully");
+                }
+                else
+                {
+                    PrintMessages.PrintInvalidInput();
+                }
             }
-            else if (sortOrder.ToUpper() == "I")
+            else
             {
-                List<Product> sortedList = productList.OrderBy(o => o.ProductId).ToList();
-                productList = sortedList;
+                PrintMessages.PrintListIsEmpty();
             }
-            Console.WriteLine("The Product List is Sorted Successfully");
         }
 
         //Method to view the product names in the list
@@ -105,10 +131,31 @@ namespace InventoryManager.AppFunctions
                 {
                     Console.WriteLine($"{i}.{productList[i - 1].ProductName}");
                 }
+                Console.Write("Do you want to view the Product Information of any specific Product ?\nY/N : ");
+                string viewChoice = Console.ReadLine();
+                while (viewChoice.ToUpper() != "Y" && viewChoice.ToUpper() != "N")
+                {
+                    PrintMessages.PrintInvalidInput();
+                    viewChoice = Console.ReadLine();
+                }
+                if (viewChoice.ToUpper() == "Y")
+                {
+                    Console.Write("Search by [N]ame / [I]d : ");
+                    string searchField = Console.ReadLine();
+                    while (searchField.ToUpper() != "I" && searchField.ToUpper() != "N")
+                    {
+                        PrintMessages.PrintInvalidInput();
+                        searchField = Console.ReadLine();
+                    }
+                    bool isProductName = (searchField.ToUpper() == "N") ? true : false;
+                    Console.Write("Kindly provide the Name/ID of the Product that must be viewed : ");
+                    string searchValue = Console.ReadLine();
+                    productInformation.PrintProductInformation(productList, searchValue, isProductName);
+                }
             }
             else
             {
-                Console.WriteLine("The Product List is Empty.");
+                PrintMessages.PrintListIsEmpty();
             }
         }
 
@@ -154,38 +201,10 @@ namespace InventoryManager.AppFunctions
                 {
                     Console.WriteLine("There are no matches found.");
                 }
-                else
-                {
-                    Console.Write("Do you want to view the Product Information of any specific Product ?\nY/N : ");
-                    string viewChoice = Console.ReadLine();
-                    while (viewChoice.ToUpper() != "Y" && viewChoice.ToUpper() != "N")
-                    {
-                        PrintMessages.PrintInvalidInput();
-                        viewChoice = Console.ReadLine();
-                    }
-                    if (viewChoice.ToUpper() == "Y")
-                    {
-                        Console.Write("Search by [N]ame / [I]d : ");
-                        string searchField = Console.ReadLine();
-                        while (searchField.ToUpper() != "I" && searchField.ToUpper() != "N")
-                        {
-                            PrintMessages.PrintInvalidInput();
-                            searchField = Console.ReadLine();
-                        }
-                        bool isProductName = (searchField.ToUpper() == "N") ? true : false;
-                        Console.Write("Kindly provide the Name/ID of the Product that must be viewed : ");
-                        string searchValue = Console.ReadLine();
-                        productInformation.PrintProductInformation(productList, searchValue, isProductName);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The Product List is exited.");
-                    }
-                }
             }
             else
             {
-                Console.WriteLine("No Product Information has been added yet");
+                PrintMessages.PrintListIsEmpty();
             }
         }
     }

@@ -15,5 +15,11 @@
             Console.Write("Type your Choice: ");
             return Console.ReadLine();
         }
+
+        public static void PrintListIsEmpty()
+        {
+            Console.WriteLine("The Product List is Empty");
+        }
+
     }
 }
