@@ -5,6 +5,7 @@ namespace ContactManager.MatchIndex
 {
     public class IndexSearch
     {
+        GetValidInput getValidInput = new GetValidInput();
         //Create the required object references 
         DataValidation dataValidation = new DataValidation();
         //Method to return the index of the matching contact in the list
@@ -18,6 +19,7 @@ namespace ContactManager.MatchIndex
                     return contactList.IndexOf(contact);
                 }
             }
+
             //If no matching contact is found, -1 is returned.
             return -1;
         }
@@ -25,7 +27,7 @@ namespace ContactManager.MatchIndex
         //Method to check for the matched contact based on name or phone number
         public bool isNameOrPhoneNumberPresent(ContactInformation contact, string inputParameter, bool isContactName)
         {
-            return isContactName ? contact.Name == inputParameter : contact.PhoneNumber == dataValidation.CheckPhoneNumber(inputParameter);
+            return isContactName ? contact.Name == inputParameter : contact.PhoneNumber == getValidInput.GetValidPhoneNumber(inputParameter);
         }
     }
 }

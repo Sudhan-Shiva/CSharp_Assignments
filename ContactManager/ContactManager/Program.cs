@@ -9,7 +9,8 @@ string userChoice;
 //Perform the function of the application
 do
 {
-    userChoice = PrintMessages.PrintUserOptions();
+    PrintMessages.PrintUserOptions();
+    userChoice = Console.ReadLine();
     ApplicationFunction applicationFunction = new ApplicationFunction();
     applicationFunction.appFunctions(contactList, userChoice);  
 } while (userChoice.ToUpper() != "E");

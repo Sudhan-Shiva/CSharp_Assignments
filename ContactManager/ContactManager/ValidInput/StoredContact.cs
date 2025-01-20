@@ -17,6 +17,7 @@ namespace ContactManager.ValidInput
                 Console.Write("No matches found !!\nGive a Valid input:");
                 isContactPresent = (indexSearch.ReturnIndex(contactList, Console.ReadLine(), isProductName) == -1);
             }
+
             return (indexSearch.ReturnIndex(contactList, inputField, isProductName));
         }
     }

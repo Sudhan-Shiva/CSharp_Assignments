@@ -8,11 +8,11 @@ namespace ContactManager.Utility
     public class ApplicationWorking
     {
         //Create the required object references
-        DataValidation dataValidation = new DataValidation();
         IndexSearch indexSearch = new IndexSearch();
         UniqueInformation uniqueInformation = new UniqueInformation();
         ContactDetails contactDetails = new ContactDetails();
         StoredContact storedContact = new StoredContact();
+        GetValidInput getValidInput = new GetValidInput();
 
         //Method to add new contacts in the list
         public void ContactAddition(List<ContactInformation> contactList)
@@ -20,9 +20,9 @@ namespace ContactManager.Utility
             Console.Write("Enter the Contact Name :  ");
             string contactName = uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), true);
             Console.Write("Enter the Contact Email :  ");
-            string contactEmail = dataValidation.CheckProperEmail(Console.ReadLine());
+            string contactEmail = getValidInput.GetValidEmail(Console.ReadLine());
             Console.Write("Enter the Contact Phone Number :  ");
-            long contactPhoneNumber = dataValidation.CheckPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
+            long contactPhoneNumber = getValidInput.GetValidPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
             Console.Write("Enter the Contact Remarks : ");
             string contactRemarks = Console.ReadLine();
             ContactInformation contact = new ContactInformation(contactName, contactEmail, contactPhoneNumber, contactRemarks);
@@ -44,6 +44,7 @@ namespace ContactManager.Utility
                     deleteChoice = Console.ReadLine();
                     deleteIndex = indexSearch.ReturnIndex(contactList, deleteChoice, true);
                 }
+
                 Console.WriteLine($"The contact Information of {deleteChoice} has been deleted successfully.");
                 contactList.RemoveAt(deleteIndex);
             }
@@ -71,11 +72,11 @@ namespace ContactManager.Utility
                         break;
                     case "E":
                         Console.Write("Enter the Edited Contact Email : ");
-                        contactList[editChoice].Email = dataValidation.CheckProperEmail(Console.ReadLine());
+                        contactList[editChoice].Email = getValidInput.GetValidEmail(Console.ReadLine());
                         break;
                     case "P":
                         Console.Write("Enter the Edited Contact Phone Number : ");
-                        contactList[editChoice].PhoneNumber = dataValidation.CheckPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
+                        contactList[editChoice].PhoneNumber = getValidInput.GetValidPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
                         break;
                     case "R":
                         Console.Write("Enter the Edited Contact Remarks : ");

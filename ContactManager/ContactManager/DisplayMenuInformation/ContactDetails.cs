@@ -18,8 +18,8 @@ namespace ContactManager.DisplayMenuInformation
                 PrintMessages.PrintInvalidInput();
                 viewContact = Console.ReadLine();
                 printIndex = indexSearch.ReturnIndex(contactList, viewContact, isContactName);
-
             }
+
             //Print the information of the contact
             Console.WriteLine($"Contact Name : {contactList[printIndex].Name}");
             Console.WriteLine($"Contact Phone Number : {contactList[printIndex].PhoneNumber}");

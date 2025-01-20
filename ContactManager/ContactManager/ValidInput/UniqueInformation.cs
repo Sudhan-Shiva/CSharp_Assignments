@@ -18,6 +18,7 @@ namespace ContactManager.ValidInput
                 Console.Write("Give a new Field : ");
                 inputParameter = Console.ReadLine();
             }
+
             return inputParameter;
         }
     }
