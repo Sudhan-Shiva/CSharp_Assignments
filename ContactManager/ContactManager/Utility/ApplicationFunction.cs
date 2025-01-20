@@ -1,6 +1,6 @@
-﻿using ContactManager.ContactClass;
+﻿using ContactManager.Contact;
 
-namespace ContactManager.AppFunctions
+namespace ContactManager.Utility
 {
     public class ApplicationFunction
     {

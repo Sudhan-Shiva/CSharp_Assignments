@@ -1,4 +1,4 @@
-﻿namespace ContactManager.ContactClass
+﻿namespace ContactManager.Contact
 {
     //Define Class to Store the Contact Information
     public class ContactInformation

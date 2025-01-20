@@ -1,9 +1,9 @@
-﻿using ContactManager.ContactClass;
-using ContactManager.PrintInformation;
+﻿using ContactManager.Contact;
+using ContactManager.DisplayMenuInformation;
 using ContactManager.MatchIndex;
 using ContactManager.ValidInput;
 
-namespace ContactManager.AppFunctions
+namespace ContactManager.Utility
 {
     public class ApplicationWorking
     {

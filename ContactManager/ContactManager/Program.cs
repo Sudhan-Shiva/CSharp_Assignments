@@ -1,18 +1,16 @@
-﻿using ContactManager.ContactClass;
-using ContactManager.PrintInformation;
-using ContactManager.AppFunctions;
+﻿using ContactManager.Contact;
+using ContactManager.DisplayMenuInformation;
+using ContactManager.Utility;
 
 //Create a list of contacts
 List<ContactInformation> contactList = new List<ContactInformation>();
 
-//Prompt the User for a choice
-string userChoice = PrintMessages.PrintUserOptions();
-
+string userChoice;
 //Perform the function of the application
-while (userChoice.ToUpper() != "E")
+do
 {
-    ApplicationFunction applicationFunction = new ApplicationFunction();
-    applicationFunction.appFunctions(contactList, userChoice);
     userChoice = PrintMessages.PrintUserOptions();
-}
+    ApplicationFunction applicationFunction = new ApplicationFunction();
+    applicationFunction.appFunctions(contactList, userChoice);  
+} while (userChoice.ToUpper() != "E");
 //Looping Continuously till the User wishes to exit

@@ -1,6 +1,6 @@
 ﻿//Looping Continuously till the User wishes to exit
 
-namespace ContactManager.PrintInformation
+namespace ContactManager.DisplayMenuInformation
 {
     public static class PrintMessages
     {

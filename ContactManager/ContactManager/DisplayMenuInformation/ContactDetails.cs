@@ -1,7 +1,7 @@
-﻿using ContactManager.ContactClass;
+﻿using ContactManager.Contact;
 using ContactManager.MatchIndex;
 
-namespace ContactManager.PrintInformation
+namespace ContactManager.DisplayMenuInformation
 {
     public class ContactDetails
     {

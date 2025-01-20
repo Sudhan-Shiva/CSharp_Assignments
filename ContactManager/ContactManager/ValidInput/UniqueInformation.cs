@@ -1,4 +1,4 @@
-﻿using ContactManager.ContactClass;
+﻿using ContactManager.Contact;
 using ContactManager.MatchIndex;
 
 namespace ContactManager.ValidInput

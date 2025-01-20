@@ -1,5 +1,5 @@
 ﻿using ContactManager.ValidInput;
-using ContactManager.ContactClass;
+using ContactManager.Contact;
 
 namespace ContactManager.MatchIndex
 {
