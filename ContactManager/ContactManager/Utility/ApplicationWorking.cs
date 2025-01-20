@@ -168,7 +168,6 @@ namespace ContactManager.Utility
                     Console.WriteLine("There are no matches found.");
                 }
             }
-
             else
             {
                 PrintMessages.PrintListIsEmpty();
