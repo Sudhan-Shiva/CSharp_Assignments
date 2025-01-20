@@ -1,4 +1,4 @@
-﻿using ContactManager.Contact;
+﻿using ContactManager.Model;
 using ContactManager.MatchIndex;
 
 namespace ContactManager.ValidInput
@@ -9,7 +9,7 @@ namespace ContactManager.ValidInput
         IndexSearch indexSearch = new IndexSearch();
 
         //Method to Prompt the user for a distinct input for Contact Name and Contact Phone Number
-        public string DistinctInputs(List<ContactInformation> contactList, string inputParameter, bool isContactName)
+        public string DistinctInputs(List<Model.Contact> contactList, string inputParameter, bool isContactName)
         {
             //Loop till a unique input is received from the user
             while (indexSearch.ReturnIndex(contactList, inputParameter, isContactName) != -1)

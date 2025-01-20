@@ -1,5 +1,4 @@
-﻿using ContactManager.Contact;
-using ContactManager.DisplayMenuInformation;
+﻿using ContactManager.DisplayInformation;
 using ContactManager.MatchIndex;
 using ContactManager.ValidInput;
 
@@ -10,12 +9,11 @@ namespace ContactManager.Utility
         //Create the required object references
         IndexSearch indexSearch = new IndexSearch();
         UniqueInformation uniqueInformation = new UniqueInformation();
-        ContactDetails contactDetails = new ContactDetails();
         StoredContact storedContact = new StoredContact();
         GetValidInput getValidInput = new GetValidInput();
 
         //Method to add new contacts in the list
-        public void ContactAddition(List<ContactInformation> contactList)
+        public void AddContact(List<Model.Contact> contactList)
         {
             Console.Write("Enter the Contact Name :  ");
             string contactName = uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), true);
@@ -25,13 +23,13 @@ namespace ContactManager.Utility
             long contactPhoneNumber = getValidInput.GetValidPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
             Console.Write("Enter the Contact Remarks : ");
             string contactRemarks = Console.ReadLine();
-            ContactInformation contact = new ContactInformation(contactName, contactEmail, contactPhoneNumber, contactRemarks);
+            Model.Contact contact = new Model.Contact(contactName, contactEmail, contactPhoneNumber, contactRemarks);
             contactList.Add(contact);
             Console.WriteLine("The contact Information has been successfully added.\n");
         }
 
         //Method to delete contacts in the list
-        public void ContactDeletion(List<ContactInformation> contactList)
+        public void DeleteContact(List<Model.Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -55,7 +53,7 @@ namespace ContactManager.Utility
         }
 
         //Method to modify contact information in the list
-        public void ContactModification(List<ContactInformation> contactList)
+        public void ModifyContact(List<Model.Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -94,7 +92,7 @@ namespace ContactManager.Utility
         }
 
         //Method to view the contact names in the list
-        public void ContactView(List<ContactInformation> contactList)
+        public void ViewContact(List<Model.Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -114,7 +112,15 @@ namespace ContactManager.Utility
                 {
                     Console.Write("Kindly provide the Name of the contact whose details must be viewed : ");
                     string searchValue = Console.ReadLine();
-                    contactDetails.PrintContactInformation(contactList, searchValue, true);
+                    int searchIndex = indexSearch.ReturnIndex(contactList, searchValue, true);
+                    if (searchIndex != -1)
+                    {
+                        PrintMessages.PrintContactInformation(contactList[searchIndex]);
+                    }
+                    else
+                    {
+                        PrintMessages.DisplayMessage("The input name is not present !!",ConsoleColor.Red);
+                    }
                 }
             }
             else
@@ -124,18 +130,19 @@ namespace ContactManager.Utility
         }
 
         //Method to search for a particular contact in the list
-        public void ContactSearch(List<ContactInformation> contactList)
+        public void SearchContact(List<Model.Contact> contactList)
         {
             if (contactList.Count > 0)
             {
                 bool isSearchPresent = false;
                 Console.Write("Search for the contact Name : ");
                 string contactNameHint = Console.ReadLine();
-                foreach (ContactInformation searchContact in contactList)
+                foreach (Model.Contact searchContact in contactList)
                 {
                     if (searchContact.Name.Contains(contactNameHint))
                     {
-                        contactDetails.PrintContactInformation(contactList, searchContact.Name, true);
+                        int searchIndex = contactList.IndexOf(searchContact);
+                        PrintMessages.PrintContactInformation(contactList[searchIndex]);
                         isSearchPresent = true;
                     }
                 }

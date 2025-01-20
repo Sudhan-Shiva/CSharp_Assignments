@@ -1,4 +1,4 @@
-﻿using ContactManager.DisplayMenuInformation;
+﻿using ContactManager.DisplayInformation;
 
 namespace ContactManager.ValidInput
 {
