@@ -1,4 +1,5 @@
 ﻿using OOP_TASK1.Task1.BaseClass;
+using OOP_TASK1.Task1.Contents;
 
 namespace OOP_TASK1.Task1.DerivedClass
 {
@@ -12,7 +13,7 @@ namespace OOP_TASK1.Task1.DerivedClass
         {
             Radius = radiusOfCircle;
             Colour = colourOfCircle;
-            ShapeType = "Circle";
+            Type = ShapeType.Circle;
         }
         //Override the CalculateArea Method
         public override double CalculateArea() => Math.PI * Radius * Radius;

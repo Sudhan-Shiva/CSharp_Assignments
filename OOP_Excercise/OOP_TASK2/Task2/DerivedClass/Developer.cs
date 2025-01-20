@@ -1,5 +1,5 @@
 ﻿using OOP_TASK2.Task2.BaseClass;
-
+using OOP_TASK2.Task2.Contents;
 namespace OOP_TASK2.Task2.DerivedClass
 {
     //Implement Derived Class 'Developer'
@@ -10,9 +10,9 @@ namespace OOP_TASK2.Task2.DerivedClass
         {
             Name = name;
             Salary = salary;
-            Position = "Developer";
+            Position = JobPosition.Developer;
         }
         //Override the CalculateBonus Method
-        public override decimal CalculateBonus() => (decimal)0.01 * Salary; 
+        public override decimal CalculateBonus() => 0.01m * Salary;
     }
 }

@@ -1,11 +1,16 @@
-﻿using System.Drawing;
-using OOP_TASK2.Task2.DerivedClass;
+﻿using OOP_TASK2.Task2.DerivedClass;
+
+string nameOfManager = "John";
+decimal salaryOfManager = 60000;
 
 //Instantiate Object of derived class 'Rectangle'
-Manager manager = new Manager("John",(decimal)60000);
+Manager manager = new Manager(nameOfManager,salaryOfManager);
+
+string nameOfDeveloper = "Eren";
+decimal salaryOfDeveloper = 40000;
 
 //Instantiate Object of derived class 'Circle'
-Developer developer = new Developer("Eren",(decimal)40000);
+Developer developer = new Developer(nameOfDeveloper,salaryOfDeveloper);
 
 //Print the details of the object
 Console.WriteLine(manager.PrintDetails);

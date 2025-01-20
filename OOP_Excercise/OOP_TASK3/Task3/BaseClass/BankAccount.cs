@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+﻿using OOP_TASK3.Task3.Contents;
 
 namespace OOP_TASK3.Task3.BaseClass
 {
@@ -6,11 +6,11 @@ namespace OOP_TASK3.Task3.BaseClass
     public abstract class BankAccount
     {
         //Define the property 'AccountNumber'
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
         //Define the property 'Balance'
         public decimal Balance { get; set; }
         //Define the property 'TypeOfAccount'
-        public string TypeOfAccount { get; set; }
+        public AccountType Type { get; set; }
         //Define Method 'Deposit' to deposit the requested amount into the account
         public string Deposit(decimal depositAmount)
         {
@@ -20,6 +20,6 @@ namespace OOP_TASK3.Task3.BaseClass
         //Define the abstarct method 'Withdraw'to perform withdrawal of the requested amount based on the account type
         public abstract decimal Withdraw(decimal withdrawAmount);
         //Define Abstract Method 'PrintDetails' to print the account details
-        public string PrintDetails() => $"Type : {TypeOfAccount}\nAccount Number:{AccountNumber}\nBalance:{Balance}\n";
+        public string PrintDetails() => $"Type : {Type}\nAccount Number:{AccountNumber}\nBalance:{Balance}\n";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OOP_TASK1.Task1.BaseClass;
+using OOP_TASK1.Task1.Contents;
 
 namespace OOP_TASK1.Task1.DerivedClass
 {
@@ -13,7 +14,7 @@ namespace OOP_TASK1.Task1.DerivedClass
             Width = widthOfRectangle;
             Height = heightOfRectangle;
             Colour = colourOfRectangle;
-            ShapeType = "Rectangle";
+            Type = ShapeType.Rectangle;
         }
         //Override the CalculateArea Method
         public override double CalculateArea() => Width * Height;

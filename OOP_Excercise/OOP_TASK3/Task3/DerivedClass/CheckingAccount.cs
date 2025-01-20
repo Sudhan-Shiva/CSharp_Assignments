@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using OOP_TASK3.Task3.BaseClass;
+using OOP_TASK3.Task3.Contents;
 
 namespace OOP_TASK3.Task3.DerivedClass
 {
@@ -7,9 +8,9 @@ namespace OOP_TASK3.Task3.DerivedClass
     public class CheckingAccount : BankAccount
     {
         //Constructor Block
-        public CheckingAccount(string accountNumber, decimal balance)
+        public CheckingAccount(int accountNumber, decimal balance)
         {
-            TypeOfAccount = "Checking Account";
+            Type = AccountType.CheckingAccount;
             AccountNumber = accountNumber;
             Balance = balance;
         }
