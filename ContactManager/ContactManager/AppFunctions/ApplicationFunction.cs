@@ -38,14 +38,3 @@ namespace ContactManager.AppFunctions
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

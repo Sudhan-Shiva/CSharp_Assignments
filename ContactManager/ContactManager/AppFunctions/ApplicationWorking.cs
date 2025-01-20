@@ -150,12 +150,3 @@ namespace ContactManager.AppFunctions
         }
     }
 }
-
-
-
-
-
-
-
-
-

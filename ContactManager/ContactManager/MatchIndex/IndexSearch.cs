@@ -29,11 +29,3 @@ namespace ContactManager.MatchIndex
         }
     }
 }
-
-
-
-
-
-
-
-

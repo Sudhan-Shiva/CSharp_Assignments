@@ -16,15 +16,3 @@ while (userChoice.ToUpper() != "E")
     userChoice = PrintMessages.PrintUserOptions();
 }
 //Looping Continuously till the User wishes to exit
-
-
-
-
-
-
-
-
-
-
-
-
