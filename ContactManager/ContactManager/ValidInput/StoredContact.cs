@@ -3,22 +3,30 @@ using ContactManager.Model;
 
 namespace ContactManager.ValidInput
 {
+    /// <summary>
+    /// Prompts the user for a stored contact field to seacrh for the contact
+    /// </summary>
     public class StoredContact
     {
-        //Create the required object references
         IndexSearch indexSearch = new IndexSearch();
-        //Method to check whether the given input is present in the contact list
-        public int ContactPresent(List<Model.Contact> contactList, string inputField, bool isProductName)
+
+        /// <summary>
+        /// Loops until the given input is present in the contact list
+        /// </summary>
+        /// <param name="contactList">List containing the stored contacts.</param>
+        /// <param name="inputField">Parameter(Name/Phone Number) to search for the required contact.</param>
+        /// <param name="isContactName">Parameter whcih represents whether thw given input is a contact name.</param></param>
+        /// <returns>returns the index of the matched contact</returns>
+        public int ContactPresent(List<Model.Contact> contactList, string inputField, bool isContactName)
         {
-            bool isContactPresent = (indexSearch.ReturnIndex(contactList, inputField, isProductName) == -1);
-            //Loop till the user gives a input present in the contact list
+            bool isContactPresent = (indexSearch.ReturnIndex(contactList, inputField, isContactName) == -1);
             while (isContactPresent)
             {
                 Console.Write("No matches found !!\nGive a Valid input:");
-                isContactPresent = (indexSearch.ReturnIndex(contactList, Console.ReadLine(), isProductName) == -1);
+                isContactPresent = (indexSearch.ReturnIndex(contactList, Console.ReadLine(), isContactName) == -1);
             }
 
-            return (indexSearch.ReturnIndex(contactList, inputField, isProductName));
+            return (indexSearch.ReturnIndex(contactList, inputField, isContactName));
         }
     }
 }

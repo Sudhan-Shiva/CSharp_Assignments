@@ -1,6 +1,8 @@
 ﻿namespace ContactManager.Model
 {
-    //Define Class to Store the Contact Information
+    /// <summary>
+    /// Defines the Contact Inforamtion
+    /// </summary>
     public class Contact
     {
         public string Name;
@@ -8,7 +10,13 @@
         public long PhoneNumber;
         public string Remarks;
 
-        //Constructor Block
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="name">Represents the name of the contact</param>
+        /// <param name="email">Represents the email of the contact</param>
+        /// <param name="phoneNumber">Represents the phone number of the contact</param>
+        /// <param name="remarks">Represents the remarks of the contact</param>
         public Contact(string name, string email, long phoneNumber, string remarks)
         {
             Name = name;

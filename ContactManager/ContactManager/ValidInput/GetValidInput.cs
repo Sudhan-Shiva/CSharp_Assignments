@@ -2,13 +2,19 @@
 
 namespace ContactManager.ValidInput
 {
+    /// <summary>
+    /// Prompts the user for a valid input format
+    /// </summary>
     public class GetValidInput
     {
         DataValidation dataValidation = new DataValidation();
-        
+        /// <summary>
+        /// Check whether the given string for the Phone number is according to the Phone number format
+        /// </summary>
+        /// <param name="inputNumber">Given as an input for the phone number</param>
+        /// <returns>Returns the proper phone number</returns>
         public long GetValidPhoneNumber(string inputPhoneNumber)
         {
-            //Loop until a valid phone number is given by the user
             while (!dataValidation.IsPhoneNumberValid(inputPhoneNumber))
             {
                 PrintMessages.PrintInvalidInput();
@@ -18,10 +24,13 @@ namespace ContactManager.ValidInput
             long.TryParse(inputPhoneNumber, out long parsedPhoneNumber);
             return parsedPhoneNumber;
         }
-
+        /// <summary>
+        /// Check whether the given string for the Phone number is according to the Phone number format
+        /// </summary>
+        /// <param name="inputNumber">Given as an input for the phone number</param>
+        /// <returns>Returns the proper email</returns>
         public string GetValidEmail(string inputEmail)
         {
-            //Loop until a valid email is given by the user
             while (!dataValidation.IsEmailValid(inputEmail))
             {
                 PrintMessages.PrintInvalidInput();
