@@ -1,40 +1,53 @@
-﻿using OOP_TASK3.Task3.BaseClass;
+﻿using OOP_TASK3.Task3.Model;
 using OOP_TASK3.Task3.Contents;
 
-namespace OOP_TASK3.Task3.DerivedClass
+namespace OOP_TASK3.Task3.AccountTypes
 {
-    //Implement Derived Class 'SavingsAccount'
+    /// <summary>
+    /// Represent the Derived Class 'SavingsAccount'
+    /// </summary>
     public class SavingsAccount : BankAccount
     {
-        //Constructor Block
+        /// <summary>
+        /// Constructor Block
+        /// </summary>
+        /// <param name="accountNumber">Represents the account number of the savings account</param>
+        /// <param name="balance">Represents the remaining balance of the savings account</param>
         public SavingsAccount(int accountNumber, decimal balance)
         {
             Type = AccountType.SavingsAccount;
             AccountNumber = accountNumber;
             Balance = balance;
         }
+
+        /// <summary>
+        /// Represents the minimum balance of the savings account
+        /// </summary>
         private const decimal MinBalance = 1000;
-        //Override the Withdraw Method
+
+        /// <summary>
+        /// To withdraw from the savings account
+        /// </summary>
+        /// <param name="withdrawRequest">Amount to be withdrawn</param>
+        /// <returns>Details of the withdrawal request based on the conditions of the savings account</returns>
         public override decimal Withdraw(decimal withdrawRequest)
         {
-            //if the remaining balance is less than the minimum balance
+            
             if (Balance <= MinBalance)
             {
                 Console.WriteLine($"The Balance Amount : {Balance} in the Savings Account with the account number : {AccountNumber} is below the Minimum Balance:{MinBalance}.\nCan't Withdraw !!!");
-            }
-            //if all the conditions for the withdrawal process is satisfied
+            }           
             else if (Balance - withdrawRequest >= MinBalance)
             {
                 Console.WriteLine($"The amount {withdrawRequest} has been withdrawn from the Savings Account with the account number : {AccountNumber} successfully.");
                 Balance = Balance - withdrawRequest;
             }
-            // if withdrawing the requested amount brings down the remaining balance below the minimum balance
             else
             {
                 Console.WriteLine($"The amount {withdrawRequest} lowers the Remaining Balance : {Balance} below the Minimum Limit : {MinBalance} in the Savings Account with the account number : {AccountNumber}.\nCan't withdraw !!!");
             }
+
             return Balance;
         }
     }
 }
-

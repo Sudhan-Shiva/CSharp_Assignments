@@ -1,4 +1,4 @@
-﻿using OOP_TASK2.Task2.DerivedClass;
+﻿using OOP_TASK2.Task2.EmployeePosition;
 
 string nameOfManager = "John";
 decimal salaryOfManager = 60000;

@@ -1,13 +1,19 @@
 ﻿using System.Xml.Linq;
-using OOP_TASK3.Task3.BaseClass;
+using OOP_TASK3.Task3.Model;
 using OOP_TASK3.Task3.Contents;
 
-namespace OOP_TASK3.Task3.DerivedClass
+namespace OOP_TASK3.Task3.AccountTypes
 {
-    //Implement Derived Class 'CheckingAccount'
+    /// <summary>
+    /// Represents the Derived Class 'CheckingAccount'
+    /// </summary>
     public class CheckingAccount : BankAccount
     {
-        //Constructor Block
+        /// <summary>
+        /// Constructor Block
+        /// </summary>
+        /// <param name="accountNumber">Account number of the checking account</param>
+        /// <param name="balance">Remaining balance amount of the checking amount</param>
         public CheckingAccount(int accountNumber, decimal balance)
         {
             Type = AccountType.CheckingAccount;
@@ -15,7 +21,11 @@ namespace OOP_TASK3.Task3.DerivedClass
             Balance = balance;
         }
 
-        //Override the Withdraw Method
+        /// <summary>
+        /// To withdraw from the checking account
+        /// </summary>
+        /// <param name="withdrawRequest">Amount to be withdrawn</param>
+        /// <returns>The details of the withdraw request based on the conditions.</returns>
         public override decimal Withdraw(decimal withdrawRequest)
         {
             if (withdrawRequest < Balance)
@@ -23,11 +33,11 @@ namespace OOP_TASK3.Task3.DerivedClass
                 Console.WriteLine($"The amount {withdrawRequest} has been withdrawn from the Checking Account with the account number : {AccountNumber} successfully.");
                 Balance = Balance - withdrawRequest;
             }
-            // If Withdrawal Amount is greater than the remaining balance
             else
             {
                 Console.WriteLine($"The amount {withdrawRequest} exceeds the remaining balance {Balance} in the Checking Account with the account number : {AccountNumber}.\nCan't withdraw !!!");
             }
+
             return Balance;
         }
     }

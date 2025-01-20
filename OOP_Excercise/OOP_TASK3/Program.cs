@@ -1,4 +1,4 @@
-﻿using OOP_TASK3.Task3.DerivedClass;
+﻿using OOP_TASK3.Task3.AccountTypes;
 
 int accNoOfSavingsAcc1 = 12345;
 decimal balanceOfSavingsAcc1 = 10000;
