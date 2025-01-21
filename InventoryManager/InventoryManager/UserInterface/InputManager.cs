@@ -2,6 +2,14 @@
 {
     public class InputManager
     {
+
+        public string GetUserOptions()
+        {
+            Console.WriteLine("\nHello!\nWhat do you want to do?\n[V]iew the Product List\n[S]earch the Product List\n[A]dd new Product\n[M]odify the Product List\n[Q]uickSort the Product List\n[D]elete the Product\n[E]xit the Product List\n");
+            Console.Write("Type your Choice: ");
+            string inputParameter = Console.ReadLine();
+            return inputParameter;
+        }
         public string GetUniqueInput()
         {
             Console.Write("The Product Field is Already Present !\nGive a new Field : ");
@@ -16,6 +24,13 @@
             return inputParameter;
         }
 
+        public string ReplaceEmptyInput()
+        {
+            Console.Write("The Provided input is empty !!\nProvide the Input again :");
+            string inputParameter = Console.ReadLine();
+            return inputParameter;
+        }
+
         public string GetProductName()
         {
             Console.Write("Enter the Product Name :  ");
@@ -26,22 +41,22 @@
         public string GetProductId()
         {
             Console.Write("Enter the Product ID :  ");
-            string productName = Console.ReadLine();
-            return productName;
+            string productId = Console.ReadLine();
+            return productId;
         }
 
         public string GetProductPrice()
         {
             Console.Write("Enter the Product Price :  ");
-            string productName = Console.ReadLine();
-            return productName;
+            string productPrice = Console.ReadLine();
+            return productPrice;
         }
 
         public string GetProductQuantity()
         {
             Console.Write("Enter the Product Quantity :  ");
-            string productName = Console.ReadLine();
-            return productName;
+            string productQuantity = Console.ReadLine();
+            return productQuantity;
         }
 
         public string GetEditField()

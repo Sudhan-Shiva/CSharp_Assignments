@@ -3,14 +3,14 @@ using InventoryManager.UserInterface;
 using InventoryManager.ValidInput;
 
 DataValidation dataValidation = new DataValidation();
-InputManager productInformation = new InputManager();
-ProductManager productManager = new ProductManager(dataValidation, productInformation);
+InputManager inputManager = new InputManager();
+ProductManager productManager = new ProductManager(dataValidation, inputManager);
 ApplicationFunction applicationFunction = new ApplicationFunction(productManager);
 
 string userChoice;
 
 do
 {
-    userChoice = OutputManager.ShowUserOptions();
+    userChoice = inputManager.GetUserOptions();
     applicationFunction.AppFunctions(userChoice);
 } while (userChoice.ToUpper() != "E");

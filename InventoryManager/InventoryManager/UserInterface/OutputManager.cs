@@ -10,14 +10,6 @@ namespace InventoryManager.UserInterface
             Console.Write("The Provided input is invalid !!");
         }
 
-        //Method to Print the user options and generate the user interface
-        public static string ShowUserOptions()
-        {
-            Console.WriteLine("\nHello!\nWhat do you want to do?\n[V]iew the Product List\n[S]earch the Product List\n[A]dd new Product\n[M]odify the Product List\n[Q]uickSort the Product List\n[D]elete the Product\n[E]xit the Product List\n");
-            Console.Write("Type your Choice: ");
-            return Console.ReadLine();
-        }
-
         public static void ShowListIsEmpty()
         {
             Console.WriteLine("The Product List is Empty");
@@ -49,7 +41,7 @@ namespace InventoryManager.UserInterface
 
         public static void ShowNameAndId(string productName, int productId)
         {
-            Console.WriteLine($"Product Name : {productName} \n " +
+            Console.WriteLine($"Product Name : {productName} \n" +
                               $"Product ID : {productId}\n");
         }
 

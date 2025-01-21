@@ -14,5 +14,9 @@
             return decimal.TryParse(inputProductPrice, out decimal parsedPrice);
         }
 
+        public bool IsDataEmpty(string inputProductField)
+        {
+            return (inputProductField == null || inputProductField == "");
+        }
     }
 }
