@@ -1,8 +1,14 @@
 ﻿namespace InventoryManager.UserInterface
 {
+    /// <summary>
+    /// Represents all the input methods
+    /// </summary>
     public class InputManager
     {
-
+        /// <summary>
+        /// To get the user option
+        /// </summary>
+        /// <returns>The user choice</returns>
         public string GetUserOptions()
         {
             Console.WriteLine("\nHello!\nWhat do you want to do?\n[V]iew the Product List\n[S]earch the Product List\n[A]dd new Product\n[M]odify the Product List\n[Q]uickSort the Product List\n[D]elete the Product\n[E]xit the Product List\n");
@@ -10,6 +16,10 @@
             string inputParameter = Console.ReadLine();
             return inputParameter;
         }
+        /// <summary>
+        /// To get another input when the given input is already present
+        /// </summary>
+        /// <returns>The input for replacing the present input</returns>
         public string GetUniqueInput()
         {
             Console.Write("The Product Field is Already Present !\nGive a new Field : ");
@@ -17,6 +27,10 @@
             return inputParameter;
         }
 
+        /// <summary>
+        /// To get another input when the given input is invalid
+        /// </summary>
+        /// <returns>The input for replacing the invalid input</returns>
         public string ReplaceInvalidInput()
         {
             Console.Write("The Provided input is invalid !!\nProvide the Input again :");
@@ -24,6 +38,10 @@
             return inputParameter;
         }
 
+        /// <summary>
+        /// To get another input when the given input is null or empty string
+        /// </summary>
+        /// <returns>The input for replacing the null or empty string input</returns>
         public string ReplaceEmptyInput()
         {
             Console.Write("The Provided input is empty !!\nProvide the Input again :");
@@ -31,6 +49,10 @@
             return inputParameter;
         }
 
+        /// <summary>
+        /// To get the product name
+        /// </summary>
+        /// <returns>The name of the product</returns>
         public string GetProductName()
         {
             Console.Write("Enter the Product Name :  ");
@@ -38,6 +60,10 @@
             return productName;
         }
 
+        /// <summary>
+        /// To get the product ID
+        /// </summary>
+        /// <returns>The ID of the product</returns>
         public string GetProductId()
         {
             Console.Write("Enter the Product ID :  ");
@@ -45,6 +71,10 @@
             return productId;
         }
 
+        /// <summary>
+        /// To get the price of the product
+        /// </summary>
+        /// <returns>The price of the product</returns>
         public string GetProductPrice()
         {
             Console.Write("Enter the Product Price :  ");
@@ -52,6 +82,10 @@
             return productPrice;
         }
 
+        /// <summary>
+        /// To get the product quantity
+        /// </summary>
+        /// <returns>The product quantity</returns>
         public string GetProductQuantity()
         {
             Console.Write("Enter the Product Quantity :  ");
@@ -59,6 +93,10 @@
             return productQuantity;
         }
 
+        /// <summary>
+        /// To get the Editing field(Name/ID/Quantity/price) in the product
+        /// </summary>
+        /// <returns>String representing the field that must be edited</returns>
         public string GetEditField()
         {
             Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n");
@@ -67,6 +105,10 @@
             return editField;
         }
 
+        /// <summary>
+        /// To get the field(Name/ID) according to whcih the action must be performed
+        /// </summary>
+        /// <returns>String representing the field</returns>
         public string GetActionField()
         {
             Console.Write("Perform the action by Name or ID ?\n[N]ame/[I]d :");
@@ -74,15 +116,15 @@
             return sortOrder;
         }
 
+        /// <summary>
+        /// To check whether the information of a specific product must be viewed
+        /// </summary>
+        /// <returns>String representing the user choice whether the product information must be viewed</returns>
         public string GetViewSpecificProductChoice()
         {
             Console.Write("Do you want to view the Product Information of any specific Product ?\nY/N : ");
             string viewChoice = Console.ReadLine();
             return viewChoice;
         }
-
-
     }
-
-    
 }

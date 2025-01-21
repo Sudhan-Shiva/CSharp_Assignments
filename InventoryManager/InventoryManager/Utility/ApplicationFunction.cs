@@ -2,39 +2,48 @@
 
 namespace InventoryManager.Utility
 {
+    /// <summary>
+    /// Represents the functions of the application based on the userchoice
+    /// </summary>
     public class ApplicationFunction
     {
+        /// <summary>
+        /// The ProductManager required to handle the operations of the product list
+        /// </summary>
         ProductManager productManager;
+
+        /// <summary>
+        /// Represents the necessary object references to the class
+        /// </summary>
+        /// <param name="mainProductManager">Required object reference</param>
         public ApplicationFunction(ProductManager mainProductManager)
         {
             productManager = mainProductManager;
         }
-        //Method to switch between various functions of the application based on the userchoice
+
+        /// <summary>
+        /// To switch between various functions of the application based on the userchoice
+        /// </summary>
+        /// <param name="userChoice">The input based on which the functions are switched</param>
         public void AppFunctions(string userChoice)
         {
             switch (userChoice.ToUpper())
             {
-                //Add New Product Information
                 case "A":
                     productManager.AddProduct();
                     break;
-                //Search for Specific Product Information
                 case "S":
                     productManager.SearchProduct();
                     break;
-                //Delete the Specific Product Information
                 case "D":
                     productManager.DeleteProduct();
                     break;
-                //Modify the Product Information
                 case "M":
                     productManager.ModifyProduct();
                     break;
-                //View all the Product Names in the Product List
                 case "V":
                     productManager.ViewProduct();
                     break;
-                //Sort the Products in the List according to Name or ID
                 case "Q":
                     productManager.SortProduct();
                     break;
