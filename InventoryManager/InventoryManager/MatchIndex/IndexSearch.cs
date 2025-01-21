@@ -1,4 +1,4 @@
-﻿using InventoryManager.ProductClass;
+﻿using InventoryManager.Model;
 using InventoryManager.ValidInput;
 
 namespace InventoryManager.MatchIndex
@@ -25,7 +25,7 @@ namespace InventoryManager.MatchIndex
         //Method to check for the matched product based on name or ID
         public bool IsIdOrNamePresent(Product product, string inputParameter, bool isProductName)
         {
-            return isProductName ? (product.ProductName == inputParameter) : (product.ProductId == dataValidation.CheckDataIsInt(inputParameter));
+            return isProductName ? (product.ProductName == inputParameter) : (product.ProductId == dataValidation.IsDataValid(inputParameter));
         }
     }
 }

@@ -5,30 +5,30 @@ namespace InventoryManager.ValidInput
     public class DataValidation
     {
         //Method to validate whether the given input is a integer
-        public int CheckDataIsInt(string inputProductField)
+        public int IsDataValid(string inputProductField)
         {
             //Use TryParse to check whether the given input can be converted to a valid integer
-            bool isProductFieldInt = int.TryParse(inputProductField, out int parsedField);
+            int parsedField;
             //Loop until a valid input is given by the user
-            while (!isProductFieldInt)
+            while (!int.TryParse(inputProductField, out parsedField))
             {
-                PrintMessages.PrintInvalidInput();
-                isProductFieldInt = int.TryParse(Console.ReadLine(), out parsedField);
+                InputManager.PrintInvalidInput();
+                inputProductField = Console.ReadLine();
             }
             //Return the valid output
             return parsedField;
         }
 
         //Method to validate whether the given input is a decimal
-        public decimal CheckProductPrice(string inputProductPrice)
+        public decimal IsProductPriceValid(string inputProductPrice)
         {
             //Use TryParse to check whether the given input can be converted to a valid decimal
-            bool isProductPriceDecimal = decimal.TryParse(inputProductPrice, out decimal parsedPrice);
+            decimal parsedPrice;
             //Loop until a valid input is given by the user
-            while (!isProductPriceDecimal)
+            while (!decimal.TryParse(inputProductPrice, out parsedPrice))
             {
-                PrintMessages.PrintInvalidInput();
-                isProductPriceDecimal = decimal.TryParse(Console.ReadLine(), out parsedPrice);
+                InputManager.PrintInvalidInput();
+                inputProductPrice = Console.ReadLine();
             }
             //Return the valid output
             return parsedPrice;

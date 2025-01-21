@@ -1,5 +1,5 @@
 ﻿using InventoryManager.MatchIndex;
-using InventoryManager.ProductClass;
+using InventoryManager.Model;
 
 namespace InventoryManager.ValidInput
 {

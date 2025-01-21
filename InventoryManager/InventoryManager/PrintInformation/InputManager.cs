@@ -1,6 +1,6 @@
 ﻿namespace InventoryManager.PrintInformation
 {
-    public static class PrintMessages
+    public static class InputManager
     {
         //Method to print that the given input is invalid
         public static void PrintInvalidInput()

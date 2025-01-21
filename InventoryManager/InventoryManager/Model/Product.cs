@@ -1,4 +1,4 @@
-﻿namespace InventoryManager.ProductClass
+﻿namespace InventoryManager.Model
 {
     //Define Class to Store the Product Information
     public class Product

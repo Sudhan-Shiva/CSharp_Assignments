@@ -1,39 +1,39 @@
-﻿using InventoryManager.ProductClass;
-
-namespace InventoryManager.AppFunctions
+﻿namespace InventoryManager.AppFunctions
 {
     public class ApplicationFunction
     {
         //Create the required object references 
-        ApplicationWorking applicationWorking = new ApplicationWorking();
+        
+
+        ProductManager productManager = new ProductManager();
         //Method to switch between various functions of the application based on the userchoice
-        public void appFunctions(List<Product> productList, string userChoice)
+        public void appFunctions(string userChoice)
         {
             switch (userChoice.ToUpper())
             {
                 //Add New Product Information
                 case "A":
-                    applicationWorking.ProductAddition(productList);
+                    productManager.AddProduct();
                     break;
                 //Search for Specific Product Information
                 case "S":
-                    applicationWorking.ProductSearch(productList);
+                    productManager.SearchProduct();
                     break;
                 //Delete the Specific Product Information
                 case "D":
-                    applicationWorking.ProductDeletion(productList);
+                    productManager.DeleteProduct();
                     break;
                 //Modify the Product Information
                 case "M":
-                    applicationWorking.ProductModification(productList);
+                    productManager.ModifyProduct();
                     break;
                 //View all the Product Names in the Product List
                 case "V":
-                    applicationWorking.ProductView(productList);
+                    productManager.ViewProduct();
                     break;
                 //Sort the Products in the List according to Name or ID
                 case "Q":
-                    applicationWorking.ProductSort(productList);
+                    productManager.SortProduct();
                     break;
                 default:
                     Console.WriteLine("The Provided input is invalid !!");
