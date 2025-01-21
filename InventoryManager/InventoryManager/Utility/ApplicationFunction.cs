@@ -1,8 +1,6 @@
-﻿using InventoryManager.MatchIndex;
-using InventoryManager.PrintInformation;
-using InventoryManager.ValidInput;
+﻿using InventoryManager.UserInterface;
 
-namespace InventoryManager.AppFunctions
+namespace InventoryManager.Utility
 {
     public class ApplicationFunction
     {
@@ -41,7 +39,7 @@ namespace InventoryManager.AppFunctions
                     productManager.SortProduct();
                     break;
                 default:
-                    Console.WriteLine("The Provided input is invalid !!");
+                    OutputManager.ShowInvalidInput();
                     break;
             }
         }

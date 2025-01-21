@@ -1,6 +1,4 @@
-﻿using InventoryManager.PrintInformation;
-
-namespace InventoryManager.ValidInput
+﻿namespace InventoryManager.ValidInput
 {
     public class DataValidation
     {
