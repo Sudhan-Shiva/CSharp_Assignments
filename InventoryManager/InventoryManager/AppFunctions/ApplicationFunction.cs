@@ -1,13 +1,18 @@
-﻿namespace InventoryManager.AppFunctions
+﻿using InventoryManager.MatchIndex;
+using InventoryManager.PrintInformation;
+using InventoryManager.ValidInput;
+
+namespace InventoryManager.AppFunctions
 {
     public class ApplicationFunction
     {
-        //Create the required object references 
-        
-
-        ProductManager productManager = new ProductManager();
+        ProductManager productManager;
+        public ApplicationFunction(ProductManager mainProductManager)
+        {
+            productManager = mainProductManager;
+        }
         //Method to switch between various functions of the application based on the userchoice
-        public void appFunctions(string userChoice)
+        public void AppFunctions(string userChoice)
         {
             switch (userChoice.ToUpper())
             {

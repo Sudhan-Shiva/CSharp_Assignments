@@ -2,6 +2,7 @@
 using InventoryManager.MatchIndex;
 using InventoryManager.Model;
 using InventoryManager.ValidInput;
+using ConsoleTables;
 
 namespace InventoryManager.AppFunctions
 {
@@ -9,27 +10,114 @@ namespace InventoryManager.AppFunctions
     {
         private List<Product> _productList = [];
         //Create the required object references
-        DataValidation dataValidation = new DataValidation();
-        IndexSearch indexSearch = new IndexSearch();
-        UniqueInformation uniqueInformation = new UniqueInformation();
-        ProductInformation productInformation = new ProductInformation();
+        DataValidation dataValidation;
+        IndexSearch indexSearch;
+        ProductInformation productInformation;
+        public ProductManager(DataValidation mainDataValidation, IndexSearch mainIndexSearch, ProductInformation mainProductInformation)
+        {
+            dataValidation = mainDataValidation ;
+            indexSearch = mainIndexSearch;
+            productInformation = mainProductInformation;
+        }
+        public bool IsListEmpty()
+        {
+            return _productList.Count == 0;
+        }
+        public string GetDistinctInputs(string inputParameter, bool isProductName)
+        {
+            //Loop till a unique input is received from the user
+            while (ReturnIndex(inputParameter, isProductName) != -1)
+            {
+                Console.WriteLine("The Product Field is Already Present !");
+                Console.Write("Give a new Field : ");
+                inputParameter = Console.ReadLine();
+            }
+            return inputParameter;
+        }
+        public int GetValidInteger(string inputParameter)
+        {          
+            while (!dataValidation.IsDataValid(inputParameter))
+            {
+                OutputManager.PrintInvalidInput();
+                inputParameter = Console.ReadLine();
+            }
+            int.TryParse(inputParameter, out int validData);
+            return validData;
+        }
+        public decimal GetValidDecimal(string inputParameter)
+        {
+            while (!dataValidation.IsProductPriceValid(inputParameter))
+            {
+                OutputManager.PrintInvalidInput();
+                inputParameter = Console.ReadLine();
+            }
+            decimal.TryParse(inputParameter, out decimal validData);
+            return validData;
+        }
 
+        public int ReturnIndex(string inputParameter, bool isProductName)
+        {
+            foreach (Product product in _productList)
+            {
+                if (indexSearch.IsIdOrNamePresent(product, inputParameter, isProductName))
+                {
+                    //Return the INdex of the matched Product
+                    return _productList.IndexOf(product);
+                }
+            }
+            //If no matching product is found, -1 is returned.
+            return -1;
+        }
+        public List<Product> GetProductRepository()
+        {
+            return _productList;
+        }
+
+        public ConsoleTable SpecificProductInformation(string viewProduct, bool isProductName)
+        {
+            int printIndex = ReturnIndex(viewProduct, isProductName);
+            //If returned index is -1, it means that either the given input is invalid or it is not present in the list
+            while (printIndex == -1)
+            {
+                OutputManager.PrintInvalidInput();
+                viewProduct = Console.ReadLine();
+                printIndex = ReturnIndex(viewProduct, isProductName);
+
+            }
+            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
+            //Print the information of the product
+            productTable.AddRow(_productList[printIndex].ProductName,
+                                _productList[printIndex].ProductId,
+                                _productList[printIndex].ProductPrice,
+                                _productList[printIndex].ProductQuantity);
+            return productTable;
+        }
+
+        public ConsoleTable ProductList()
+        {
+            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
+            foreach (Product product in _productList)
+            {
+                productTable.AddRow(product.ProductName, product.ProductId, product.ProductPrice, product.ProductQuantity);
+            }
+            //Print the information of the product     
+            return productTable;
+        }
         //Method to add new products in the list
         public void AddProduct()
         {
             Console.Write("Enter the Product Name :  ");
-            string productName = uniqueInformation.DistinctInputs(_productList, Console.ReadLine(), true);
+            string productName = GetDistinctInputs(Console.ReadLine(), true);
             Console.Write("Enter the Product ID :  ");
-            int productId = dataValidation.IsDataValid(uniqueInformation.DistinctInputs(_productList, Console.ReadLine(), false));
+            int productId = GetValidInteger(GetDistinctInputs(Console.ReadLine(), false));
             Console.Write("Enter the Product Price :  ");
-            decimal productPrice = dataValidation.IsProductPriceValid(Console.ReadLine());
+            decimal productPrice = GetValidDecimal(Console.ReadLine());
             Console.Write("Enter the Product Quantity : ");
-            int productQuantity = dataValidation.IsDataValid(Console.ReadLine());
+            int productQuantity = GetValidInteger(Console.ReadLine());
             Product product = new Product(productId, productName, productPrice, productQuantity);
             _productList.Add(product);
             Console.WriteLine("The Product Information has been successfully added.\n");
         }
-
         //Method to delete products in the list
         public void DeleteProduct()
         {
@@ -37,22 +125,21 @@ namespace InventoryManager.AppFunctions
             {
                 Console.Write("Enter the Name of the Product that must be deleted :  ");
                 string deleteChoice = Console.ReadLine();
-                int deleteIndex = indexSearch.ReturnIndex(_productList, deleteChoice, true);
+                int deleteIndex = ReturnIndex(deleteChoice, true);
                 while (deleteIndex == -1)
                 {
-                    InputManager.PrintInvalidInput();
+                    OutputManager.PrintInvalidInput();
                     deleteChoice = Console.ReadLine();
-                    deleteIndex = indexSearch.ReturnIndex(_productList, deleteChoice, true);
+                    deleteIndex = ReturnIndex(deleteChoice, true);
                 }
                 Console.WriteLine($"The Product Information of {deleteChoice} has been deleted successfully.");
                 _productList.RemoveAt(deleteIndex);
             }
             else
             {
-                InputManager.PrintListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
-
         //Method to modify product information in the list
         public void ModifyProduct()
         {
@@ -67,19 +154,19 @@ namespace InventoryManager.AppFunctions
                 {
                     case "N":
                         Console.WriteLine("Enter the Edited Product Name : ");
-                        _productList[indexSearch.ReturnIndex(_productList, editChoice, true)].ProductName = Console.ReadLine();
+                        _productList[ReturnIndex(editChoice, true)].ProductName = Console.ReadLine();
                         break;
                     case "I":
                         Console.WriteLine("Enter the Edited Product ID : ");
-                        _productList[indexSearch.ReturnIndex(_productList, editChoice, true)].ProductId = dataValidation.IsDataValid(Console.ReadLine());
+                        _productList[ReturnIndex(editChoice, true)].ProductId = GetValidInteger(Console.ReadLine());
                         break;
                     case "P":
                         Console.WriteLine("Enter the Edited Product Price : ");
-                        _productList[indexSearch.ReturnIndex(_productList, editChoice, true)].ProductPrice = dataValidation.IsProductPriceValid(Console.ReadLine());
+                        _productList[ReturnIndex(editChoice, true)].ProductPrice = GetValidDecimal(Console.ReadLine());
                         break;
                     case "Q":
                         Console.WriteLine("Enter the Edited Product Quantity : ");
-                        _productList[indexSearch.ReturnIndex(_productList, editChoice, true)].ProductQuantity = dataValidation.IsDataValid(Console.ReadLine());
+                        _productList[ReturnIndex(editChoice, true)].ProductQuantity = GetValidInteger(Console.ReadLine());
                         break;
                     default:
                         Console.WriteLine("The Provided input is invalid !!");
@@ -88,7 +175,7 @@ namespace InventoryManager.AppFunctions
             }
             else
             {
-                InputManager.PrintListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -100,27 +187,25 @@ namespace InventoryManager.AppFunctions
                 Console.Write("Do you want to sort by Name or ID ?\n[N]ame/[I]d :");
                 string sortOrder = Console.ReadLine();
                 if (sortOrder.ToUpper() == "N")
-                {
-                    List<Product> sortedList = _productList.OrderBy(o => o.ProductName).ToList();
-                    _productList = sortedList;
+                {                
                     Console.WriteLine("The Product List is Sorted Successfully.\nThe Sorted List ");
-                    productInformation.PrintProductList(sortedList);
+                    _productList = _productList.OrderBy(o => o.ProductName).ToList();
+                    productInformation.PrintTable(ProductList());
                 }
                 else if (sortOrder.ToUpper() == "I")
                 {
-                    List<Product> sortedList = _productList.OrderBy(o => o.ProductId).ToList();
-                    _productList = sortedList;
                     Console.WriteLine("The Product List is Sorted Successfully.\nThe Sorted List ");
-                    productInformation.PrintProductList(sortedList);
+                    _productList = _productList.OrderBy(o => o.ProductId).ToList();
+                    productInformation.PrintTable(ProductList());
                 }
                 else
                 {
-                    InputManager.PrintInvalidInput();
+                    OutputManager.PrintInvalidInput();
                 }
             }
             else
             {
-                InputManager.PrintListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -138,7 +223,7 @@ namespace InventoryManager.AppFunctions
                 string viewChoice = Console.ReadLine();
                 while (viewChoice.ToUpper() != "Y" && viewChoice.ToUpper() != "N")
                 {
-                    InputManager.PrintInvalidInput();
+                    OutputManager.PrintInvalidInput();
                     viewChoice = Console.ReadLine();
                 }
                 if (viewChoice.ToUpper() == "Y")
@@ -147,18 +232,18 @@ namespace InventoryManager.AppFunctions
                     string searchField = Console.ReadLine();
                     while (searchField.ToUpper() != "I" && searchField.ToUpper() != "N")
                     {
-                        InputManager.PrintInvalidInput();
+                        OutputManager.PrintInvalidInput();
                         searchField = Console.ReadLine();
                     }
                     bool isProductName = (searchField.ToUpper() == "N") ? true : false;
                     Console.Write("Kindly provide the Name/ID of the Product that must be viewed : ");
                     string searchValue = Console.ReadLine();
-                    productInformation.PrintProductInformation(_productList, searchValue, isProductName);
+                    productInformation.PrintTable(SpecificProductInformation(searchValue, isProductName));
                 }
             }
             else
             {
-                InputManager.PrintListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -186,7 +271,7 @@ namespace InventoryManager.AppFunctions
                 else if (searchByChoice.ToUpper() == "I")
                 {
                     Console.Write("Search for the Product ID : ");
-                    int productIdHint = dataValidation.IsDataValid(Console.ReadLine());
+                    int productIdHint = GetValidInteger(Console.ReadLine());
                     foreach (Product searchproduct in _productList)
                     {
                         if (searchproduct.ProductId == productIdHint)
@@ -198,7 +283,7 @@ namespace InventoryManager.AppFunctions
                 }
                 else
                 {
-                    InputManager.PrintInvalidInput();
+                    OutputManager.PrintInvalidInput();
                 }
                 if (!isSearchPresent)
                 {
@@ -207,7 +292,7 @@ namespace InventoryManager.AppFunctions
             }
             else
             {
-                InputManager.PrintListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
     }
