@@ -1,6 +1,6 @@
 ﻿using ContactManager.DisplayInformation;
 
-namespace ContactManager.ValidInput
+namespace ContactManager.InputValidation
 {
     /// <summary>
     /// Prompts the user for a valid input format

@@ -1,7 +1,7 @@
 ﻿using ContactManager.MatchIndex;
 using ContactManager.Model;
 
-namespace ContactManager.ValidInput
+namespace ContactManager.InputValidation
 {
     /// <summary>
     /// Prompts the user for a stored contact field to seacrh for the contact

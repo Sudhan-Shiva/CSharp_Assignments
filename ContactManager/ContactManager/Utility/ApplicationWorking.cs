@@ -1,6 +1,6 @@
 ﻿using ContactManager.DisplayInformation;
 using ContactManager.MatchIndex;
-using ContactManager.ValidInput;
+using ContactManager.InputValidation;
 using ContactManager.Model;
 
 namespace ContactManager.Utility

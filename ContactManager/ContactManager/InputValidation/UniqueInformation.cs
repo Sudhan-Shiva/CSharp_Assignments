@@ -1,7 +1,7 @@
 ﻿using ContactManager.MatchIndex;
 using ContactManager.Model;
 
-namespace ContactManager.ValidInput
+namespace ContactManager.InputValidation
 {
     /// <summary>
     /// Checks whether the given input is distinct and if not, prompts the user for a distinct one.
