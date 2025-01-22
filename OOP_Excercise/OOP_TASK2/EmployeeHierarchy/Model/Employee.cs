@@ -1,6 +1,6 @@
-﻿using OOP_TASK2.Task2.Contents;
+﻿using OOP_TASK2.EmployeeHierarchy.Contents;
 
-namespace OOP_TASK2.Task2.Model
+namespace OOP_TASK2.EmployeeHierarchy.Model
 {
     /// <summary>
     /// Represents the Base Class 'Employee'

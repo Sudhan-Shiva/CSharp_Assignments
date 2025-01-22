@@ -1,4 +1,4 @@
-﻿namespace OOP_TASK3.Task3.Contents
+﻿namespace OOP_TASK3.BankAccountTypes.Contents
 {
     /// <summary>
     /// Represents the different types of the bank account

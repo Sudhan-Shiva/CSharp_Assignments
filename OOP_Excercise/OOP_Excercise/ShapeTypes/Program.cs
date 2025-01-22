@@ -1,4 +1,4 @@
-﻿using OOP_TASK1.Task1.ShapeTypes;
+﻿using OOP_TASK1.ShapeTypes.ShapeTypes;
 
 double widthOfRectangle = 2;
 double heightOfRectangle = 7;

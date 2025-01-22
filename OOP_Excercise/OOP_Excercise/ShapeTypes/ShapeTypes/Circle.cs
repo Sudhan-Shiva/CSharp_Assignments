@@ -1,7 +1,7 @@
-﻿using OOP_TASK1.Task1.Model;
-using OOP_TASK1.Task1.Contents;
+﻿using OOP_TASK1.ShapeTypes.Model;
+using OOP_TASK1.ShapeTypes.Contents;
 
-namespace OOP_TASK1.Task1.ShapeTypes
+namespace OOP_TASK1.ShapeTypes.ShapeTypes
 {
     /// <summary>
     /// Represents the Derived class 'Circle'

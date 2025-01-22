@@ -1,7 +1,7 @@
-﻿using OOP_TASK3.Task3.Model;
-using OOP_TASK3.Task3.Contents;
+﻿using OOP_TASK3.BankAccountTypes.Model;
+using OOP_TASK3.BankAccountTypes.Contents;
 
-namespace OOP_TASK3.Task3.AccountTypes
+namespace OOP_TASK3.BankAccountTypes.AccountTypes
 {
     /// <summary>
     /// Represent the Derived Class 'SavingsAccount'
@@ -13,7 +13,7 @@ namespace OOP_TASK3.Task3.AccountTypes
         /// </summary>
         /// <param name="accountNumber">Represents the account number of the savings account</param>
         /// <param name="balance">Represents the remaining balance of the savings account</param>
-        public SavingsAccount(int accountNumber, decimal balance)
+        public SavingsAccount(string accountNumber, decimal balance)
         {
             Type = AccountType.SavingsAccount;
             AccountNumber = accountNumber;

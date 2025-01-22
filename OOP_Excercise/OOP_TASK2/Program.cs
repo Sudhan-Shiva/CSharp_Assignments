@@ -1,4 +1,4 @@
-﻿using OOP_TASK2.Task2.EmployeePosition;
+﻿using OOP_TASK2.EmployeeHierarchy.EmployeePosition;
 
 string nameOfManager = "John";
 decimal salaryOfManager = 60000;

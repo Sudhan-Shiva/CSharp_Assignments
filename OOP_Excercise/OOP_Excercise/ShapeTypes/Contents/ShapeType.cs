@@ -1,7 +1,7 @@
-﻿namespace OOP_TASK1.Task1.Contents
+﻿namespace OOP_TASK1.ShapeTypes.Contents
 {
     /// <summary>
-    /// Represents the types of the shape
+    /// Represents the types of the shape.
     /// </summary>
     public enum ShapeType
     {

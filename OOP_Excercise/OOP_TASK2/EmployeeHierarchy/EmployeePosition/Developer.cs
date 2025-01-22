@@ -1,7 +1,7 @@
-﻿using OOP_TASK2.Task2.Model;
-using OOP_TASK2.Task2.Contents;
+﻿using OOP_TASK2.EmployeeHierarchy.Model;
+using OOP_TASK2.EmployeeHierarchy.Contents;
 
-namespace OOP_TASK2.Task2.EmployeePosition
+namespace OOP_TASK2.EmployeeHierarchy.EmployeePosition
 {
     /// <summary>
     /// Represents the Derived Class 'Developer'

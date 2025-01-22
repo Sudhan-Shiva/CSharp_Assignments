@@ -1,6 +1,6 @@
-﻿using OOP_TASK3.Task3.Contents;
+﻿using OOP_TASK3.BankAccountTypes.Contents;
 
-namespace OOP_TASK3.Task3.Model
+namespace OOP_TASK3.BankAccountTypes.Model
 {
     /// <summary>
     /// Represents the Base Class 'BankAccount'
@@ -10,7 +10,7 @@ namespace OOP_TASK3.Task3.Model
         /// <summary>
         /// Represents the Account Number of the Bank Account
         /// </summary>
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
         /// <summary>
         /// Represents the Balance of the Bank Account
@@ -36,9 +36,22 @@ namespace OOP_TASK3.Task3.Model
         /// <summary>
         /// To perform withdrawal of the requested amount based on the account type
         /// </summary>
-        /// <param name="withdrawAmount">Amount to be withdrawn.</param>
+        /// <param name="withdrawRequest">Amount to be withdrawn.</param>
         /// <returns>The details of the withdraw process and the remaining balance.</returns>
-        public abstract decimal Withdraw(decimal withdrawAmount);
+        public virtual decimal Withdraw(decimal withdrawRequest)
+        {
+            if (withdrawRequest < Balance)
+            {
+                Console.WriteLine($"The amount {withdrawRequest} has been withdrawn from the Account with the account number : {AccountNumber} successfully.");
+                Balance = Balance - withdrawRequest;
+            }
+            else
+            {
+                Console.WriteLine($"The amount {withdrawRequest} exceeds the remaining balance {Balance} in the Account with the account number : {AccountNumber}.\nCan't withdraw !!!");
+            }
+
+            return Balance;
+        }
 
         /// <summary>
         /// To print the Account details

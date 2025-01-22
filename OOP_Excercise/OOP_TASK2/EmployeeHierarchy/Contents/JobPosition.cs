@@ -1,4 +1,4 @@
-﻿namespace OOP_TASK2.Task2.Contents
+﻿namespace OOP_TASK2.EmployeeHierarchy.Contents
 {
     /// <summary>
     /// Represents the positions of the employee

@@ -1,6 +1,6 @@
-﻿using OOP_TASK1.Task1.Contents;
+﻿using OOP_TASK1.ShapeTypes.Contents;
 
-namespace OOP_TASK1.Task1.Model
+namespace OOP_TASK1.ShapeTypes.Model
 {
     /// <summary>
     /// Represents the Base Class 'Shape'
