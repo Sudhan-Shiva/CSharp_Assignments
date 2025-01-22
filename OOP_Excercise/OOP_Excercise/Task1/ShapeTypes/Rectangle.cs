@@ -17,12 +17,13 @@ namespace OOP_TASK1.Task1.ShapeTypes
         /// Represents the height of the rectngle
         /// </summary>
         public double Height { get; }
+
         /// <summary>
-        /// 
+        /// Represents the shape Rectangle
         /// </summary>
-        /// <param name="widthOfRectangle"></param>
-        /// <param name="heightOfRectangle"></param>
-        /// <param name="colourOfRectangle"></param>
+        /// <param name="widthOfRectangle">The width of the rectangle</param>
+        /// <param name="heightOfRectangle">The height of the rectangle</param>
+        /// <param name="colourOfRectangle">The colour of the rectangle</param>
         public Rectangle(double widthOfRectangle, double heightOfRectangle, string colourOfRectangle)
         {
             Width = widthOfRectangle;
