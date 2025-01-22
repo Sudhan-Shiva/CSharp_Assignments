@@ -1,6 +1,7 @@
 ﻿using ContactManager.DisplayInformation;
 using ContactManager.MatchIndex;
 using ContactManager.ValidInput;
+using ContactManager.Model;
 
 namespace ContactManager.Utility
 {
@@ -18,7 +19,7 @@ namespace ContactManager.Utility
         /// Adds new contact to the contact list
         /// </summary>
         /// <param name="contactList">Represents the stored contact list</param>
-        public void AddContact(List<Model.Contact> contactList)
+        public void AddContact(List<Contact> contactList)
         {
             Console.Write("Enter the Contact Name :  ");
             string contactName = uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), true);
@@ -28,7 +29,7 @@ namespace ContactManager.Utility
             long contactPhoneNumber = getValidInput.GetValidPhoneNumber(uniqueInformation.DistinctInputs(contactList, Console.ReadLine(), false));
             Console.Write("Enter the Contact Remarks : ");
             string contactRemarks = Console.ReadLine();
-            Model.Contact contact = new Model.Contact(contactName, contactEmail, contactPhoneNumber, contactRemarks);
+            Contact contact = new Contact(contactName, contactEmail, contactPhoneNumber, contactRemarks);
             contactList.Add(contact);
             Console.WriteLine("The contact Information has been successfully added.\n");
         }
@@ -37,7 +38,7 @@ namespace ContactManager.Utility
         /// Deletes any contact in the list.
         /// </summary>
         /// <param name="contactList">Represents the stored contact list</param>
-        public void DeleteContact(List<Model.Contact> contactList)
+        public void DeleteContact(List<Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -64,7 +65,7 @@ namespace ContactManager.Utility
         /// Modify contact information in the list.
         /// </summary>
         /// <param name="contactList">Represents the stored contact list</param>
-        public void ModifyContact(List<Model.Contact> contactList)
+        public void ModifyContact(List<Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -106,7 +107,7 @@ namespace ContactManager.Utility
         /// View the contact names in the list.
         /// </summary>
         /// <param name="contactList">Represents the stored contact list</param>
-        public void ViewContact(List<Model.Contact> contactList)
+        public void ViewContact(List<Contact> contactList)
         {
             if (contactList.Count > 0)
             {
@@ -147,14 +148,14 @@ namespace ContactManager.Utility
         /// Search for a particular contact in the list.
         /// </summary>
         /// <param name="contactList">Represents the stored contact list</param>
-        public void SearchContact(List<Model.Contact> contactList)
+        public void SearchContact(List<Contact> contactList)
         {
             if (contactList.Count > 0)
             {
                 bool isSearchPresent = false;
                 Console.Write("Search for the contact Name : ");
                 string contactNameHint = Console.ReadLine();
-                foreach (Model.Contact searchContact in contactList)
+                foreach (Contact searchContact in contactList)
                 {
                     if (searchContact.Name.Contains(contactNameHint))
                     {

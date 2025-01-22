@@ -21,8 +21,7 @@ namespace ContactManager.ValidInput
                 inputPhoneNumber = Console.ReadLine();
             }
 
-            long.TryParse(inputPhoneNumber, out long parsedPhoneNumber);
-            return parsedPhoneNumber;
+            return long.Parse(inputPhoneNumber);
         }
         /// <summary>
         /// Check whether the given string for the Phone number is according to the Phone number format

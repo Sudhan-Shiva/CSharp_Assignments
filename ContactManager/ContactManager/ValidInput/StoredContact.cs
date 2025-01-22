@@ -17,7 +17,7 @@ namespace ContactManager.ValidInput
         /// <param name="inputField">Parameter(Name/Phone Number) to search for the required contact.</param>
         /// <param name="isContactName">Parameter whcih represents whether thw given input is a contact name.</param></param>
         /// <returns>returns the index of the matched contact</returns>
-        public int ContactPresent(List<Model.Contact> contactList, string inputField, bool isContactName)
+        public int ContactPresent(List<Contact> contactList, string inputField, bool isContactName)
         {
             bool isContactPresent = (indexSearch.ReturnIndex(contactList, inputField, isContactName) == -1);
             while (isContactPresent)

@@ -1,4 +1,5 @@
 ﻿using ContactManager.ValidInput;
+using ContactManager.Model;
 
 namespace ContactManager.MatchIndex
 {
@@ -16,9 +17,9 @@ namespace ContactManager.MatchIndex
         /// <param name="inputParameter">Parameter(Name/Phone Number) to search for the required contact.</param>
         /// <param name="isContactName">Parameter whcih represents whether thw given input is a contact name.</param>
         /// <returns></returns>
-        public int ReturnIndex(List<Model.Contact> contactList, string inputParameter, bool isContactName)
+        public int ReturnIndex(List<Contact> contactList, string inputParameter, bool isContactName)
         {
-            foreach (Model.Contact contact in contactList)
+            foreach (Contact contact in contactList)
             {
                 if (isNameOrPhoneNumberPresent(contact, inputParameter, isContactName))
                 {
@@ -36,13 +37,12 @@ namespace ContactManager.MatchIndex
         /// <param name="inputParameter">Parameter(Name/Phone Number) to search for the required contact</param>
         /// <param name="isContactName">Parameter whcih represents whether thw given input is a contact name.</param>
         /// <returns></returns>
-        public bool isNameOrPhoneNumberPresent(Model.Contact contact, string inputParameter, bool isContactName)
+        public bool isNameOrPhoneNumberPresent(Contact contact, string inputParameter, bool isContactName)
         {
             if (isContactName)
             {
                 return contact.Name == inputParameter;
             }
-
             else
             {
                 return contact.PhoneNumber == getValidInput.GetValidPhoneNumber(inputParameter);

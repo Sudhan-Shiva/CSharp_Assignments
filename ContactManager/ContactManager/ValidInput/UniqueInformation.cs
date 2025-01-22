@@ -1,4 +1,5 @@
 ﻿using ContactManager.MatchIndex;
+using ContactManager.Model;
 
 namespace ContactManager.ValidInput
 {
@@ -16,7 +17,7 @@ namespace ContactManager.ValidInput
         /// <param name="inputParameter">Parameter(Name/Phone Number) to search for the required contact.</param>
         /// <param name="isContactName">Parameter whcih represents whether thw given input is a contact name.</param></param>
         /// <returns>Returns a unique contact name and phone number</returns>
-        public string DistinctInputs(List<Model.Contact> contactList, string inputParameter, bool isContactName)
+        public string DistinctInputs(List<Contact> contactList, string inputParameter, bool isContactName)
         {
             //Loop till a unique input is received from the user
             while (indexSearch.ReturnIndex(contactList, inputParameter, isContactName) != -1)
