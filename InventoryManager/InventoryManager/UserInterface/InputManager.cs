@@ -1,10 +1,17 @@
-﻿namespace InventoryManager.UserInterface
+﻿using InventoryManager.ValidInput;
+
+namespace InventoryManager.UserInterface
 {
     /// <summary>
     /// Represents all the input methods
     /// </summary>
     public class InputManager
     {
+        DataValidation dataValidation;
+        public InputManager(DataValidation mainDataValidation) 
+        {
+            dataValidation = mainDataValidation;
+        }
         /// <summary>
         /// To get the user option
         /// </summary>
@@ -117,14 +124,47 @@
         }
 
         /// <summary>
-        /// To check whether the information of a specific product must be viewed
+        /// To get a valid input which is not null or empty string
         /// </summary>
-        /// <returns>String representing the user choice whether the product information must be viewed</returns>
-        public string GetViewSpecificProductChoice()
+        /// <param name="inputParameter">The input that is validated</param>
+        /// <returns>A valid input which is not null or empty string</returns>
+        public string GetValidInput(string inputParameter)
         {
-            Console.Write("Do you want to view the Product Information of any specific Product ?\nY/N : ");
-            string viewChoice = Console.ReadLine();
-            return viewChoice;
+            while (dataValidation.IsDataEmpty(inputParameter))
+            {
+                inputParameter = ReplaceEmptyInput();
+            }
+            return inputParameter;
+        }
+
+        /// <summary>
+        /// To get a valid input which is of the required datatype integer.
+        /// </summary>
+        /// <param name="inputParameter">The input that is validated for the datatype</param>
+        /// <returns>A valid input which is integer</returns>
+        public int GetValidInteger(string inputParameter)
+        {
+            while (!dataValidation.IsDataValid(inputParameter))
+            {
+                inputParameter = ReplaceInvalidInput();
+            }
+            int.TryParse(inputParameter, out int validData);
+            return validData;
+        }
+
+        /// <summary>
+        /// To get a valid input which is of the required datatype decimal.
+        /// </summary>
+        /// <param name="inputParameter">The input that is validated for the datatype</param>
+        /// <returns>A valid input which is decimal</returns>
+        public decimal GetValidDecimal(string inputParameter)
+        {
+            while (!dataValidation.IsProductPriceValid(inputParameter))
+            {
+                inputParameter = ReplaceInvalidInput();
+            }
+            decimal.TryParse(inputParameter, out decimal validData);
+            return validData;
         }
     }
 }

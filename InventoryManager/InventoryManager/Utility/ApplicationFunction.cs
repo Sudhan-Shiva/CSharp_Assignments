@@ -25,7 +25,7 @@ namespace InventoryManager.Utility
         /// To switch between various functions of the application based on the userchoice
         /// </summary>
         /// <param name="userChoice">The input based on which the functions are switched</param>
-        public void AppFunctions(string userChoice)
+        public string AppFunctions(string userChoice)
         {
             switch (userChoice.ToUpper())
             {
@@ -51,6 +51,7 @@ namespace InventoryManager.Utility
                     OutputManager.ShowInvalidInput();
                     break;
             }
+            return userChoice;
         }
     }
 }

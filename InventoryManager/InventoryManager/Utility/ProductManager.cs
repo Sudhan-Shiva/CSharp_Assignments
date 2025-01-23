@@ -14,7 +14,6 @@ namespace InventoryManager.Utility
         /// Represents the Product List
         /// </summary>
         private List<Product> _productList = [];
-        DataValidation dataValidation;
         InputManager inputManager;
 
         /// <summary>
@@ -22,9 +21,8 @@ namespace InventoryManager.Utility
         /// </summary>
         /// <param name="mainDataValidation">Required Data validation object reference</param>
         /// <param name="mainInputManager">Required Input manager object reference</param>
-        public ProductManager(DataValidation mainDataValidation, InputManager mainInputManager)
+        public ProductManager(InputManager mainInputManager)
         {
-            dataValidation = mainDataValidation ;
             inputManager = mainInputManager ;
         }
 
@@ -52,49 +50,6 @@ namespace InventoryManager.Utility
             return inputParameter;
         }
 
-        /// <summary>
-        /// To get a valid input which is not null or empty string
-        /// </summary>
-        /// <param name="inputParameter">The input that is validated</param>
-        /// <returns>A valid input which is not null or empty string</returns>
-        public string GetValidInput(string inputParameter)
-        {
-            while(dataValidation.IsDataEmpty(inputParameter))
-            {
-                inputParameter = inputManager.ReplaceEmptyInput();
-            }
-            return inputParameter;
-        }
-
-        /// <summary>
-        /// To get a valid input which is of the required datatype integer.
-        /// </summary>
-        /// <param name="inputParameter">The input that is validated for the datatype</param>
-        /// <returns>A valid input which is integer</returns>
-        public int GetValidInteger(string inputParameter)
-        {          
-            while (!dataValidation.IsDataValid(inputParameter))
-            {
-                inputParameter = inputManager.ReplaceInvalidInput();
-            }
-            int.TryParse(inputParameter, out int validData);
-            return validData;
-        }
-
-        /// <summary>
-        /// To get a valid input which is of the required datatype decimal.
-        /// </summary>
-        /// <param name="inputParameter">The input that is validated for the datatype</param>
-        /// <returns>A valid input which is decimal</returns>
-        public decimal GetValidDecimal(string inputParameter)
-        {
-            while (!dataValidation.IsProductPriceValid(inputParameter))
-            {
-                inputParameter = inputManager.ReplaceInvalidInput();
-            }
-            decimal.TryParse(inputParameter, out decimal validData);
-            return validData;
-        }
 
         /// <summary>
         /// Returns the index of the product from the product list
@@ -110,7 +65,7 @@ namespace InventoryManager.Utility
             }
             else
             {
-                return _productList.FindIndex(x => x.ProductId == GetValidInteger(inputParameter));
+                return _productList.FindIndex(x => x.ProductId == inputManager.GetValidInteger(inputParameter));
             }
         }
 
@@ -177,7 +132,7 @@ namespace InventoryManager.Utility
             {
                 if (searchproduct.ProductName.Contains(productNameHint))
                 {
-                    OutputManager.ShowNameAndId(searchproduct.ProductName, searchproduct.ProductId);
+                    OutputManager.ShowList(SpecificProductInformation(searchproduct.ProductName, true));
                     isSearchPresent = true;
                 }
             }
@@ -189,10 +144,10 @@ namespace InventoryManager.Utility
         /// </summary>
         public void AddProduct()
         {
-            string productName = GetDistinctInputs(GetValidInput(inputManager.GetProductName()), true);
-            int productId = GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
-            decimal productPrice = GetValidDecimal(inputManager.GetProductPrice());
-            int productQuantity = GetValidInteger(inputManager.GetProductQuantity());
+            string productName = GetDistinctInputs(inputManager.GetValidInput(inputManager.GetProductName()), true);
+            int productId = inputManager.GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
+            decimal productPrice = inputManager.GetValidDecimal(inputManager.GetProductPrice());
+            int productQuantity = inputManager.GetValidInteger(inputManager.GetProductQuantity());
             Product product = new Product(productId, productName, productPrice, productQuantity);
             _productList.Add(product);
             OutputManager.ShowSuccessfulAddition();
@@ -244,20 +199,20 @@ namespace InventoryManager.Utility
                     switch (editField.ToUpper())
                     {
                         case "N":
-                            newProductName = GetDistinctInputs(GetValidInput(inputManager.GetProductName()), true);
+                            newProductName = GetDistinctInputs(inputManager.GetValidInput(inputManager.GetProductName()), true);
                             _productList[editIndex].ProductName = newProductName;
                             break;
                         case "I":
-                            _productList[editIndex].ProductId = GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
+                            _productList[editIndex].ProductId = inputManager.GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
                             break;
                         case "P":
-                            _productList[editIndex].ProductPrice = GetValidDecimal(inputManager.GetProductPrice());
+                            _productList[editIndex].ProductPrice = inputManager.GetValidDecimal(inputManager.GetProductPrice());
                             break;
                         case "Q":
-                            _productList[editIndex].ProductQuantity = GetValidInteger(inputManager.GetProductQuantity());
+                            _productList[editIndex].ProductQuantity = inputManager.GetValidInteger(inputManager.GetProductQuantity());
                             break;
                         default:
-                            OutputManager.ShowInvalidInput();
+                            inputManager.ReplaceInvalidInput();
                             break;
                     }
                     OutputManager.ShowList(SpecificProductInformation(newProductName, true));
@@ -308,41 +263,7 @@ namespace InventoryManager.Utility
         {
             if (!IsListEmpty())
             {
-                OutputManager.ShowList(ProductNames());
-                string viewChoice = inputManager.GetViewSpecificProductChoice();
-                while (viewChoice.ToUpper() != "Y" && viewChoice.ToUpper() != "N")
-                {
-                    viewChoice = inputManager.ReplaceInvalidInput();
-                }
-                if (viewChoice.ToUpper() == "Y")
-                {
-                    string searchField = inputManager.GetActionField();
-                    while (searchField.ToUpper() != "I" && searchField.ToUpper() != "N")
-                    {
-                        searchField = inputManager.ReplaceInvalidInput();
-                    }
-                    bool isProductName = (searchField.ToUpper() == "N") ? true : false;
-                    string searchValue;
-                    int searchIndex;
-                    if (isProductName)
-                    { 
-                        searchValue = inputManager.GetProductName();
-                        searchIndex = ReturnIndex(searchValue, true);
-                    }
-                    else 
-                    {
-                        searchValue = inputManager.GetProductId();
-                        searchIndex = ReturnIndex(searchValue, false);
-                    }
-                    if (searchIndex == -1)
-                    {
-                        OutputManager.ShowNoMatches(); 
-                    }
-                    else
-                    {
-                        OutputManager.ShowList(SpecificProductInformation(searchValue, isProductName));
-                    }                    
-                }
+                OutputManager.ShowList(ProductList());
             }
             else
             {
@@ -366,19 +287,19 @@ namespace InventoryManager.Utility
                 switch(searchByChoice.ToUpper())
                     {
                         case "N":
-                        string productNameHint = inputManager.GetProductName();
-                        isSearchPresent = IsContainingProductName(productNameHint);
+                            string productNameHint = inputManager.GetProductName();
+                            isSearchPresent = IsContainingProductName(productNameHint);
                         break;
-                    case "I":
-                        string productIdHint = inputManager.GetProductId();
-                        int searchIndex = ReturnIndex(productIdHint, false);
-                        if (searchIndex == -1)
-                        { break; }
-                        else
-                        {
-                            OutputManager.ShowNameAndId(_productList[searchIndex].ProductName, _productList[searchIndex].ProductId);
-                            isSearchPresent = true;
-                        }                       
+                        case "I":
+                            string productIdHint = inputManager.GetProductId();
+                            int searchIndex = ReturnIndex(productIdHint, false);
+                            if (searchIndex == -1)
+                            { break; }
+                            else
+                            {
+                                OutputManager.ShowList(SpecificProductInformation(_productList[searchIndex].ProductName, true));
+                                isSearchPresent = true;
+                            }                       
                         break;
                     default:
                         OutputManager.ShowInvalidInput();
