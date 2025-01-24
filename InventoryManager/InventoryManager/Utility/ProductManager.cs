@@ -1,7 +1,5 @@
 ﻿using InventoryManager.UserInterface;
 using InventoryManager.Model;
-using InventoryManager.ValidInput;
-using ConsoleTables;
 
 namespace InventoryManager.Utility
 {
@@ -13,19 +11,20 @@ namespace InventoryManager.Utility
         /// <summary>
         /// Represents the Product List
         /// </summary>
-        private List<Product> _productList = [];
+        private List<Product> _productList = new List<Product>();
         InputManager inputManager;
+        OutputManager outputManager;
 
         /// <summary>
         /// Represents the ProductManager class with the essential object references
         /// </summary>
         /// <param name="mainDataValidation">Required Data validation object reference</param>
         /// <param name="mainInputManager">Required Input manager object reference</param>
-        public ProductManager(InputManager mainInputManager)
+        public ProductManager(InputManager mainInputManager, OutputManager mainOutputManager)
         {
             inputManager = mainInputManager ;
+            outputManager = mainOutputManager ;
         }
-
         /// <summary>
         /// To check if the product list is empty
         /// </summary>
@@ -34,22 +33,6 @@ namespace InventoryManager.Utility
         {
             return (_productList.Count == 0);
         }
-
-        /// <summary>
-        /// To get unique inputs for the product name and ID
-        /// </summary>
-        /// <param name="inputParameter">The input which is checked</param>
-        /// <param name="isProductName">Represents whether the given input is the product name</param>
-        /// <returns>A unique input for the product name or ID</returns>
-        public string GetDistinctInputs(string inputParameter, bool isProductName)
-        {
-            while (ReturnIndex(inputParameter, isProductName) != -1)
-            {
-                inputParameter = inputManager.GetUniqueInput();
-            }
-            return inputParameter;
-        }
-
 
         /// <summary>
         /// Returns the index of the product from the product list
@@ -70,57 +53,6 @@ namespace InventoryManager.Utility
         }
 
         /// <summary>
-        /// Stores the information of a specific product as a ConsoleTable
-        /// </summary>
-        /// <param name="viewProduct">The product name/ID whose information must be stored</param>
-        /// <param name="isProductName">Represents whether the input parameter to locate the product is name</param>
-        /// <returns>The informaton of a specific product as a ConsoleTable</returns>
-        public ConsoleTable SpecificProductInformation(string viewProduct, bool isProductName)
-        {
-            int printIndex = ReturnIndex(viewProduct, isProductName);
-            while (printIndex == -1)
-            {
-                viewProduct  = inputManager.ReplaceInvalidInput();
-                printIndex = ReturnIndex(viewProduct, isProductName);
-            }
-            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
-            productTable.AddRow(_productList[printIndex].ProductName,
-                                _productList[printIndex].ProductId,
-                                _productList[printIndex].ProductPrice,
-                                _productList[printIndex].ProductQuantity);
-            return productTable;
-        }
-
-        /// <summary>
-        /// Stores the complete product list as a ConsoleTable
-        /// </summary>
-        /// <returns>The ConsoleTable containing the product List</returns>
-        public ConsoleTable ProductList()
-        {
-            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
-            foreach (Product product in _productList)
-            {
-                productTable.AddRow(product.ProductName, product.ProductId, product.ProductPrice, product.ProductQuantity);
-            }  
-            return productTable;
-        }
-
-        /// <summary>
-        /// Stores the names of all the product as a ConsoleTable
-        /// </summary>
-        /// <returns>The ConsoleTable containing all the product names</returns>
-        public ConsoleTable ProductNames()
-        {
-            var productTable = new ConsoleTable("Product Name");
-            foreach (Product product in _productList)
-            {
-                productTable.AddRow(product.ProductName);
-            }
-            //Print the information of the product     
-            return productTable;
-        }
-
-        /// <summary>
         /// To check whether the input string is contained in any of the product name
         /// </summary>
         /// <param name="productNameHint">The input string which is to be checked</param>
@@ -132,11 +64,31 @@ namespace InventoryManager.Utility
             {
                 if (searchproduct.ProductName.Contains(productNameHint))
                 {
-                    OutputManager.ShowList(SpecificProductInformation(searchproduct.ProductName, true));
+                    outputManager.SpecificProductInformation(_productList, ReturnValidIndex(searchproduct.ProductName, true));
                     isSearchPresent = true;
                 }
             }
             return isSearchPresent;
+        }
+
+        public int ReturnValidIndex(string viewProduct, bool isProductName)
+        {
+            int printIndex = ReturnIndex(viewProduct, isProductName);
+            while (printIndex == -1)
+            {
+                viewProduct = inputManager.ReplaceInvalidInput();
+                printIndex = ReturnIndex(viewProduct, isProductName);
+            }
+            return printIndex;
+        }
+
+        public string GetDistinctInputs(string inputParameter, bool isProductName)
+        {
+            while (ReturnIndex(inputParameter, isProductName) != -1)
+            {
+                inputParameter = inputManager.GetUniqueInput();
+            }
+            return inputParameter;
         }
 
         /// <summary>
@@ -144,14 +96,15 @@ namespace InventoryManager.Utility
         /// </summary>
         public void AddProduct()
         {
-            string productName = GetDistinctInputs(inputManager.GetValidInput(inputManager.GetProductName()), true);
-            int productId = inputManager.GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
-            decimal productPrice = inputManager.GetValidDecimal(inputManager.GetProductPrice());
-            int productQuantity = inputManager.GetValidInteger(inputManager.GetProductQuantity());
+
+            string productName = GetDistinctInputs(inputManager.GetProductName(), true);
+            int productId = int.Parse(GetDistinctInputs(inputManager.GetProductId(), false));
+            decimal productPrice = inputManager.GetProductPrice();
+            int productQuantity = inputManager.GetProductQuantity();
             Product product = new Product(productId, productName, productPrice, productQuantity);
             _productList.Add(product);
-            OutputManager.ShowSuccessfulAddition();
-            OutputManager.ShowList(SpecificProductInformation(productName, true));
+            OutputManager.PrintSuccessfulAddition();
+            outputManager.SpecificProductInformation(_productList, ReturnValidIndex(productName, true));
         }
 
         /// <summary>
@@ -165,17 +118,17 @@ namespace InventoryManager.Utility
                 int deleteIndex = ReturnIndex(deleteChoice, true);
                 if (deleteIndex == -1)
                 {
-                    OutputManager.ShowNoMatches();
+                    OutputManager.PrintNoMatches();
                 }
                 else
                 {
-                    OutputManager.ShowSuccessfulDeletion();
+                    OutputManager.PrintSuccessfulDeletion();
                     _productList.RemoveAt(deleteIndex);
                 }
             }
             else
             {
-                OutputManager.ShowListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -191,7 +144,7 @@ namespace InventoryManager.Utility
                 string newProductName = editChoice;
                 if (editIndex == -1)
                 { 
-                    OutputManager.ShowNoMatches(); 
+                    OutputManager.PrintNoMatches(); 
                 }
                 else
                 {
@@ -206,22 +159,22 @@ namespace InventoryManager.Utility
                             _productList[editIndex].ProductId = inputManager.GetValidInteger(GetDistinctInputs(inputManager.GetProductId(), false));
                             break;
                         case "P":
-                            _productList[editIndex].ProductPrice = inputManager.GetValidDecimal(inputManager.GetProductPrice());
+                            _productList[editIndex].ProductPrice = inputManager.GetProductPrice();
                             break;
                         case "Q":
-                            _productList[editIndex].ProductQuantity = inputManager.GetValidInteger(inputManager.GetProductQuantity());
+                            _productList[editIndex].ProductQuantity = inputManager.GetProductQuantity();
                             break;
                         default:
                             inputManager.ReplaceInvalidInput();
                             break;
                     }
-                    OutputManager.ShowList(SpecificProductInformation(newProductName, true));
-                    OutputManager.ShowSuccessfulModification();
+                    outputManager.SpecificProductInformation(_productList, editIndex);
+                    OutputManager.PrintSuccessfulModification();
                 }
             }
             else
             {
-                OutputManager.ShowListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -235,15 +188,15 @@ namespace InventoryManager.Utility
                 string sortOrder = inputManager.GetActionField();
                 if (sortOrder.ToUpper() == "N")
                 {
-                    OutputManager.ShowSuccessfulSorting();
+                    OutputManager.PrintSuccessfulSorting();
                     _productList = _productList.OrderBy(o => o.ProductName).ToList();
-                    OutputManager.ShowList(ProductList());
+                    outputManager.ProductList(_productList);
                 }
                 else if (sortOrder.ToUpper() == "I")
                 {
-                    OutputManager.ShowSuccessfulSorting();
+                    OutputManager.PrintSuccessfulSorting();
                     _productList = _productList.OrderBy(o => o.ProductId).ToList();
-                    OutputManager.ShowList(ProductList());
+                    outputManager.ProductList(_productList);
                 }
                 else
                 {
@@ -252,7 +205,7 @@ namespace InventoryManager.Utility
             }
             else
             {
-                OutputManager.ShowListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -263,11 +216,11 @@ namespace InventoryManager.Utility
         {
             if (!IsListEmpty())
             {
-                OutputManager.ShowList(ProductList());
+                outputManager.ProductList(_productList);
             }
             else
             {
-                OutputManager.ShowListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
 
@@ -297,22 +250,22 @@ namespace InventoryManager.Utility
                             { break; }
                             else
                             {
-                                OutputManager.ShowList(SpecificProductInformation(_productList[searchIndex].ProductName, true));
+                                outputManager.SpecificProductInformation(_productList, searchIndex);
                                 isSearchPresent = true;
                             }                       
                         break;
                     default:
-                        OutputManager.ShowInvalidInput();
+                        OutputManager.PrintInvalidInput();
                         break;
                     }
                 if (!isSearchPresent)
                 {
-                   OutputManager.ShowNoMatches();
+                   OutputManager.PrintNoMatches();
                 }
             }
             else
             {
-                OutputManager.ShowListIsEmpty();
+                OutputManager.PrintListIsEmpty();
             }
         }
     }

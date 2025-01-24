@@ -1,4 +1,6 @@
-﻿using InventoryManager.ValidInput;
+﻿using ConsoleTables;
+using InventoryManager.Model;
+using InventoryManager.ValidInput;
 
 namespace InventoryManager.UserInterface
 {
@@ -35,6 +37,21 @@ namespace InventoryManager.UserInterface
         }
 
         /// <summary>
+        /// To get unique inputs for the product name and ID
+        /// </summary>
+        /// <param name="inputParameter">The input which is checked</param>
+        /// <param name="isProductName">Represents whether the given input is the product name</param>
+        /// <returns>A unique input for the product name or ID</returns>
+        public string GetDistinctInputs(string inputParameter, int inputIndex)
+        {
+            while (inputIndex != -1)
+            {
+                inputParameter = GetUniqueInput();
+            }
+            return inputParameter;
+        }
+
+        /// <summary>
         /// To get another input when the given input is invalid
         /// </summary>
         /// <returns>The input for replacing the invalid input</returns>
@@ -64,7 +81,7 @@ namespace InventoryManager.UserInterface
         {
             Console.Write("Enter the Product Name :  ");
             string productName = Console.ReadLine();
-            return productName;
+            return GetValidInput(productName);
         }
 
         /// <summary>
@@ -75,29 +92,29 @@ namespace InventoryManager.UserInterface
         {
             Console.Write("Enter the Product ID :  ");
             string productId = Console.ReadLine();
-            return productId;
+            return GetValidInput(productId);
         }
 
         /// <summary>
         /// To get the price of the product
         /// </summary>
         /// <returns>The price of the product</returns>
-        public string GetProductPrice()
+        public decimal GetProductPrice()
         {
             Console.Write("Enter the Product Price :  ");
             string productPrice = Console.ReadLine();
-            return productPrice;
+            return GetValidDecimal(productPrice);
         }
 
         /// <summary>
         /// To get the product quantity
         /// </summary>
         /// <returns>The product quantity</returns>
-        public string GetProductQuantity()
+        public int GetProductQuantity()
         {
             Console.Write("Enter the Product Quantity :  ");
             string productQuantity = Console.ReadLine();
-            return productQuantity;
+            return GetValidInteger(productQuantity);
         }
 
         /// <summary>

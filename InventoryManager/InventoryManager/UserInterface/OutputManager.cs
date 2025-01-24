@@ -1,24 +1,31 @@
 ﻿using ConsoleTables;
+using InventoryManager.Model;
+using InventoryManager.Utility;
 
 namespace InventoryManager.UserInterface
 {
     /// <summary>
-    /// Represents all the methods which shows the relevant messages in the console
+    /// Represents all the methods which Prints the relevant messages in the console
     /// </summary>
-    public static class OutputManager
+    public class OutputManager
     {
+        InputManager inputManager;
+        public OutputManager(InputManager mainInputManager)
+        {
+            inputManager = mainInputManager;
+        }
         /// <summary>
-        /// To show that the given input is invalid
+        /// To Print that the given input is invalid
         /// </summary>
-        public static void ShowInvalidInput()
+        public static void PrintInvalidInput()
         {
             Console.Write("The Provided input is invalid !!");
         }
 
         /// <summary>
-        /// To show that the product list is empty
+        /// To Print that the product list is empty
         /// </summary>
-        public static void ShowListIsEmpty()
+        public static void PrintListIsEmpty()
         {
             Console.WriteLine("The Product List is Empty");
         }
@@ -27,61 +34,78 @@ namespace InventoryManager.UserInterface
         /// To print the ConsoleTable given as the input
         /// </summary>
         /// <param name="productTable">The ConsoleTable that must be printed</param>
-        public static void ShowList(ConsoleTable productTable)
+        public static void PrintList(ConsoleTable productTable)
         {
-            productTable.Write();
+            
         }
 
         /// <summary>
-        /// To show that the list is sorted successfully
+        /// To Print that the list is sorted successfully
         /// </summary>
-        public static void ShowSuccessfulSorting()
+        public static void PrintSuccessfulSorting()
         {
             Console.WriteLine("The Product List is Sorted Successfully.\nThe Sorted List ");
         }
 
         /// <summary>
-        /// To show that the product is added succesfully in the list
+        /// To Print that the product is added succesfully in the list
         /// </summary>
-        public static void ShowSuccessfulAddition()
+        public static void PrintSuccessfulAddition()
         {
             Console.WriteLine("The Product Information has been successfully added.\n");
         }
 
         /// <summary>
-        /// To show that the product is deleted successfully from the list.
+        /// To Print that the product is deleted successfully from the list.
         /// </summary>
-        public static void ShowSuccessfulDeletion()
+        public static void PrintSuccessfulDeletion()
         {
             Console.WriteLine("The Product has been deleted successfully.");
         }
 
         /// <summary>
-        /// To show that the required product information is edited successfully.
+        /// To Print that the required product information is edited successfully.
         /// </summary>
-        public static void ShowSuccessfulModification()
+        public static void PrintSuccessfulModification()
         {
             Console.WriteLine("The Product has been edited successfully.");
         }
 
         /// <summary>
-        /// To display the product name and Id
+        /// To Print that there are no matching products
         /// </summary>
-        /// <param name="productName">The product name</param>
-        /// <param name="productId">The product Id</param>
-        public static void ShowNameAndId(string productName, int productId)
-        {
-            Console.WriteLine($"Product Name : {productName} \n" +
-                              $"Product ID : {productId}\n");
-        }
-
-        /// <summary>
-        /// To show that there are no matching products
-        /// </summary>
-        public static void ShowNoMatches()
+        public static void PrintNoMatches()
         {
             Console.WriteLine("There are no matches found.");
         }
+        /// <summary>
+        /// Stores the information of a specific product as a ConsoleTable
+        /// </summary>
+        /// <param name="viewProduct">The product name/ID whose information must be stored</param>
+        /// <param name="isProductName">Represents whether the input parameter to locate the product is name</param>
+        /// <returns>The informaton of a specific product as a ConsoleTable</returns>
+        public void SpecificProductInformation(List<Product> productList, int printIndex)
+        {
+            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
+            productTable.AddRow(productList[printIndex].ProductName,
+                                productList[printIndex].ProductId,
+                                productList[printIndex].ProductPrice,
+                                productList[printIndex].ProductQuantity);
+            productTable.Write();
+        }
 
+        /// <summary>
+        /// Stores the complete product list as a ConsoleTable
+        /// </summary>
+        /// <returns>The ConsoleTable containing the product List</returns>
+        public void ProductList(List<Product> productList)
+        {
+            var productTable = new ConsoleTable("Product Name", "Product ID", "Product Price", "Product Quantity");
+            foreach (Product product in productList)
+            {
+                productTable.AddRow(product.ProductName, product.ProductId, product.ProductPrice, product.ProductQuantity);
+            }
+            productTable.Write();
+        }
     }
 }

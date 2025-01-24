@@ -48,7 +48,7 @@ namespace InventoryManager.Utility
                     productManager.SortProduct();
                     break;
                 default:
-                    OutputManager.ShowInvalidInput();
+                    OutputManager.PrintInvalidInput();
                     break;
             }
             return userChoice;

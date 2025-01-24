@@ -4,7 +4,8 @@ using InventoryManager.ValidInput;
 
 DataValidation dataValidation = new DataValidation();
 InputManager inputManager = new InputManager(dataValidation);
-ProductManager productManager = new ProductManager(inputManager);
+OutputManager outputManager = new OutputManager(inputManager);
+ProductManager productManager = new ProductManager(inputManager, outputManager);
 ApplicationFunction applicationFunction = new ApplicationFunction(productManager);
 string userChoice;
 do
