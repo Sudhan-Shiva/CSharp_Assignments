@@ -1,4 +1,5 @@
 ﻿using InventoryManager.UserInterface;
+using InventoryManager.Model;
 
 namespace InventoryManager.Utility
 {
@@ -25,26 +26,27 @@ namespace InventoryManager.Utility
         /// To switch between various functions of the application based on the userchoice
         /// </summary>
         /// <param name="userChoice">The input based on which the functions are switched</param>
-        public string AppFunctions(string userChoice)
+        public int AppFunctions(int userChoice)
         {
-            switch (userChoice.ToUpper())
+            ApplicationOptions applicationOptions = (ApplicationOptions) userChoice;
+            switch (applicationOptions)
             {
-                case "A":
+                case ApplicationOptions.AddProduct :
                     productManager.AddProduct();
                     break;
-                case "S":
+                case ApplicationOptions.SearchProduct :
                     productManager.SearchProduct();
                     break;
-                case "D":
+                case ApplicationOptions.DeleteProduct :
                     productManager.DeleteProduct();
                     break;
-                case "M":
+                case ApplicationOptions.EditProduct :
                     productManager.ModifyProduct();
                     break;
-                case "V":
+                case ApplicationOptions.ViewProducts :
                     productManager.ViewProduct();
                     break;
-                case "Q":
+                case ApplicationOptions.SortProducts :
                     productManager.SortProduct();
                     break;
                 default:

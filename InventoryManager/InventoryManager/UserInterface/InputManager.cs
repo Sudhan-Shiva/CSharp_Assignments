@@ -1,6 +1,5 @@
-﻿using ConsoleTables;
+﻿using InventoryManager.InputValidation;
 using InventoryManager.Model;
-using InventoryManager.ValidInput;
 
 namespace InventoryManager.UserInterface
 {
@@ -14,17 +13,18 @@ namespace InventoryManager.UserInterface
         {
             dataValidation = mainDataValidation;
         }
+
         /// <summary>
         /// To get the user option
         /// </summary>
         /// <returns>The user choice</returns>
-        public string GetUserOptions()
+        public int GetUserOptions()
         {
-            Console.WriteLine("\nHello!\nWhat do you want to do?\n[V]iew the Product List\n[S]earch the Product List\n[A]dd new Product\n[M]odify the Product List\n[Q]uickSort the Product List\n[D]elete the Product\n[E]xit the Product List\n");
+            Console.WriteLine("\nHello!\nWhat do you want to do?\n[0] View the Product List\n[1] Add new Product\n[2] Delete the Product\n[3] Modify the Product List\n[4] Search the Product List\n[5] QuickSort the Product List\n[6] Exit the Product List\n");
             Console.Write("Type your Choice: ");
-            string inputParameter = Console.ReadLine();
-            return inputParameter;
+            return GetChoiceWithinBounds(6);
         }
+
         /// <summary>
         /// To get another input when the given input is already present
         /// </summary>
@@ -33,21 +33,6 @@ namespace InventoryManager.UserInterface
         {
             Console.Write("The Product Field is Already Present !\nGive a new Field : ");
             string inputParameter = Console.ReadLine();
-            return inputParameter;
-        }
-
-        /// <summary>
-        /// To get unique inputs for the product name and ID
-        /// </summary>
-        /// <param name="inputParameter">The input which is checked</param>
-        /// <param name="isProductName">Represents whether the given input is the product name</param>
-        /// <returns>A unique input for the product name or ID</returns>
-        public string GetDistinctInputs(string inputParameter, int inputIndex)
-        {
-            while (inputIndex != -1)
-            {
-                inputParameter = GetUniqueInput();
-            }
             return inputParameter;
         }
 
@@ -121,23 +106,30 @@ namespace InventoryManager.UserInterface
         /// To get the Editing field(Name/ID/Quantity/price) in the product
         /// </summary>
         /// <returns>String representing the field that must be edited</returns>
-        public string GetEditField()
+        public int GetEditField()
         {
-            Console.WriteLine("Choose the Information that must be edited : \n [N]ame of the Product \n [I]D of the Product \n [P]rice of the Product \n [Q]uantity of the product \n");
+            Console.WriteLine("Choose the Information that must be edited : \n[0] Name of the Product \n[1] ID of the Product \n[2] Price of the Product \n[3] Quantity of the product \n");
             Console.Write("Type your Choice: ");
-            string editField = Console.ReadLine();
-            return editField;
+            return GetChoiceWithinBounds(3);
         }
 
+        public int GetChoiceWithinBounds(int maxEnumLength)
+        {
+            int enumChoice = GetValidInteger(Console.ReadLine());
+            while (enumChoice < 0 || enumChoice > maxEnumLength)
+            {
+                enumChoice = GetValidInteger(ReplaceInvalidInput());
+            }
+            return enumChoice;
+        }
         /// <summary>
         /// To get the field(Name/ID) according to whcih the action must be performed
         /// </summary>
         /// <returns>String representing the field</returns>
-        public string GetActionField()
+        public int GetActionField()
         {
-            Console.Write("Perform the action by Name or ID ?\n[N]ame/[I]d :");
-            string sortOrder = Console.ReadLine();
-            return sortOrder;
+            Console.Write("[0] Name\n[1] Id\nPerform the action by Name or ID : ");
+            return GetChoiceWithinBounds(1);
         }
 
         /// <summary>

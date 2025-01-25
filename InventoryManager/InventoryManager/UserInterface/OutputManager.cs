@@ -1,6 +1,5 @@
 ﻿using ConsoleTables;
 using InventoryManager.Model;
-using InventoryManager.Utility;
 
 namespace InventoryManager.UserInterface
 {
@@ -9,11 +8,6 @@ namespace InventoryManager.UserInterface
     /// </summary>
     public class OutputManager
     {
-        InputManager inputManager;
-        public OutputManager(InputManager mainInputManager)
-        {
-            inputManager = mainInputManager;
-        }
         /// <summary>
         /// To Print that the given input is invalid
         /// </summary>

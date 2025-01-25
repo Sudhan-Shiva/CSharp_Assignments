@@ -1,4 +1,4 @@
-﻿namespace InventoryManager.ValidInput
+﻿namespace InventoryManager.InputValidation
 {
     public class DataValidation
     {
