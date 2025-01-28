@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "yuQeE7X/5N8=",
+  "success": true,
+  "projectFilePath": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\InventoryManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sudhan.shiva\\.nuget\\packages\\consoletables\\2.6.2\\consoletables.2.6.2.nupkg.sha512",
+    "C:\\Users\\sudhan.shiva\\.nuget\\packages\\wcwidth\\1.0.0\\wcwidth.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

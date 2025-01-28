@@ -1,0 +1,159 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\C#_Assignments\\InventoryManager\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\userinterface\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\userinterface\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\model\\contents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\model\\contents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\userinterface\\outputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\userinterface\\outputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\utility\\productmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\utility\\productmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\utility\\applicationfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\utility\\applicationfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\inputvalidation\\datavalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\inputvalidation\\datavalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|f:\\c#_assignments\\inventorymanager\\inventorymanager\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655A964A-E88F-47F5-8181-D4DF92477AA9}|InventoryManager\\InventoryManager.csproj|solutionrelative:inventorymanager\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductManager.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Utility\\ProductManager.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\Utility\\ProductManager.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Utility\\ProductManager.cs",
+              "RelativeToolTip": "InventoryManager\\Utility\\ProductManager.cs",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAkwOwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T03:42:07.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Contents.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Model\\Contents.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\Model\\Contents.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Model\\Contents.cs",
+              "RelativeToolTip": "InventoryManager\\Model\\Contents.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAQwAcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T09:18:02.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InputManager.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\UserInterface\\InputManager.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\UserInterface\\InputManager.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\UserInterface\\InputManager.cs",
+              "RelativeToolTip": "InventoryManager\\UserInterface\\InputManager.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAA2wIQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T03:33:54.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationFunction.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Utility\\ApplicationFunction.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\Utility\\ApplicationFunction.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Utility\\ApplicationFunction.cs",
+              "RelativeToolTip": "InventoryManager\\Utility\\ApplicationFunction.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwDAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T11:22:30.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Program.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\Program.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Program.cs",
+              "RelativeToolTip": "InventoryManager\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T11:22:35.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OutputManager.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\UserInterface\\OutputManager.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\UserInterface\\OutputManager.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\UserInterface\\OutputManager.cs",
+              "RelativeToolTip": "InventoryManager\\UserInterface\\OutputManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T04:50:23.498Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Product.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Model\\Product.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\Model\\Product.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\Model\\Product.cs",
+              "RelativeToolTip": "InventoryManager\\Model\\Product.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T03:23:25.518Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataValidation.cs",
+              "DocumentMoniker": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\InputValidation\\DataValidation.cs",
+              "RelativeDocumentMoniker": "InventoryManager\\InputValidation\\DataValidation.cs",
+              "ToolTip": "F:\\C#_Assignments\\InventoryManager\\InventoryManager\\InputValidation\\DataValidation.cs",
+              "RelativeToolTip": "InventoryManager\\InputValidation\\DataValidation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T03:20:21.451Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
