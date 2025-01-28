@@ -20,7 +20,7 @@ namespace InventoryManager.UserInterface
         /// <returns>The user choice</returns>
         public int GetUserOptions()
         {
-            Console.WriteLine("\nHello!\nWhat do you want to do?\n[0] View the Product List\n[1] Add new Product\n[2] Delete the Product\n[3] Modify the Product List\n[4] Search the Product List\n[5] QuickSort the Product List\n[6] Exit the Product List\n");
+            Console.WriteLine($"\nHello!\nWhat do you want to do?\n[0] {ApplicationOptions.ViewProducts}\n[1] {ApplicationOptions.AddProduct}\n[2] {ApplicationOptions.DeleteProduct}\n[3] {ApplicationOptions.EditProduct}\n[4] {ApplicationOptions.SearchProduct}\n[5] {ApplicationOptions.SortProducts}\n[6] {ApplicationOptions.Exit}\n");
             Console.Write("Type your Choice: ");
             return GetChoiceWithinBounds(6);
         }
@@ -108,7 +108,7 @@ namespace InventoryManager.UserInterface
         /// <returns>String representing the field that must be edited</returns>
         public int GetEditField()
         {
-            Console.WriteLine("Choose the Information that must be edited : \n[0] Name of the Product \n[1] ID of the Product \n[2] Price of the Product \n[3] Quantity of the product \n");
+            Console.WriteLine($"Choose the Information that must be edited : \n[0] {UserEditChoice.EditProductName}\n[1] {UserEditChoice.EditProductId} \n[2] {UserEditChoice.EditProductPrice} \n[3] {UserEditChoice.EditProductQuantity} \n");
             Console.Write("Type your Choice: ");
             return GetChoiceWithinBounds(3);
         }
@@ -128,7 +128,7 @@ namespace InventoryManager.UserInterface
         /// <returns>String representing the field</returns>
         public int GetActionField()
         {
-            Console.Write("[0] Name\n[1] Id\nPerform the action by Name or ID : ");
+            Console.Write($"[0] {NameOrIdChoice.ByName}\n[1] {NameOrIdChoice.ById}\nPerform the action by Name or ID : ");
             return GetChoiceWithinBounds(1);
         }
 
