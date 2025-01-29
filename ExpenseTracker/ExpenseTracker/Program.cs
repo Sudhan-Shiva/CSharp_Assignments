@@ -6,7 +6,7 @@ DataValidation dataValidation = new DataValidation();
 InputManager inputManager = new InputManager(dataValidation);
 OutputManager outputManager = new OutputManager();
 TransactionsManager transactionsManager = new TransactionsManager(inputManager, outputManager);
-TransactionFeatures transactionFeatures = new TransactionFeatures(transactionsManager);
+TransactionFeatures transactionFeatures = new TransactionFeatures(transactionsManager, inputManager);
 int userChoice;
 outputManager.PrintStartMessage();
 do

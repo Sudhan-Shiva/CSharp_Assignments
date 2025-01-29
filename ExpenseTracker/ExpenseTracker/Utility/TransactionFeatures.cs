@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Model;
+﻿using ExpenseTracker.ConsoleUI;
+using ExpenseTracker.Model;
 
 namespace ExpenseTracker.Utility
 {
@@ -7,15 +8,16 @@ namespace ExpenseTracker.Utility
     /// </summary>
     public class TransactionFeatures
     {
-        TransactionsManager transactionsManager;
-
+        private TransactionsManager _transactionsManager;
+        private InputManager _inputManager;
         /// <summary>
         /// Represnts the features of the application
         /// </summary>
         /// <param name="mainTransactionsManager">The required methods to perform the functions of the application</param>
-        public TransactionFeatures(TransactionsManager mainTransactionsManager)
+        public TransactionFeatures(TransactionsManager mainTransactionsManager, InputManager mainInputManager)
         {
-            transactionsManager = mainTransactionsManager;
+            _transactionsManager = mainTransactionsManager;
+            _inputManager = mainInputManager;
         }
 
         /// <summary>
@@ -29,26 +31,31 @@ namespace ExpenseTracker.Utility
             switch (options)
             {
                 case ApplicationOptions.ViewTransaction:
-                    transactionsManager.ViewTransactions();
+                    _transactionsManager.ViewTransactions();
                     break;
                 case ApplicationOptions.AddTransaction:
-                    transactionsManager.AddTransaction();
+                    _transactionsManager.AddTransaction();
                     break;
                 case ApplicationOptions.DeleteTransaction:
-                    transactionsManager.DeleteTransaction();
+                    _transactionsManager.DeleteTransaction();
                     break;
                 case ApplicationOptions.EditTransaction:
-                    transactionsManager.ModifyTransaction();
+                    _transactionsManager.ModifyTransaction();
                     break;
                 case ApplicationOptions.SearchTransaction:
-                    transactionsManager.SearchTransaction();
+                    _transactionsManager.SearchTransaction();
                     break;
                 case ApplicationOptions.ViewTransactionSummary:
-                    transactionsManager.GetSummaryOfTransaction();
+                    _transactionsManager.GetSummaryOfTransaction();
                     break;
                 case ApplicationOptions.Exit:
                     break;
                 default:
+                    while (!(userChoice >= 0 && userChoice <= 6))
+                    {
+                        userChoice = _inputManager.GetValidInteger(_inputManager.ReplaceInvalidInput());
+                    }
+                    ApplicationFunctions(userChoice);
                     break;
             }
             return userChoice;

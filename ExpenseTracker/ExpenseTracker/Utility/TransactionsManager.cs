@@ -10,8 +10,8 @@ public class TransactionsManager
     /// Represents the transaction list
     /// </summary>
     private List<Transaction> _trackerList = new ();
-    InputManager inputManager;
-    OutputManager outputManager;
+    private InputManager _inputManager;
+    private OutputManager _outputManager;
 
     /// <summary>
     /// Constructor block
@@ -20,15 +20,15 @@ public class TransactionsManager
     /// <param name="mainOutputManager">Provides the required output methods</param>
     public TransactionsManager(InputManager mainInputManager, OutputManager mainOutputManager)
     {
-        inputManager = mainInputManager;
-        outputManager = mainOutputManager;
+        _inputManager = mainInputManager;
+        _outputManager = mainOutputManager;
     }
 
     /// <summary>
     /// To check if the transaction list is empty.
     /// </summary>
     /// <returns>True if the list is empty, else false</returns>
-    public bool isListEmpty()
+    private bool isListEmpty()
     {
         return (_trackerList.Count == 0);
     }
@@ -39,9 +39,9 @@ public class TransactionsManager
     public void ViewTransactions()
     {
         if (!isListEmpty())
-            outputManager.PrintTable(_trackerList);
+            _outputManager.PrintTable(_trackerList);
         else
-            outputManager.PrintListIsEmpty();
+            _outputManager.PrintListIsEmpty();
     }
 
     /// <summary>
@@ -49,33 +49,43 @@ public class TransactionsManager
     /// </summary>
     public void AddTransaction()
     {
-        int transactionChoice = inputManager.GetTransactionType() ;
+        int transactionChoice = _inputManager.GetTransactionType() ;
         TransactionType transactionType = (TransactionType) transactionChoice;
         switch(transactionType)
         {
             case TransactionType.Income:
-                Income income = new ();
-                income.Type = "INCOME";
-                income.Amount = inputManager.GetTransactionAmount();
-                income.DateOfTransaction = inputManager.GetTransactionDate();
-                income.Source = inputManager.GetIncomeSource();
-                _trackerList.Add(income);
-                outputManager.PrintSpecificTransactionInformation(income);
+                AddIncome();
                 break;
             case TransactionType.Expense:
-                Expense expense = new ();
-                expense.Type = "EXPENSE";
-                expense.Amount = inputManager.GetTransactionAmount();
-                expense.DateOfTransaction = inputManager.GetTransactionDate();
-                expense.Category = inputManager.GetExpenseCategory();
-                _trackerList.Add(expense);
-                outputManager.PrintSpecificTransactionInformation(expense);
+                AddExpense();
                 break;
             default:
-                inputManager.ReplaceInvalidInput();
+                _inputManager.ReplaceInvalidInput();
                 break;
         }
-        outputManager.PrintSuccessfulAddition();
+        _outputManager.PrintSuccessfulAddition();
+    }
+
+    private void AddExpense()
+    {
+        Expense expense = new();
+        expense.Type = "EXPENSE";
+        expense.Amount = _inputManager.GetTransactionAmount();
+        expense.DateOfTransaction = _inputManager.GetTransactionDate();
+        expense.Category = _inputManager.GetExpenseCategory();
+        _trackerList.Add(expense);
+        _outputManager.PrintSpecificTransactionInformation(expense);
+    }
+
+    private void AddIncome()
+    {
+        Income income = new();
+        income.Type = "INCOME";
+        income.Amount = _inputManager.GetTransactionAmount();
+        income.DateOfTransaction = _inputManager.GetTransactionDate();
+        income.Source = _inputManager.GetIncomeSource();
+        _trackerList.Add(income);
+        _outputManager.PrintSpecificTransactionInformation(income);
     }
 
     /// <summary>
@@ -89,16 +99,16 @@ public class TransactionsManager
             if(deleteChoiceIndex > -1)
             {
                 _trackerList.RemoveAt(deleteChoiceIndex);
-                outputManager.PrintSuccessfulDeletion();
+                _outputManager.PrintSuccessfulDeletion();
             }
             else
             {
-                outputManager.PrintNoMatches();
+                _outputManager.PrintNoMatches();
             }            
         }
         else
         {
-            outputManager.PrintListIsEmpty();
+            _outputManager.PrintListIsEmpty();
         }
     }
 
@@ -112,69 +122,77 @@ public class TransactionsManager
             int transactionIndex = SelectTransactionIndex();
             if (transactionIndex > -1)
             {
-                int fieldToEdit = inputManager.GetModifyChoice();
+                int fieldToEdit = _inputManager.GetModifyChoice();
                 UserEditChoice userEditChoice = (UserEditChoice)fieldToEdit;
                 switch (userEditChoice)
                 {
                     case UserEditChoice.EditTransactionType:
-                        string transactionType = (inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
+                        string transactionType = (_inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
                         if (_trackerList[transactionIndex] is Income && transactionType == "EXPENSE")
                         {
-                            Expense expenseTransaction = new Expense();
-                            expenseTransaction.Type = transactionType;
-                            expenseTransaction.Amount = _trackerList[transactionIndex].Amount;
-                            expenseTransaction.DateOfTransaction = _trackerList[transactionIndex].DateOfTransaction;
-                            expenseTransaction.Category = inputManager.GetExpenseCategory();
-                            _trackerList.RemoveAt(transactionIndex);
-                            _trackerList.Insert(transactionIndex, expenseTransaction);
-                            outputManager.PrintSuccessfulModification();
+                            EditToExpense(transactionIndex);
                         }
                         else if (_trackerList[transactionIndex] is Expense && transactionType == "INCOME")
                         {
-                            Income incomeTransaction = new Income();
-                            incomeTransaction.Type = transactionType;
-                            incomeTransaction.Amount = _trackerList[transactionIndex].Amount;
-                            incomeTransaction.DateOfTransaction = _trackerList[transactionIndex].DateOfTransaction;
-                            incomeTransaction.Source = inputManager.GetIncomeSource();
-                            _trackerList.RemoveAt(transactionIndex);
-                            _trackerList.Insert(transactionIndex, incomeTransaction);
-                            outputManager.PrintSuccessfulModification();
+                            EditToIncome(transactionIndex);
                         }
                         else if((_trackerList[transactionIndex] is Expense && transactionType == "EXPENSE") || (_trackerList[transactionIndex] is Income && transactionType == "INCOME"))
                         {
-                            Console.WriteLine("The provided transaction is already of the same type.");
+                            _outputManager.PrintAlreadySameType();
                         }
                         break;
                     case UserEditChoice.EditTransactionAmount:
-                        _trackerList[transactionIndex].Amount = inputManager.GetTransactionAmount();
-                        outputManager.PrintSuccessfulModification();
+                        _trackerList[transactionIndex].Amount = _inputManager.GetTransactionAmount();
+                        _outputManager.PrintSuccessfulModification();
                         break;
                     case UserEditChoice.EditTransactionDate:
-                        _trackerList[transactionIndex].DateOfTransaction = inputManager.GetTransactionDate();
-                        outputManager.PrintSuccessfulModification();
+                        _trackerList[transactionIndex].DateOfTransaction = _inputManager.GetTransactionDate();
+                        _outputManager.PrintSuccessfulModification();
                         break;
                     case UserEditChoice.EditTransactionDetails:
                         if (_trackerList[transactionIndex] is Income incomeType)
                         {
-                            incomeType.Source = inputManager.GetIncomeSource();
+                            incomeType.Source = _inputManager.GetIncomeSource();
                         }
                         else if (_trackerList[transactionIndex] is Expense expenseType)
                         {
-                            expenseType.Category = inputManager.GetExpenseCategory();
+                            expenseType.Category = _inputManager.GetExpenseCategory();
                         }
-                        outputManager.PrintSuccessfulModification();
+                        _outputManager.PrintSuccessfulModification();
                         break;
                 }
             }
             else
             {
-                outputManager.PrintNoMatches();
+                _outputManager.PrintNoMatches();
             }
         }
         else
         {
-            outputManager.PrintListIsEmpty();
+            _outputManager.PrintListIsEmpty();
         }
+    }
+
+    private void EditToExpense(int transactionIndex)
+    {
+        Expense expenseTransaction = new Expense();
+        expenseTransaction.Type = "EXPENSE";
+        expenseTransaction.Amount = _trackerList[transactionIndex].Amount;
+        expenseTransaction.DateOfTransaction = _trackerList[transactionIndex].DateOfTransaction;
+        expenseTransaction.Category = _inputManager.GetExpenseCategory();
+        _trackerList[transactionIndex] = expenseTransaction;
+        _outputManager.PrintSuccessfulModification();
+    }
+
+    private void EditToIncome(int transactionIndex)
+    {
+        Income incomeTransaction = new Income();
+        incomeTransaction.Type = "INCOME";
+        incomeTransaction.Amount = _trackerList[transactionIndex].Amount;
+        incomeTransaction.DateOfTransaction = _trackerList[transactionIndex].DateOfTransaction;
+        incomeTransaction.Source = _inputManager.GetIncomeSource();
+        _trackerList[transactionIndex] = incomeTransaction;
+        _outputManager.PrintSuccessfulModification();
     }
 
     /// <summary>
@@ -184,8 +202,8 @@ public class TransactionsManager
     {
         if (!isListEmpty())
         {
-            string deleteChoiceType = (inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
-            DateOnly deleteChoiceDate = inputManager.GetTransactionDate();
+            string deleteChoiceType = (_inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
+            DateOnly deleteChoiceDate = _inputManager.GetTransactionDate();
             int numberOfMatchingChoices = 0;
             int matchedIndex = 0;
             foreach (Transaction transaction in _trackerList)
@@ -194,17 +212,17 @@ public class TransactionsManager
                 {
                     numberOfMatchingChoices++;
                     Console.WriteLine($"[{numberOfMatchingChoices}]");
-                    outputManager.PrintSpecificTransactionInformation(transaction);
+                    _outputManager.PrintSpecificTransactionInformation(transaction);
                 }
             }
             if (numberOfMatchingChoices == 0)
             {
-                outputManager.PrintNoMatches();
+                _outputManager.PrintNoMatches();
             }
         }
         else
         {
-            outputManager.PrintListIsEmpty();
+            _outputManager.PrintListIsEmpty();
         }
     }
 
@@ -228,11 +246,11 @@ public class TransactionsManager
                     totalExpense += transaction.Amount;
                 }
             }
-            outputManager.PrintTransactionSummary(totalIncome, totalExpense);
+            _outputManager.PrintTransactionSummary(totalIncome, totalExpense);
         }
         else
         {
-            outputManager.PrintListIsEmpty();
+            _outputManager.PrintListIsEmpty();
         }
     }
 
@@ -240,29 +258,29 @@ public class TransactionsManager
     /// To select the index of the transaction that must be accessed
     /// </summary>
     /// <returns>The index of the transaction that must be accessed</returns>
-    public int SelectTransactionIndex()
+    private int SelectTransactionIndex()
     {
-        string deleteChoiceType = (inputManager.GetTransactionType()==0) ? "INCOME" : "EXPENSE";
-        DateOnly deleteChoiceDate = inputManager.GetTransactionDate();
+        string userChoiceOfType = (_inputManager.GetTransactionType()==0) ? "INCOME" : "EXPENSE";
+        DateOnly userChoiceOfDate = _inputManager.GetTransactionDate();
         int numberOfMatchingChoices = 0;
         int matchedIndex = 0;
         foreach (Transaction transaction in _trackerList)
         {
-            if (transaction.DateOfTransaction == deleteChoiceDate && transaction.Type == deleteChoiceType)
+            if (transaction.DateOfTransaction == userChoiceOfDate && transaction.Type == userChoiceOfType)
             {
                 numberOfMatchingChoices++;
                 Console.WriteLine($"[{numberOfMatchingChoices}]");
-                outputManager.PrintSpecificTransactionInformation(transaction);
+                _outputManager.PrintSpecificTransactionInformation(transaction);
             }
         }
 
         if (numberOfMatchingChoices > 0)
         {
-            int deleteChoiceIndex = inputManager.GetTransactionIndex();
+            int deleteChoiceIndex = _inputManager.GetTransactionIndex(numberOfMatchingChoices);
             numberOfMatchingChoices = 0;
             foreach (Transaction transaction in _trackerList)
             {
-                if (transaction.DateOfTransaction == deleteChoiceDate && transaction.Type == deleteChoiceType)
+                if (transaction.DateOfTransaction == userChoiceOfDate && transaction.Type == userChoiceOfType)
                 {
                     numberOfMatchingChoices++;
                     if (deleteChoiceIndex == numberOfMatchingChoices)
