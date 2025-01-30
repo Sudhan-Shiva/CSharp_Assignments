@@ -51,10 +51,7 @@ namespace ExpenseTracker.Utility
                 case ApplicationOptions.Exit:
                     break;
                 default:
-                    while (!(userChoice >= 0 && userChoice <= 6))
-                    {
-                        userChoice = _inputManager.GetValidInteger(_inputManager.ReplaceInvalidInput());
-                    }
+                    userChoice = _inputManager.GetValidInteger(_inputManager.ReplaceInvalidInput());
                     ApplicationFunctions(userChoice);
                     break;
             }

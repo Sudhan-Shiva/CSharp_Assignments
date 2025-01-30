@@ -2,16 +2,23 @@
 using ExpenseTracker.InputValidation;
 using ExpenseTracker.ConsoleUI;
 
-DataValidation dataValidation = new DataValidation();
-InputManager inputManager = new InputManager(dataValidation);
-OutputManager outputManager = new OutputManager();
-TransactionsManager transactionsManager = new TransactionsManager(inputManager, outputManager);
-TransactionFeatures transactionFeatures = new TransactionFeatures(transactionsManager, inputManager);
-int userChoice;
-outputManager.PrintStartMessage();
-do
+public class Program
 {
-    userChoice = transactionFeatures.ApplicationFunctions(inputManager.GetUserChoice());
-} while (userChoice != 6);
-outputManager.PrintExitMessage();
-Console.ReadKey();
+    private static DataValidation _dataValidation = new DataValidation();
+    private static InputManager _inputManager = new InputManager(_dataValidation);
+    private static OutputManager _outputManager = new OutputManager();
+    private static TransactionsManager _transactionsManager = new TransactionsManager(_inputManager, _outputManager);
+    private static TransactionFeatures _transactionFeatures = new TransactionFeatures(_transactionsManager, _inputManager);
+    private static int _userChoice;
+    static void Main()
+    {
+        _outputManager.PrintStartMessage();
+        do
+        {
+            _userChoice = _transactionFeatures.ApplicationFunctions(_inputManager.GetUserChoice());
+        } while (_userChoice != 6);
+        _outputManager.PrintExitMessage();
+        Console.ReadKey();
+    }
+}
+

@@ -165,13 +165,9 @@ namespace ExpenseTracker.ConsoleUI
         /// <returns>Integer corresponding to the detail that must be modified</returns>
         public int GetModifyChoice()
         {
-            Console.WriteLine($"[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionAmount}\n[3] {UserEditChoice.EditTransactionDetails}");
+            Console.WriteLine($"\n[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionAmount}\n[3] {UserEditChoice.EditTransactionDetails}");
             Console.Write("Select the field to edit :");
             int fieldToEdit = GetValidInteger(Console.ReadLine());
-            while(!(fieldToEdit>=0 && fieldToEdit <=3))
-            {
-                fieldToEdit = GetValidInteger(ReplaceInvalidInput());
-            }
             return fieldToEdit;
         }
 
@@ -179,15 +175,11 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the index of the transaction that must be accessed in the printed transactions
         /// </summary>
         /// <returns>The index of the transaction that must be accessed in the printed transactions</returns>
-        public int GetTransactionIndex(int maxValue)
+        public int GetTransactionIndex()
         {
             Console.Write("Select the transaction index : ");
-            int deleteChoiceIndex = GetValidInteger(Console.ReadLine());
-            while (!(deleteChoiceIndex > 0 && deleteChoiceIndex <= maxValue))
-            {
-                deleteChoiceIndex = GetValidInteger(ReplaceInvalidInput());
-            }
-            return deleteChoiceIndex;
+            int userChoiceTransactionIndex = GetValidInteger(Console.ReadLine());
+            return userChoiceTransactionIndex;
         }
     }
 }

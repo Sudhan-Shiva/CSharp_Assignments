@@ -9,17 +9,17 @@
         /// <summary>
         /// To access the type of the transaction
         /// </summary>
-        public string Type;
+        public string Type { get; set; }
 
         /// <summary>
         /// To access the amount of the transaction
         /// </summary>
-        public int Amount;
+        public int Amount { get; set; }
 
         /// <summary>
         /// To access the date of the transaction
         /// </summary>
-        public DateOnly DateOfTransaction;
+        public DateOnly DateOfTransaction { get; set; }
     }
 
     /// <summary>
@@ -31,6 +31,14 @@
         /// Represents the category of the expense
         /// </summary>
         public string Category { get; set; }
+
+        public Expense(string Type, int Amount, DateOnly DateOfTransaction, string Category)
+        {
+            this.Type = Type;
+            this.Amount = Amount;
+            this.DateOfTransaction = DateOfTransaction;
+            this.Category = Category;
+        }
     }
 
     /// <summary>
@@ -42,5 +50,13 @@
         /// Represents the source of the income
         /// </summary>
         public string Source { get; set; }
+
+        public Income(string Type, int Amount, DateOnly DateOfTransaction, string Source)
+        {
+            this.Type = Type;
+            this.Amount = Amount;
+            this.DateOfTransaction = DateOfTransaction;
+            this.Source = Source;
+        }
     }
 }
