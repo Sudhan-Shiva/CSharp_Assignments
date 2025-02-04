@@ -113,5 +113,14 @@ namespace ExpenseTracker.ConsoleUI
             Console.WriteLine("--------EXITING--------");
             Console.WriteLine("Press any key to exit");
         }
+        public void PrintAlreadySameType()
+        {
+            Console.WriteLine("The provided transaction is already of the same type.");
+        }
+
+        public void PrintInvalidInput()
+        {
+            Console.WriteLine("The given input is Invalid !!!\n");
+        }
     }
 }

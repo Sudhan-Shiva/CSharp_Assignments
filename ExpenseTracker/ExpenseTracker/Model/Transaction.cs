@@ -7,46 +7,19 @@
 
     {
         /// <summary>
-        /// The type of the transaction
-        /// </summary>
-        private string _type;
-
-        /// <summary>
-        /// The amount of the transaction
-        /// </summary>
-        private int _amount;
-
-        /// <summary>
-        /// The date of the transaction
-        /// </summary>
-        private DateOnly _dateOnly;
-
-        /// <summary>
         /// To access the type of the transaction
         /// </summary>
-        public string Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
+        public string Type { get; set; }
 
         /// <summary>
         /// To access the amount of the transaction
         /// </summary>
-        public int Amount
-        {
-            get { return _amount; }
-            set { _amount = value; }
-        }
+        public int Amount { get; set; }
 
         /// <summary>
         /// To access the date of the transaction
         /// </summary>
-        public DateOnly DateOfTransaction
-        {
-            get { return _dateOnly; }
-            set { _dateOnly = value; }
-        }
+        public DateOnly DateOfTransaction { get; set; }
     }
 
     /// <summary>
@@ -58,6 +31,14 @@
         /// Represents the category of the expense
         /// </summary>
         public string Category { get; set; }
+
+        public Expense(string Type, int Amount, DateOnly DateOfTransaction, string Category)
+        {
+            this.Type = Type;
+            this.Amount = Amount;
+            this.DateOfTransaction = DateOfTransaction;
+            this.Category = Category;
+        }
     }
 
     /// <summary>
@@ -69,5 +50,13 @@
         /// Represents the source of the income
         /// </summary>
         public string Source { get; set; }
+
+        public Income(string Type, int Amount, DateOnly DateOfTransaction, string Source)
+        {
+            this.Type = Type;
+            this.Amount = Amount;
+            this.DateOfTransaction = DateOfTransaction;
+            this.Source = Source;
+        }
     }
 }

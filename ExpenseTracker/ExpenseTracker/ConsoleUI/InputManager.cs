@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.InputValidation;
+using ExpenseTracker.Model;
 
 namespace ExpenseTracker.ConsoleUI
 {
@@ -10,7 +11,7 @@ namespace ExpenseTracker.ConsoleUI
         /// <summary>
         /// To validate the input data
         /// </summary>
-        DataValidation dataValidation;
+        private DataValidation _dataValidation;
 
         /// <summary>
         /// Required class for input validation
@@ -18,38 +19,30 @@ namespace ExpenseTracker.ConsoleUI
         /// <param name="mainDataValidation"> To validate the input data </param>
         public InputManager(DataValidation mainDataValidation)
         {
-            dataValidation = mainDataValidation;
+            _dataValidation = mainDataValidation;
         }
 
         /// <summary>
         /// To get the choice of the user for the function of the application
         /// </summary>
         /// <returns>Integer corresponding to the function that is to be performed</returns>
-        public int GetUserChoice()
+        public ApplicationOptions GetUserChoice()
         {
-            Console.WriteLine("\n[0] View all previous transaction\n[1] Add new transcation\n[2] Delete older transaction\n[3] Edit Older transaction\n[4] Search the Tracker List\n[5] View Transacton Summary\n[6] Exit ");
+            Console.WriteLine($"\n[0] {ApplicationOptions.ViewTransaction}\n[1] {ApplicationOptions.AddTransaction}\n[2] {ApplicationOptions.DeleteTransaction}\n[3] {ApplicationOptions.EditTransaction}\n[4] {ApplicationOptions.SearchTransaction}\n[5] {ApplicationOptions.ViewTransactionSummary}\n[6] {ApplicationOptions.Exit} ");
             Console.Write("Select the action to be performed :");
             int userChoice = GetValidInteger(Console.ReadLine());
-            while (!(userChoice >= 0 && userChoice <= 6))
-            {
-                userChoice = GetValidInteger(ReplaceInvalidInput());
-            }
-            return userChoice;
+            return (ApplicationOptions) userChoice;
         }
 
         /// <summary>
         /// To get the type of the input transaction
         /// </summary>
         /// <returns>Integer corresponding to the type of the transaction</returns>
-        public int GetTransactionType()
+        public TransactionType GetTransactionType()
         {
-            Console.Write("[0] INCOME\n[1] EXPENSE\nEnter the Transaction Type :  ");
+            Console.Write($"[0] {TransactionType.Income}\n[1] {TransactionType.Expense}\nEnter the Transaction Type :  ");
             int transactionType = GetValidInteger(Console.ReadLine());
-            while (transactionType != 0 && transactionType != 1)
-            {
-                transactionType = GetValidInteger(ReplaceInvalidInput());
-            }
-            return transactionType;
+            return (TransactionType) transactionType;
         }
 
         /// <summary>
@@ -69,7 +62,7 @@ namespace ExpenseTracker.ConsoleUI
         /// <returns>The date of the transaction</returns>
         public DateOnly GetTransactionDate()
         {
-            Console.Write("Enter the Date of Transaction :  ");
+            Console.Write("Enter the Date of Transaction (DD/MM/YYYY) :  ");
             DateOnly transactionDate = GetValidDate(Console.ReadLine());
             return transactionDate;
         }
@@ -111,7 +104,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get another input when the given input is null or empty string
         /// </summary>
         /// <returns>The input for replacing the null or empty string input</returns>
-        public string ReplaceEmptyInput()
+        private string ReplaceEmptyInput()
         {
             Console.Write("The Provided input is empty !!\nProvide the Input again :");
             string inputParameter = Console.ReadLine();
@@ -123,9 +116,9 @@ namespace ExpenseTracker.ConsoleUI
         /// </summary>
         /// <param name="inputParameter">The input that is validated</param>
         /// <returns>A valid input which is not null or empty string</returns>
-        public string GetValidInput(string inputParameter)
+        private string GetValidInput(string inputParameter)
         {
-            while (dataValidation.IsDataEmpty(inputParameter))
+            while (_dataValidation.IsDataEmpty(inputParameter))
             {
                 inputParameter = ReplaceEmptyInput();
             }
@@ -139,7 +132,7 @@ namespace ExpenseTracker.ConsoleUI
         /// <returns>A valid input which is integer</returns>
         public int GetValidInteger(string inputParameter)
         {
-            while (!dataValidation.IsInputInt(inputParameter))
+            while (!_dataValidation.IsInputInt(inputParameter))
             {
                 inputParameter = ReplaceInvalidInput();
             }
@@ -152,9 +145,9 @@ namespace ExpenseTracker.ConsoleUI
         /// </summary>
         /// <param name="inputParameter">The input that is validated for the datatype</param>
         /// <returns>A valid input which is DateOnly</returns>
-        public DateOnly GetValidDate(string inputParameter)
+        private DateOnly GetValidDate(string inputParameter)
         {
-            while (!dataValidation.IsInputDate(inputParameter))
+            while (!_dataValidation.IsInputDate(inputParameter))
             {
                 inputParameter = ReplaceInvalidInput();
             }
@@ -166,16 +159,12 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the transaction detail that must be modified
         /// </summary>
         /// <returns>Integer corresponding to the detail that must be modified</returns>
-        public int GetModifyChoice()
+        public UserEditChoice GetModifyChoice()
         {
-            Console.WriteLine("[0] Transaction Type\n[1] Transaction Amount\n[2] Transaction Date\n[3] Transaction Details");
+            Console.WriteLine($"\n[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionAmount}\n[3] {UserEditChoice.EditTransactionDetails}");
             Console.Write("Select the field to edit :");
             int fieldToEdit = GetValidInteger(Console.ReadLine());
-            while(!(fieldToEdit>=0 && fieldToEdit <=3))
-            {
-                fieldToEdit = GetValidInteger(ReplaceInvalidInput());
-            }
-            return fieldToEdit;
+            return (UserEditChoice) fieldToEdit;
         }
 
         /// <summary>
@@ -185,8 +174,8 @@ namespace ExpenseTracker.ConsoleUI
         public int GetTransactionIndex()
         {
             Console.Write("Select the transaction index : ");
-            int deleteChoiceIndex = GetValidInteger(Console.ReadLine());
-            return deleteChoiceIndex;
+            int userChoiceTransactionIndex = GetValidInteger(Console.ReadLine());
+            return userChoiceTransactionIndex;
         }
     }
 }
