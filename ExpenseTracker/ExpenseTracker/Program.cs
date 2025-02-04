@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Utility;
 using ExpenseTracker.InputValidation;
 using ExpenseTracker.ConsoleUI;
+using ExpenseTracker.Model;
 
 public class Program
 {
@@ -9,14 +10,14 @@ public class Program
     private static OutputManager _outputManager = new OutputManager();
     private static TransactionsManager _transactionsManager = new TransactionsManager(_inputManager, _outputManager);
     private static TransactionFeatures _transactionFeatures = new TransactionFeatures(_transactionsManager, _inputManager);
-    private static int _userChoice;
+    private static ApplicationOptions _userChoice;
     static void Main()
     {
         _outputManager.PrintStartMessage();
         do
         {
             _userChoice = _transactionFeatures.ApplicationFunctions(_inputManager.GetUserChoice());
-        } while (_userChoice != 6);
+        } while (_userChoice != ApplicationOptions.Exit);
         _outputManager.PrintExitMessage();
         Console.ReadKey();
     }

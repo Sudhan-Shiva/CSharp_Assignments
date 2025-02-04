@@ -49,9 +49,8 @@ public class TransactionsManager
     /// </summary>
     public void AddTransaction()
     {
-        int transactionChoice = _inputManager.GetTransactionType() ;
-        TransactionType transactionType = (TransactionType) transactionChoice;
-        switch(transactionType)
+        TransactionType transactionChoice = _inputManager.GetTransactionType() ;
+        switch(transactionChoice)
         {
             case TransactionType.Income:
                 AddIncome();
@@ -60,7 +59,8 @@ public class TransactionsManager
                 AddExpense();
                 break;
             default:
-                _inputManager.ReplaceInvalidInput();
+                _outputManager.PrintInvalidInput();
+                AddTransaction();              
                 break;
         }
         _outputManager.PrintSuccessfulAddition();
@@ -129,12 +129,21 @@ public class TransactionsManager
 
     private void EditTransactionDetails(int transactionIndex)
     {
-        int fieldToEdit = _inputManager.GetModifyChoice();
-        UserEditChoice userEditChoice = (UserEditChoice)fieldToEdit;
-        switch (userEditChoice)
+        UserEditChoice fieldToEdit = _inputManager.GetModifyChoice();
+        switch (fieldToEdit)
         {
             case UserEditChoice.EditTransactionType:
-                string transactionType = (_inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
+                string transactionType = "";
+                TransactionType editTransactionTypeChoice = _inputManager.GetTransactionType();
+                if (editTransactionTypeChoice == TransactionType.Income)
+                    transactionType = "INCOME";
+                else if (editTransactionTypeChoice == TransactionType.Expense)
+                    transactionType = "EXPENSE";
+                else
+                {
+                    _outputManager.PrintInvalidInput();
+                    editTransactionTypeChoice = _inputManager.GetTransactionType();
+                }
                 if (_trackerList[transactionIndex] is Income && transactionType == "EXPENSE")
                 {
                     EditToExpense(transactionIndex);
@@ -194,7 +203,17 @@ public class TransactionsManager
     {
         if (!isListEmpty())
         {
-            string deleteChoiceType = (_inputManager.GetTransactionType() == 0) ? "INCOME" : "EXPENSE";
+            string deleteChoiceType = "";
+            TransactionType editTransactionTypeChoice = _inputManager.GetTransactionType();
+            if (editTransactionTypeChoice == TransactionType.Income)
+                deleteChoiceType = "INCOME";
+            else if (editTransactionTypeChoice == TransactionType.Expense)
+                deleteChoiceType = "EXPENSE";
+            else
+            {
+                _outputManager.PrintInvalidInput();
+                editTransactionTypeChoice = _inputManager.GetTransactionType();
+            }
             DateOnly deleteChoiceDate = _inputManager.GetTransactionDate();
             int numberOfMatchingChoices = 0;
             int matchedIndex = 0;
@@ -252,7 +271,17 @@ public class TransactionsManager
     /// <returns>The index of the transaction that must be accessed</returns>
     private int SelectTransactionIndex()
     {
-        string userChoiceOfType = (_inputManager.GetTransactionType()==0) ? "INCOME" : "EXPENSE";
+        string userChoiceOfType = "";
+        TransactionType selctTransactionTypeChoice = _inputManager.GetTransactionType();
+        if (selctTransactionTypeChoice == TransactionType.Income)
+            userChoiceOfType = "INCOME";
+        else if (selctTransactionTypeChoice == TransactionType.Expense)
+            userChoiceOfType = "EXPENSE";
+        else
+        {
+            _outputManager.PrintInvalidInput();
+            selctTransactionTypeChoice = _inputManager.GetTransactionType();
+        }
         if (!(_trackerList.FindIndex(x => x.Type == userChoiceOfType) == -1))
         {
             DateOnly userChoiceOfDate = _inputManager.GetTransactionDate();

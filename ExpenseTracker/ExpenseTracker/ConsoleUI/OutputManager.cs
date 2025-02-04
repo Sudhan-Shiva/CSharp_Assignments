@@ -117,5 +117,10 @@ namespace ExpenseTracker.ConsoleUI
         {
             Console.WriteLine("The provided transaction is already of the same type.");
         }
+
+        public void PrintInvalidInput()
+        {
+            Console.WriteLine("The given input is Invalid !!!\n");
+        }
     }
 }

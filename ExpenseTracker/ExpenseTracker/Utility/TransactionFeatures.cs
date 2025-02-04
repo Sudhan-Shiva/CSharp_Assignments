@@ -25,10 +25,9 @@ namespace ExpenseTracker.Utility
         /// </summary>
         /// <param name="userChoice">Integer based on which the transaction feature is selected</param>
         /// <returns></returns>
-        public int ApplicationFunctions(int userChoice)
+        public ApplicationOptions ApplicationFunctions(ApplicationOptions userChoice)
         {
-            ApplicationOptions options = (ApplicationOptions) userChoice;
-            switch (options)
+            switch (userChoice)
             {
                 case ApplicationOptions.ViewTransaction:
                     _transactionsManager.ViewTransactions();
@@ -51,11 +50,11 @@ namespace ExpenseTracker.Utility
                 case ApplicationOptions.Exit:
                     break;
                 default:
-                    userChoice = _inputManager.GetValidInteger(_inputManager.ReplaceInvalidInput());
+                    userChoice = _inputManager.GetUserChoice();
                     ApplicationFunctions(userChoice);
                     break;
             }
-            return userChoice;
+            return (ApplicationOptions) userChoice;
         }
     }
 }
