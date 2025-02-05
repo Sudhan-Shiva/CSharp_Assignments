@@ -75,11 +75,11 @@
         /// <summary>
         /// Choose the transaction type as income
         /// </summary>
-        Income,
+        INCOME,
 
         /// <summary>
         /// Choose the transaction type as expense
         /// </summary>
-        Expense
+        EXPENSE
     }
 }

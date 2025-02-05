@@ -40,7 +40,7 @@ namespace ExpenseTracker.ConsoleUI
         /// <returns>Integer corresponding to the type of the transaction</returns>
         public TransactionType GetTransactionType()
         {
-            Console.Write($"[0] {TransactionType.Income}\n[1] {TransactionType.Expense}\nEnter the Transaction Type :  ");
+            Console.Write($"[0] {TransactionType.INCOME}\n[1] {TransactionType.EXPENSE}\nEnter the Transaction Type :  ");
             int transactionType = GetValidInteger(Console.ReadLine());
             return (TransactionType) transactionType;
         }
