@@ -2,7 +2,6 @@
 using Task5.Repository;
 using ConsoleTables;
 using Task5.Utility;
-using System.Security.Cryptography.X509Certificates;
 
 public class Program
 {

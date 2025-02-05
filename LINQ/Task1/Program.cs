@@ -19,7 +19,7 @@ public class Program
 
         var products = productRepository.GetProductList().Where((product) => product.ProductPrice < 500 && product.ProductCategory.Equals("Electronics") );
         
-        var productsNameAndPrice = products.Select(product => (product.ProductName,product.ProductPrice))
+        var productsNameAndPrice = products.Select(product => new { product.ProductName, product.ProductPrice })
             .OrderByDescending(product => product.ProductPrice);
         
         ConsoleTable filteredTable = new ConsoleTable("Product Name", "Product Price");
@@ -28,7 +28,7 @@ public class Program
             filteredTable.AddRow(product.ProductName, product.ProductPrice);         
         }
 
-        Console.WriteLine("The products after filtering in descending order of Product Price : ");
+        Console.WriteLine("The products under category 'Electronics' in descending order of Product Price : ");
         filteredTable.Write();
 
         var avgPrice = productsNameAndPrice.Average(product => product.ProductPrice);

@@ -7,7 +7,8 @@
         Console.WriteLine("The second highest number in the array : "+sortedArray[1]);
 
         Console.Write("\nProvide the specified target sum : ");
-        int targetSum = int.Parse(Console.ReadLine());
+        string inputTargetSum = Console.ReadLine();
+        int targetSum = int.Parse(inputTargetSum);
 
         var pairIntegers = testArray.Where(x => testArray.Contains(targetSum - x));
 

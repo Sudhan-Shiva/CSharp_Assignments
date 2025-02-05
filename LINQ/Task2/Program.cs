@@ -69,7 +69,7 @@ public class Program
         {
             Console.WriteLine("\nProduct Name : "+product.productName);
             Console.WriteLine("Product ID : "+product.commonId);
-            Console.WriteLine("Suppliers : "+ product.supplierName);
+            Console.WriteLine("Supplier : "+ product.supplierName);
             Console.WriteLine("\n-----------------------------------");
         }
         
