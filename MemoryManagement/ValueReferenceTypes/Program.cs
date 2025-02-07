@@ -2,6 +2,17 @@
 
 public class Program
 {
+    /// <summary>
+    /// Method that takes refrence type and value type as parameters and modifies them
+    /// </summary>
+    /// <param name="testValue">The value type variable that is to be modified</param>
+    /// <param name="testProduct">The reference type variable that is to be modifed</param>
+    public static void ValueChange(int testValue, Product testProduct)
+    {
+        testValue++;
+        testProduct.ProductName = "Banana";
+    }
+
     static void Main()
     {
         int valueTypeInteger = 1;
@@ -11,13 +22,6 @@ public class Program
         Console.WriteLine("Initial Value Type :"+valueTypeInteger);
         Console.WriteLine("Initial Reference Type :"+product.ProductName);
 
-        // Method that takes refrence type and value type as parameters and modifies them
-        void ValueChange(int testValue, Product testProduct)
-        {
-            testValue++;
-            testProduct.ProductName = "Banana";
-        }
-        
         ValueChange(valueTypeInteger, product);
 
         // Print the updated reference type and value type variables
