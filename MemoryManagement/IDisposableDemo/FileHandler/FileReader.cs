@@ -9,11 +9,13 @@
             _streamReader = new StreamReader(fileName);
         }
 
+        //Create method to read contents of the file
         public string Read()
         {
             return _streamReader.ReadToEnd();
         }
 
+        //Implement the dispose method of the IDisposable interface
         public void Dispose()
         {
             _streamReader.Dispose();
