@@ -30,15 +30,6 @@ public class MemoryEater
             memoryTable.AddRow(++loopCount, GC.GetTotalMemory(false));
             memoryTable.Write();
         }
-
-        // Measuring heap memory after completion of memory allocation
-        Console.WriteLine($"The heap memory after allocating required memory for the objects : {$"{(double)GC.GetTotalMemory(false) / 1000}".Pastel(ConsoleColor.Red)} Kilobytes");
-
-        Thread.Sleep(1000);
-
-        // Clearing the heap memory by force calling the Garbage collector
-        GC.Collect();
-        Console.WriteLine($"\nThe heap memory after the garbage collection of unreferenced objects : {$"{(double)GC.GetTotalMemory(false) / 1000}".Pastel(ConsoleColor.Red)} Kilobytes");
     }
 }
 
@@ -48,6 +39,15 @@ class Program
     {
         MemoryEater me = new MemoryEater();
         me.Allocate();
+
+        // Measuring heap memory after completion of memory allocation
+        Console.WriteLine($"The heap memory after allocating required memory for the objects : {$"{(double)GC.GetTotalMemory(false) / 1000}".Pastel(ConsoleColor.Red)} Kilobytes");
+
+        Thread.Sleep(1000);
+
+        // Clearing the heap memory by force calling the Garbage collector
+        GC.Collect();
+        Console.WriteLine($"\nThe heap memory after the garbage collection of unreferenced objects : {$"{(double)GC.GetTotalMemory(false) / 1000}".Pastel(ConsoleColor.Red)} Kilobytes");
 
         Console.ReadKey();
     }
