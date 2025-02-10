@@ -15,10 +15,14 @@ public class MemoryEater
         ConsoleTable memoryTable = new ConsoleTable("Loop Count", "Occupied Heap Memory (Bytes)");
         int loopCount = 0;
 
-        //Loop which continuously allocates memory by adding new objects
-        while (true)
+        Console.Write("Provide the number of memory allocations : ");
+        int maxAllocations = int.Parse(Console.ReadLine());
+
+        //Loop which continuously allocates memory by adding new objects until the maximum number of allocations
+        while (loopCount < maxAllocations)
         {
             memAlloc.Add(new int[1000]);
+
             // Assume memAlloc variable is used only within this loop.
             Thread.Sleep(1000);
 
@@ -34,5 +38,7 @@ class Program
     {
         MemoryEater me = new MemoryEater();
         me.Allocate();
+
+        Console.ReadKey();
     }
 }
