@@ -11,8 +11,4 @@
     <PackageReference Include="Pastel" Version="6.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DisplayApp\DisplayApp (C).csproj" />
-  </ItemGroup>
-
 </Project>
