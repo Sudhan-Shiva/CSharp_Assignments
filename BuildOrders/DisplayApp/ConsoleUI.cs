@@ -1,4 +1,5 @@
-﻿using Pastel;
+﻿using UtilityApp;
+using Pastel;
 
 namespace DisplayApp
 {
@@ -7,7 +8,7 @@ namespace DisplayApp
         public static int GetInteger()
         {
             Console.Write($"\nProvide the Input integer : ".Pastel(ConsoleColor.Yellow));
-            return int.Parse(Console.ReadLine());
+            return DataValidation.GetValidInteger(Console.ReadLine());
         }
 
         public static void PrintAdditionResult(int firstIntegerInput, int secondIntegerInput, int result)
