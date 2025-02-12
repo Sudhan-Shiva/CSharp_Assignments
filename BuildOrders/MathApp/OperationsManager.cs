@@ -18,7 +18,7 @@ namespace MathApp
             int firstInput = ConsoleUI.GetInputInteger();
             int secondInput = ConsoleUI.GetInputInteger();
 
-            switch ((MathOperations) ConsoleUI.GetUserOptions())
+            switch (InputManager.GetInputOperation())
             {
                 case MathOperations.Addition:
                     ConsoleUI.PrintAdditionResult(firstInput, secondInput, mathUtils.Add(firstInput, secondInput));
