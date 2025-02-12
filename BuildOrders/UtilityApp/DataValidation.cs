@@ -20,5 +20,22 @@ namespace UtilityApp
 
             return int.Parse(inputString);
         }
+
+        /// <summary>
+        /// Method to get a valid string which can be parsed to an integer
+        /// </summary>
+        /// <param name="inputString">String which is checked if it can be parsed to an integer</param>
+        /// <returns>A valid integer</returns>
+        public static int GetChoiceWithinBounds(int inputInteger, int maxValue)
+        {
+            while (inputInteger < 0 || inputInteger > maxValue)
+            {
+                Console.WriteLine($"\nThe given input is out of bounds !!!".Pastel(ConsoleColor.Red));
+                Console.Write($"\nProvide a valid integer : ".Pastel(ConsoleColor.Yellow));
+                inputInteger = GetValidInteger(Console.ReadLine());
+            }
+
+            return inputInteger;
+        }
     }
 }

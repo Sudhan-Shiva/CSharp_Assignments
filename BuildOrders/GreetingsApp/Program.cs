@@ -8,10 +8,11 @@ public class Program
         Console.WriteLine($"WELCOME TO THE APPLICATION !!!".Pastel(ConsoleColor.Magenta));
         Console.WriteLine($"\nProvide two integer inputs to do the math operations.".Pastel(ConsoleColor.Magenta));
 
-        MathOperations mathOperations = new MathOperations();
+        OperationsManager mathOperations = new OperationsManager();
 
         mathOperations.DoMathOperations();
 
+        Console.WriteLine($"\nPress any key to exit.....".Pastel(ConsoleColor.Magenta));
         Console.ReadKey();
     }
 }
