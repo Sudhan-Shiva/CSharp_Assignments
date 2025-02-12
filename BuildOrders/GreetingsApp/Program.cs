@@ -3,6 +3,9 @@ using MathApp;
 
 public class Program
 {
+    /// <summary>
+    /// The primary Main method which acts as the entrypoint of the project
+    /// </summary>
     static void Main()
     {
         Console.WriteLine($"WELCOME TO THE APPLICATION !!!".Pastel(ConsoleColor.Magenta));
