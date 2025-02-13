@@ -37,6 +37,30 @@ public class Program
             }
         }
 
+        using (FileStream fileStream = new FileStream("TestFile.txt", FileMode.Open, FileAccess.Read))
+        {
+
+            using (BufferedStream bufferedStream = new BufferedStream(fileStream, bufferLength))
+            {
+                using (StreamReader streamReader = new StreamReader(bufferedStream))
+                {
+                    bytesRead = 0;
+                    stopWatch.Restart();
+
+                    while (bufferedStream.Position != fileStream.Length)
+                    {
+                        buffer = new char[bufferLength];
+                        bytesRead += streamReader.Read(buffer, 0, bufferLength);
+                    }
+
+                    Console.WriteLine($"\nThe size of the file read : {bytesRead / (1024.0 * 1024 * 1024)} Gigabytes");
+                    stopWatch.Stop();
+
+                    Console.WriteLine($"The time elapsed to read the file in chunks of {bufferLength / (1024.0 * 1024)} MegaBytes using BufferedStream is : {stopWatch.Elapsed} seconds");
+                }
+            }
+        }
+
         Console.ReadKey();
     }
 }
