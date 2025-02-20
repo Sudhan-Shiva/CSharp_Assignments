@@ -1,4 +1,4 @@
-﻿namespace FilesAndStreams.FileManager
+﻿namespace Task1.FileManager
 {
     public class DataHandler
     {
