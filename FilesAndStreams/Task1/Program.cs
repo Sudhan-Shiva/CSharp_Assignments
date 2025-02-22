@@ -1,0 +1,37 @@
+﻿using Pastel;
+using Task1.FileManager;
+
+/// <summary>
+/// Class which contains the main method
+/// </summary>
+public class Program
+{
+    /// <summary>
+    /// The main method which acts as the EntryPoint of the project
+    /// </summary>
+    static void Main()
+    {
+        Console.WriteLine("-----WELCOME-----".Pastel(ConsoleColor.Magenta));
+
+        Console.Write("\nProvide the name of the file to be created : ".Pastel(ConsoleColor.Yellow));
+        string? fileName = Console.ReadLine();
+
+        SynchronousFileHandler synchronousFileHandler = new SynchronousFileHandler();
+        synchronousFileHandler.DeleteFileIfExists(fileName+".txt");
+        synchronousFileHandler.CreateLargeTextFile(fileName);
+
+        synchronousFileHandler.ReadByBufferedStream(fileName);
+
+        synchronousFileHandler.ReadByFileStream(fileName);
+            
+        Console.Write("\nProvide the name of the file to be created after processing : ".Pastel(ConsoleColor.Yellow));
+        string? processedFileName = Console.ReadLine();
+        synchronousFileHandler.DeleteFileIfExists(processedFileName + ".txt");
+        synchronousFileHandler.WriteByMemoryStream(fileName, processedFileName);
+
+        synchronousFileHandler.CheckFileContent(fileName, processedFileName);
+
+        Console.WriteLine("\nPress any key to exit....");
+        Console.ReadKey();
+    }
+}
