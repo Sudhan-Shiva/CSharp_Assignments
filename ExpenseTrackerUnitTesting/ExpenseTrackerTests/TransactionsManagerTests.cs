@@ -42,7 +42,7 @@ namespace ExpenseTrackerTests
             Assert.Multiple(() =>
             {
                 Assert.IsTrue((transactionType == 0) ? (_transactionsManager.transactionRepository()[listCount] is Income) : (_transactionsManager.transactionRepository()[listCount] is Expense));
-                Assert.AreEqual(listCount+1, _transactionsManager.transactionRepository().Count);
+                Assert.AreEqual(listCount + 1, _transactionsManager.transactionRepository().Count);
             });
         }
 
@@ -98,7 +98,7 @@ namespace ExpenseTrackerTests
             _transactionsManager.ModifyTransaction();
 
             //Assert
-            if(editField == 0)
+            if (editField == 0)
             {
                 Assert.AreEqual(editedField, _transactionsManager.transactionRepository()[inputIndex].Type);
             }
@@ -156,7 +156,7 @@ namespace ExpenseTrackerTests
             return new[]
             {
                 new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") } , $"Total Income : 1300{Environment.NewLine}Total Expense : 1{Environment.NewLine}Net Balance : 1299{Environment.NewLine}"  },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, $"Total Income : 100{Environment.NewLine}Total Expense : 1{Environment.NewLine}Net Balance : 99{Environment.NewLine}" },                                                               
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, $"Total Income : 100{Environment.NewLine}Total Expense : 1{Environment.NewLine}Net Balance : 99{Environment.NewLine}" },
                 new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") }, $"Total Income : 100{Environment.NewLine}Total Expense : 3{Environment.NewLine}Net Balance : 97{Environment.NewLine}" },
                 new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") }, $"Total Income : 100{Environment.NewLine}Total Expense : 0{Environment.NewLine}Net Balance : 100{Environment.NewLine}" }
             };

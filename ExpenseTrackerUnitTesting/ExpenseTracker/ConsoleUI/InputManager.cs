@@ -26,18 +26,18 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the choice of the user for the function of the application
         /// </summary>
         /// <returns>Integer corresponding to the function that is to be performed</returns>
-        public int GetUserChoice()
+        public ApplicationOptions GetUserChoice()
         {
             Console.Write($"\n[0] {ApplicationOptions.ViewTransaction}\n[1] {ApplicationOptions.AddTransaction}\n[2] {ApplicationOptions.DeleteTransaction}\n[3] {ApplicationOptions.EditTransaction}\n[4] {ApplicationOptions.SearchTransaction}\n[5] {ApplicationOptions.ViewTransactionSummary}\n[6] {ApplicationOptions.Exit}\nSelect the action to be performed :");
             int userChoice = GetValidInteger(Console.ReadLine());
-            return userChoice;
+            return (ApplicationOptions)userChoice;
         }
 
         /// <summary>
         /// To get the type of the input transaction
         /// </summary>
         /// <returns>Integer corresponding to the type of the transaction</returns>
-        public int GetTransactionType()
+        public TransactionType GetTransactionType()
         {
             Console.Write($"[0] {TransactionType.Income}\n[1] {TransactionType.Expense}\nEnter the Transaction Type :  ");
             int transactionType = GetValidInteger(Console.ReadLine());
@@ -45,7 +45,7 @@ namespace ExpenseTracker.ConsoleUI
             {
                 transactionType = GetValidInteger(ReplaceInvalidInput());
             }
-            return transactionType;
+            return (TransactionType)transactionType;
         }
 
         /// <summary>
@@ -162,11 +162,11 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the transaction detail that must be modified
         /// </summary>
         /// <returns>Integer corresponding to the detail that must be modified</returns>
-        public int GetModifyChoice()
+        public UserEditChoice GetModifyChoice()
         {
             Console.Write($"\n[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionDate}\n[3] {UserEditChoice.EditTransactionDetails}\nSelect the field to edit :");
             int fieldToEdit = GetValidInteger(Console.ReadLine());
-            return fieldToEdit;
+            return (UserEditChoice)fieldToEdit;
         }
 
         /// <summary>

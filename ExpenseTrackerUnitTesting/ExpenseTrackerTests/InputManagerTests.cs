@@ -36,12 +36,12 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            int result = inputManager.GetUserChoice();
+            ApplicationOptions result = inputManager.GetUserChoice();
 
             //Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(int.Parse(inputUserOptions), result);
+                Assert.AreEqual((ApplicationOptions)int.Parse(inputUserOptions), result);
                 Assert.AreEqual($"\n[0] {ApplicationOptions.ViewTransaction}\n[1] {ApplicationOptions.AddTransaction}\n[2] {ApplicationOptions.DeleteTransaction}\n[3] {ApplicationOptions.EditTransaction}\n[4] {ApplicationOptions.SearchTransaction}\n[5] {ApplicationOptions.ViewTransactionSummary}\n[6] {ApplicationOptions.Exit}\nSelect the action to be performed :", stringWriter.ToString());
             });
         }
@@ -57,12 +57,12 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            int result = inputManager.GetModifyChoice();
-            
+            UserEditChoice result = inputManager.GetModifyChoice();
+
             //Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(int.Parse(inputEditField), result);
+                Assert.AreEqual((UserEditChoice)int.Parse(inputEditField), result);
                 Assert.AreEqual($"\n[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionDate}\n[3] {UserEditChoice.EditTransactionDetails}\nSelect the field to edit :", stringWriter.ToString());
             });
         }
@@ -79,13 +79,12 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            int result = inputManager.GetTransactionType();
+            TransactionType result = inputManager.GetTransactionType();
 
             //Assert
             Assert.Multiple(() =>
             {
-                Assert.IsTrue((result >=0) && (result <=1));
-                Assert.AreEqual(int.Parse(inputTransactionType), result);
+                Assert.AreEqual((TransactionType)int.Parse(inputTransactionType), result);
                 Assert.AreEqual($"[0] {TransactionType.Income}\n[1] {TransactionType.Expense}\nEnter the Transaction Type :  ", stringWriter.ToString());
             });
         }
@@ -211,10 +210,10 @@ namespace ExpenseTrackerTests
             int result = inputManager.GetTransactionIndex();
 
             //Assert
-            Assert.Multiple(() => 
-            { 
-                Assert.AreEqual(int.Parse(inputTransactionIndex), result); 
-                Assert.AreEqual("Select the transaction index : ", stringWriter.ToString()); 
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(int.Parse(inputTransactionIndex), result);
+                Assert.AreEqual("Select the transaction index : ", stringWriter.ToString());
             });
         }
         private static IEnumerable<object> InputManagerStringMethodsTestCases()
