@@ -9,7 +9,7 @@ public class Program
 
         string fileName = "testFile";
         asynchronousFileHandler.DeleteFileIfExists(fileName+".txt");
-        asynchronousFileHandler.CreateTextFile(fileName);
+        asynchronousFileHandler.CreateLargeTextFile(fileName);
 
         asynchronousFileHandler.ReadByFileStream(fileName, bufferLength);
 

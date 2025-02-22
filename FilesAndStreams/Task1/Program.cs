@@ -9,7 +9,9 @@ public class Program
 
         Console.Write("\nProvide the name of the file to be created : ".Pastel(ConsoleColor.Yellow));
         string? fileName = Console.ReadLine();
+
         SynchronousFileHandler synchronousFileHandler = new SynchronousFileHandler();
+        synchronousFileHandler.DeleteFileIfExists(fileName+".txt");
         synchronousFileHandler.CreateLargeTextFile(fileName);
 
         synchronousFileHandler.ReadByBufferedStream(fileName);
@@ -18,6 +20,7 @@ public class Program
             
         Console.Write("\nProvide the name of the file to be created after processing : ".Pastel(ConsoleColor.Yellow));
         string? processedFileName = Console.ReadLine();
+        synchronousFileHandler.DeleteFileIfExists(processedFileName + ".txt");
         synchronousFileHandler.WriteByMemoryStream(fileName, processedFileName);
 
         synchronousFileHandler.CheckFileContent(fileName, processedFileName);

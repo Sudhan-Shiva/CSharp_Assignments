@@ -27,7 +27,7 @@ namespace Task2.FileManager
             }
         }
 
-        public void CreateTextFile(string fileName)
+        public void CreateLargeTextFile(string fileName)
         {
             DataHandler dataHandler = new DataHandler();
 
@@ -40,7 +40,7 @@ namespace Task2.FileManager
             Console.WriteLine($"\nFile of size "+ $"{((double) new FileInfo($"{fileName}.txt").Length) / (1024.0 * 1024 * 1024)} GigaBytes ".Pastel(ConsoleColor.Red) + "is successfully created in the name "+$"{fileName}".Pastel(ConsoleColor.Red));
         }
 
-        public async void ReadByFileStream(string fileName, int bufferLength)
+        public async Task<int> ReadByFileStream(string fileName, int bufferLength)
         {
             byte[] buffer = new byte[bufferLength];
             int bytesRead = 0;
@@ -62,10 +62,12 @@ namespace Task2.FileManager
 
                 Console.WriteLine($"\nThe size of the file read by file stream : ".Pastel(ConsoleColor.Yellow)+ $"{bytesRead / (1024.0 * 1024 * 1024)} Gigabytes".Pastel(ConsoleColor.Red));
                 Console.WriteLine($"\nThe time elapsed to read the file in chunks of ".Pastel(ConsoleColor.Yellow) + $"{ bufferLength / (1024.0 * 1024)} MegaBytes".Pastel(ConsoleColor.Red) + " using FileStream is : ".Pastel(ConsoleColor.Yellow)+ $"{stopWatch.ElapsedMilliseconds} Milliseconds".Pastel(ConsoleColor.Red));
+            
+                return bytesRead;
             }
         }
 
-        public async void ReadByBufferedStream(string fileName, int bufferLength)
+        public async Task<int> ReadByBufferedStream(string fileName, int bufferLength)
         {
             byte[] buffer = new byte[bufferLength];
             int bytesRead = 0;
@@ -90,11 +92,13 @@ namespace Task2.FileManager
 
                     Console.WriteLine($"\nThe size of the file read by buffered stream : ".Pastel(ConsoleColor.Yellow)+ $"{ bytesRead / (1024.0 * 1024 * 1024)} Gigabytes".Pastel(ConsoleColor.Red));
                     Console.WriteLine($"\nThe time elapsed to read the file in chunks of ".Pastel(ConsoleColor.Yellow) + $"{bufferLength / (1024.0 * 1024)} MegaBytes".Pastel(ConsoleColor.Red) + " using BufferedStream is : ".Pastel(ConsoleColor.Yellow) + $"{stopWatch.ElapsedMilliseconds} Milliseconds".Pastel(ConsoleColor.Red));
+
+                    return bytesRead;
                 }
             }
         }
 
-        public async void WriteByMemoryStream(string fileName, string processedFileName, int bufferLength)
+        public async Task WriteByMemoryStream(string fileName, string processedFileName, int bufferLength)
         {
             Console.WriteLine("\n-------File is being processed by memory stream-------".Pastel(ConsoleColor.Magenta));
             byte[] buffer = new byte[bufferLength];
@@ -120,7 +124,7 @@ namespace Task2.FileManager
             CheckFileContents(fileName, processedFileName);
         }
 
-        public async void WriteByFileStream(string fileName, string processedFileName, int bufferLength)
+        public async Task WriteByFileStream(string fileName, string processedFileName, int bufferLength)
         {
             Console.WriteLine("\n-------File is being processed by file Stream-------".Pastel(ConsoleColor.Magenta));
 
