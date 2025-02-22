@@ -4,8 +4,15 @@ using Pastel;
 
 namespace Task1.FileManager
 {
+    /// <summary>
+    /// Class to define synchronous file handling methods using streams
+    /// </summary>
     public class SynchronousFileHandler
     {
+        /// <summary>
+        /// To delete a file if it already exists
+        /// </summary>
+        /// <param name="FileName">The name of the file that is to be deleted</param>
         public void DeleteFileIfExists(string FileName)
         {
             if (File.Exists(FileName))
@@ -14,6 +21,10 @@ namespace Task1.FileManager
             }
         }
 
+        /// <summary>
+        /// To create a large text file of size 1GB
+        /// </summary>
+        /// <param name="fileName">The name of the file to be created</param>
         public void CreateLargeTextFile(string fileName)
         {
             DataHandler dataHandler = new DataHandler();
@@ -27,6 +38,11 @@ namespace Task1.FileManager
             Console.WriteLine($"\nFile of size " + $"{((double)new FileInfo($"{fileName}.txt").Length) / (1024.0 * 1024 * 1024)} GigaBytes ".Pastel(ConsoleColor.Red) + "is successfully created in the name " + $"{fileName}".Pastel(ConsoleColor.Red));
         }
 
+        /// <summary>
+        /// To read the contents of a target file by BufferedStream
+        /// </summary>
+        /// <param name="fileName">The name of the file that is to be read</param>
+        /// <returns>The number of bytes read from the file</returns>
         public int ReadByBufferedStream(string fileName)
         {
             using (FileStream fileStream = new FileStream($"{fileName}.txt", FileMode.Open, FileAccess.Read))
@@ -57,6 +73,11 @@ namespace Task1.FileManager
             }
         }
 
+        /// <summary>
+        /// To read the contents of a target file by FileStream
+        /// </summary>
+        /// <param name="fileName">The name of the file that is to be read</param>
+        /// <returns>The number of bytes read from the file</returns>
         public int ReadByFileStream(string fileName)
         {
             using (FileStream fileStream = new FileStream($"{fileName}.txt", FileMode.Open, FileAccess.Read))
@@ -83,6 +104,11 @@ namespace Task1.FileManager
             }
         }
 
+        /// <summary>
+        /// To write some processed data into a new file using memory stream
+        /// </summary>
+        /// <param name="fileName">The name of the file which contains the unprocessed data</param>
+        /// <param name="processedFileName">The name of the file which is to be created to store the processed data</param>
         public void WriteByMemoryStream(string fileName, string processedFileName)
         {
             Console.WriteLine("\n-------File is being processed-------".Pastel(ConsoleColor.Magenta));
@@ -110,13 +136,17 @@ namespace Task1.FileManager
             Console.WriteLine($"\nFile of UpperCase text is created in the name " + $"{processedFileName}".Pastel(ConsoleColor.Red) + " by MemoryStream.");
         }
 
+        /// <summary>
+        /// To check the contents in the processed file and unprocessed file
+        /// </summary>
+        /// <param name="fileName">The name of the file which contains the unprocessed data</param>
+        /// <param name="processedFileName">The name of the file which stores the processed data</param>
         public void CheckFileContent(string fileName, string processedFileName)
         {
             using (StreamReader testReader = new StreamReader($"{fileName}.txt"))
             {
                 Console.WriteLine("\nThe previous first line in the file is : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());
             }
-
             using (StreamReader testReader = new StreamReader($"{processedFileName}.txt"))
             {
                 Console.WriteLine("The current first line after the file is processed : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());

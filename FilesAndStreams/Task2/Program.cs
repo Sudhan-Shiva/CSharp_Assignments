@@ -1,7 +1,13 @@
 ﻿using Task2.FileManager;
 
+/// <summary>
+/// Class which contains the main method
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// The main method which acts as the EntryPoint of the project
+    /// </summary>
     static void Main()
     {
         AsynchronousFileHandler asynchronousFileHandler = new AsynchronousFileHandler();

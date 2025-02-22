@@ -5,8 +5,14 @@ using Task4.SubTask3;
 using Task4.SubTask4;
 using Task4.DataValidation;
 
+/// <summary>
+/// Class which contains the main method
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// The main method which acts as the EntryPoint of the project
+    /// </summary>
     static void Main()
     {
         SubTaskList chosenSubTask = GetSubTaskToBeExecuted();

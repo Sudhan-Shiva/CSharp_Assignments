@@ -4,8 +4,15 @@ using Pastel;
 
 namespace Task2.FileManager
 {
+    /// <summary>
+    /// Class to define Asynchronous file handling methods using streams
+    /// </summary>
     public class AsynchronousFileHandler
     {
+        /// <summary>
+        /// To delete a file if it already exists
+        /// </summary>
+        /// <param name="FileName">The name of the file that is to be deleted</param>
         public void DeleteFileIfExists(string FileName)
         {
             if (File.Exists(FileName))
@@ -14,32 +21,28 @@ namespace Task2.FileManager
             }
         }
 
-        public void CheckFileContents(string fileName, string processedFileName)
-        {
-            using (StreamReader testReader = new StreamReader($"{fileName}.txt"))
-            {
-                Console.WriteLine("\nThe previous first line in the file is : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());
-            }
-
-            using (StreamReader testReader = new StreamReader($"{processedFileName}.txt"))
-            {
-                Console.WriteLine("The current first line after the file is processed : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());
-            }
-        }
-
+        /// <summary>
+        /// To create a large text file of size 1GB
+        /// </summary>
+        /// <param name="fileName">The name of the file to be created</param>
         public void CreateLargeTextFile(string fileName)
         {
             DataHandler dataHandler = new DataHandler();
-
             Console.WriteLine("\n-------File is being created-------".Pastel(ConsoleColor.Magenta));
+
             do
             {
                 dataHandler.WriteFile($"{fileName}.txt", dataHandler.ReadFile("../../../../Shakespeare.txt"));
             } while (new FileInfo($"{fileName}.txt").Length < 1024.0 * 1024 * 1024);
 
-            Console.WriteLine($"\nFile of size "+ $"{((double) new FileInfo($"{fileName}.txt").Length) / (1024.0 * 1024 * 1024)} GigaBytes ".Pastel(ConsoleColor.Red) + "is successfully created in the name "+$"{fileName}".Pastel(ConsoleColor.Red));
+            Console.WriteLine($"\nFile of size " + $"{((double)new FileInfo($"{fileName}.txt").Length) / (1024.0 * 1024 * 1024)} GigaBytes ".Pastel(ConsoleColor.Red) + "is successfully created in the name " + $"{fileName}".Pastel(ConsoleColor.Red));
         }
 
+        /// <summary>
+        /// To read the contents of a target file by FileStream asynchronously
+        /// </summary>
+        /// <param name="fileName">The name of the file that is to be read</param>
+        /// <returns>The number of bytes read from the file</returns>
         public async Task<int> ReadByFileStream(string fileName, int bufferLength)
         {
             byte[] buffer = new byte[bufferLength];
@@ -67,6 +70,11 @@ namespace Task2.FileManager
             }
         }
 
+        /// <summary>
+        /// To read the contents of a target file by BufferedStream asynchronously
+        /// </summary>
+        /// <param name="fileName">The name of the file that is to be read</param>
+        /// <returns>The number of bytes read from the file</returns>
         public async Task<int> ReadByBufferedStream(string fileName, int bufferLength)
         {
             byte[] buffer = new byte[bufferLength];
@@ -98,6 +106,12 @@ namespace Task2.FileManager
             }
         }
 
+        /// <summary>
+        /// To write some processed data into a new file using memory stream asynchronously
+        /// </summary>
+        /// <param name="fileName">The name of the file which contains the unprocessed data</param>
+        /// <param name="processedFileName">The name of the file which is to be created to store the processed data</param>
+        /// <param name="bufferLength">The size of the buffer to store the processed data</param>
         public async Task WriteByMemoryStream(string fileName, string processedFileName, int bufferLength)
         {
             Console.WriteLine("\n-------File is being processed by memory stream-------".Pastel(ConsoleColor.Magenta));
@@ -124,6 +138,12 @@ namespace Task2.FileManager
             CheckFileContents(fileName, processedFileName);
         }
 
+        /// <summary>
+        /// To write some processed data into a new file using file stream asynchronously
+        /// </summary>
+        /// <param name="fileName">The name of the file which contains the unprocessed data</param>
+        /// <param name="processedFileName">The name of the file which is to be created to store the processed data</param>
+        /// <param name="bufferLength">The size of the buffer to store the processed data</param>
         public async Task WriteByFileStream(string fileName, string processedFileName, int bufferLength)
         {
             Console.WriteLine("\n-------File is being processed by file Stream-------".Pastel(ConsoleColor.Magenta));
@@ -145,6 +165,23 @@ namespace Task2.FileManager
 
             Console.WriteLine("\nFile of LowerCase text is created in the name " + $"{processedFileName}".Pastel(ConsoleColor.Red) + " by FileStream.");
             CheckFileContents(fileName, processedFileName);
+        }
+
+        /// <summary>
+        /// To check the contents in the processed file and unprocessed file
+        /// </summary>
+        /// <param name="fileName">The name of the file which contains the unprocessed data</param>
+        /// <param name="processedFileName">The name of the file which stores the processed data</param>
+        public void CheckFileContents(string fileName, string processedFileName)
+        {
+            using (StreamReader testReader = new StreamReader($"{fileName}.txt"))
+            {
+                Console.WriteLine("\nThe previous first line in the file is : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());
+            }
+            using (StreamReader testReader = new StreamReader($"{processedFileName}.txt"))
+            {
+                Console.WriteLine("The current first line after the file is processed : ".Pastel(ConsoleColor.Yellow) + testReader.ReadLine());
+            }
         }
     }
 }

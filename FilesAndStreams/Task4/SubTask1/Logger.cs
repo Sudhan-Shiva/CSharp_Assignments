@@ -2,10 +2,17 @@
 
 namespace Task4.SubTask1
 {
+    /// <summary>
+    /// Class to define error logging methods
+    /// </summary>
     public class Logger
     {
         private static string _logFilePath = "log.txt";
 
+        /// <summary>
+        /// To log an error message to the file using memory stream
+        /// </summary>
+        /// <param name="errorMessage">The error message that is to be logged</param>
         public static void LogError(string errorMessage)
         {
             using (MemoryStream memoryStream = new MemoryStream())

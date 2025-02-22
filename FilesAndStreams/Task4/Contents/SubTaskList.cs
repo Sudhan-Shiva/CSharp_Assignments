@@ -1,6 +1,9 @@
 ﻿namespace Task4.Contents
 {
-    public enum SubTaskList
+    /// <summary>
+    /// enum to define the subtasks
+    /// </summary>
+    internal enum SubTaskList
     {
         SubTask1,
         SubTask2,

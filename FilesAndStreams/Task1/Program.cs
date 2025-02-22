@@ -1,8 +1,14 @@
 ﻿using Pastel;
 using Task1.FileManager;
 
+/// <summary>
+/// Class which contains the main method
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// The main method which acts as the EntryPoint of the project
+    /// </summary>
     static void Main()
     {
         Console.WriteLine("-----WELCOME-----".Pastel(ConsoleColor.Magenta));
