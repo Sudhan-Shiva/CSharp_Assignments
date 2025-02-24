@@ -1,8 +1,15 @@
 ﻿using ConsoleTables;
 
+/// <summary>
+/// Entry point Class
+/// </summary>
 public class Program
 {
     public record Book(string Title, string Author, int ISBN);
+
+    /// <summary>
+    /// Main method which acts as the entry point
+    /// </summary>
     static void Main()
     {
         Console.WriteLine("---- SubTask : Defining Records and Printing to Console ----\n");
@@ -38,13 +45,16 @@ public class Program
         Console.WriteLine("\n---- SubTask : DeConstructing the record ----\n");
         DisplayBook(harryPotterBook);
         DisplayBook(originBook);
-        Console.WriteLine(harryPotterBook.Author); 
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// To display the details of the record
+    /// </summary>
+    /// <param name="book">The record 'book' whose details is to be printed</param>
     static void DisplayBook(Book book)
     {
-        book.Deconstruct(out string Title,out string Author,out int ISBN);
+        book.Deconstruct(out string Title, out string Author, out int ISBN);
         Console.WriteLine($"Title : {Title}, Author : {Author}, ISBN : {ISBN}");
     }
 }

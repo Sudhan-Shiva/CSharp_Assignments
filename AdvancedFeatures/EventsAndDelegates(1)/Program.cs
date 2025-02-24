@@ -1,7 +1,13 @@
 ﻿using EventsAndDelegates;
 
+/// <summary>
+/// Entry point Class
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main method which acts as the entry point
+    /// </summary>
     static void Main()
     {
         Notifier notifier = new Notifier();
@@ -17,6 +23,10 @@ public class Program
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// To print a message to the console
+    /// </summary>
+    /// <param name="message">The message to be printed to the console</param>
     static void MessagePrinter(string message)
     {
         Console.WriteLine(message);

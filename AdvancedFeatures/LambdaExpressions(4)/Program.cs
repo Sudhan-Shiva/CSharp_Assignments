@@ -1,5 +1,11 @@
-﻿public class Program
+﻿/// <summary>
+/// Entry point Class
+/// </summary>
+public class Program
 {
+    /// <summary>
+    /// Main method which acts as the entry point
+    /// </summary>
     static void Main()
     {
         List<int> testList = new List<int> { 1,2,3,4,5,6,7,8,9,0 };
