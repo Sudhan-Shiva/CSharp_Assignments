@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaExpressions(4)", "Lam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedDelegates(5)", "AdvancedDelegates(5)\AdvancedDelegates(5).csproj", "{F850F997-3C76-4F5C-B8DA-7847560CEFA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordOperations(6)", "RecordOperations(6)\RecordOperations(6).csproj", "{969383D4-23ED-4D11-A4A1-3924158C1E2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

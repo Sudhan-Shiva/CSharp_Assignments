@@ -17,13 +17,13 @@ public class Program
         SortDelegate sortDelegateByCategory = SortByCategory;
         SortDelegate sortDelegateByPrice = SortByPrice;
 
-        Console.WriteLine("-----Sorting By Name------\n");
+        Console.WriteLine("\n-----Sorting By Name------\n");
         SortAndDisplay(sortDelegateByName, productList);
 
-        Console.WriteLine("-----Sorting By Category------\n");
+        Console.WriteLine("\n-----Sorting By Category------\n");
         SortAndDisplay(sortDelegateByCategory, productList);
 
-        Console.WriteLine("-----Sorting By Price------\n");
+        Console.WriteLine("\n-----Sorting By Price------\n");
         SortAndDisplay(sortDelegateByPrice, productList);
 
         Console.ReadKey();
