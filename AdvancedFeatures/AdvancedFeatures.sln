@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsAndDelegates(1)", "Ev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VarAndDynamic(2)", "VarAndDynamic(2)\VarAndDynamic(2).csproj", "{725D0161-533F-4C3F-BF42-F712BB042F31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousMethods(3)", "AnonymousMethods(3)\AnonymousMethods(3).csproj", "{84C1CC62-1481-4FD8-9438-26A83D19D719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{725D0161-533F-4C3F-BF42-F712BB042F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{725D0161-533F-4C3F-BF42-F712BB042F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{725D0161-533F-4C3F-BF42-F712BB042F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
