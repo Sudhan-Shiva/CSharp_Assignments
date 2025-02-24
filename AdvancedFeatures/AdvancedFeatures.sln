@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsAndDelegates(1)", "EventsAndDelegates(1)\EventsAndDelegates(1).csproj", "{F2AFD7CF-215E-4444-BF96-9F9F1011DF3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VarAndDynamic(2)", "VarAndDynamic(2)\VarAndDynamic(2).csproj", "{725D0161-533F-4C3F-BF42-F712BB042F31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousMethods(3)", "AnonymousMethods(3)\AnonymousMethods(3).csproj", "{84C1CC62-1481-4FD8-9438-26A83D19D719}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaExpressions(4)", "LambdaExpressions(4)\LambdaExpressions(4).csproj", "{C7D836F1-F556-459E-A1D6-32F86E624CDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedDelegates(5)", "AdvancedDelegates(5)\AdvancedDelegates(5).csproj", "{F850F997-3C76-4F5C-B8DA-7847560CEFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordOperations(6)", "RecordOperations(6)\RecordOperations(6).csproj", "{969383D4-23ED-4D11-A4A1-3924158C1E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatching(7)", "PatternMatching(7)\PatternMatching(7).csproj", "{8703F9CA-6704-41C9-9DEE-D0256FD154FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2AFD7CF-215E-4444-BF96-9F9F1011DF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AFD7CF-215E-4444-BF96-9F9F1011DF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AFD7CF-215E-4444-BF96-9F9F1011DF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AFD7CF-215E-4444-BF96-9F9F1011DF3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{725D0161-533F-4C3F-BF42-F712BB042F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725D0161-533F-4C3F-BF42-F712BB042F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725D0161-533F-4C3F-BF42-F712BB042F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725D0161-533F-4C3F-BF42-F712BB042F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C1CC62-1481-4FD8-9438-26A83D19D719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7D836F1-F556-459E-A1D6-32F86E624CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D836F1-F556-459E-A1D6-32F86E624CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D836F1-F556-459E-A1D6-32F86E624CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D836F1-F556-459E-A1D6-32F86E624CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F850F997-3C76-4F5C-B8DA-7847560CEFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969383D4-23ED-4D11-A4A1-3924158C1E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8703F9CA-6704-41C9-9DEE-D0256FD154FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8703F9CA-6704-41C9-9DEE-D0256FD154FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8703F9CA-6704-41C9-9DEE-D0256FD154FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8703F9CA-6704-41C9-9DEE-D0256FD154FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
