@@ -15,53 +15,85 @@ namespace ExpenseTrackerTests
             Console.SetOut(Console.Out);
         }
 
-        [TestCase("abcd", false)]
-        [TestCase("ab123", false)]
-        [TestCase("", false)]
-        [TestCase("     ", false)]
-        [TestCase("@%^", false)]
-        [TestCase("123", true)]
-        [TestCase("2345678", true)]
-        [TestCase(" 0 ", true)]
+        [TestCase("123")]
+        [TestCase("000234")]
+        [TestCase("2345678")]
+        [TestCase(" 0 ")]
         [Test]
-        public void IsInputInt_ShallReturnTrue_IfInputIsInt(string inputData, bool isInputInt)
+        public void IsInputInt_ReturnsTrue_ForValidInputIntegerString(string inputData)
         {
             //Act
             bool result = dataValidation.IsInputInt(inputData);
 
             //Assert
-            Assert.AreEqual(isInputInt, result);
+            Assert.IsTrue(result);
         }
 
-        [TestCase("5435", false)]
-        [TestCase(null, true)]
-        [TestCase("hello", false)]
-        [TestCase("", true)]
-        [TestCase("Welcome123", false)]
+        [TestCase("abcd")]
+        [TestCase("ab123")]
+        [TestCase("")]
+        [TestCase("     ")]
+        [TestCase("@%^")]
         [Test]
-        public void IsDataEmpty_ShallReturnTrue_IfInputIsNullOrEmpty(string inputData, bool isDataEmpty)
+        public void IsInputInt_ReturnsFalse_ForInvalidInputIntegerString(string inputData)
+        {
+            //Act
+            bool result = dataValidation.IsInputInt(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [Test]
+        public void IsDataEmpty_ReturnsTrue_ForNullOrEmptyString(string inputData)
         {
             //Act
             bool result = dataValidation.IsDataEmpty(inputData);
 
             //Assert
-            Assert.AreEqual(result, isDataEmpty);
+            Assert.IsTrue(result);
         }
 
-        [TestCase("5435", false)]
-        [TestCase("1/1/1", true)]
-        [TestCase(null, false)]
-        [TestCase("04/05/2004", true)]
-        [TestCase("20-5-2004", true)]
-        [TestCase("Welcome123", false)]
+        [TestCase("5435")]
+        [TestCase("hello")]
+        [TestCase("11.22.33.44")]
+        [TestCase("Welcome123")]
         [Test]
-        public void IsInputDate_ShallReturnTrue_IfInputIsValidDate(string inputData, bool isInputValidDate)
+        public void IsDataEmpty_ReturnsFalse_ForValidString(string inputData)
+        {
+            //Act
+            bool result = dataValidation.IsDataEmpty(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestCase("1/1/1")]
+        [TestCase("04/05/2004")]
+        [TestCase("20-5-2004")]
+        [Test]
+        public void IsInputDate_ReturnsTrue_ForValidDateString(string inputData)
         {
             //Act
             bool result = dataValidation.IsInputDate(inputData);
 
             //Assert
-            Assert.AreEqual(result, isInputValidDate);
+            Assert.IsTrue(result);
+        }
+
+        [TestCase("5435")]
+        [TestCase(null)]
+        [TestCase("Welcome123")]
+        [Test]
+        public void IsInputDate_ReturnsFalse_ForInvalidDateString(string inputData)
+        {
+            //Act
+            bool result = dataValidation.IsInputDate(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
         }
     }
 }
