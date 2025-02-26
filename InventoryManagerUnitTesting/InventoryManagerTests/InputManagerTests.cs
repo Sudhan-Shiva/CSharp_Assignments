@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using InventoryManager.InputValidation;
-using Moq;
 using InventoryManager.UserInterface;
 using InventoryManager.Model;
 
@@ -14,8 +13,8 @@ namespace InventoryManagerTests
         [SetUp]
         public void SetUp()
         {
-            Mock<DataValidation> _mockDataValidation = new Mock<DataValidation>();
-            inputManager = new InputManager(_mockDataValidation.Object);
+            DataValidation dataValidation = new DataValidation();
+            inputManager = new InputManager(dataValidation);
         }
 
         [TearDown]
@@ -27,17 +26,22 @@ namespace InventoryManagerTests
 
         [TestCaseSource(nameof(GetUserOptionsTestCases))]
         [Test]
-        public void GetUserOptions_ShallReturnInput_IfInputIsBetween0And6(StringReader inputUserOptions)
+        public void GetUserOptions_ReturnsUserOptionAsInt_ForIntegerInputBetween0And6(StringReader inputUserOptions)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(inputUserOptions);
+
+            //Act
             int result = inputManager.GetUserOptions();
-            var consoleOuput = stringWriter.ToString();
+            var consoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.Multiple(() =>
             {
                 Assert.True((result >= 0) && (result <= 6));
-                Assert.AreEqual(consoleOuput, $"\nHello!\nWhat do you want to do?\n[0] {ApplicationOptions.ViewProducts}\n[1] {ApplicationOptions.AddProduct}\n[2] {ApplicationOptions.DeleteProduct}\n[3] {ApplicationOptions.EditProduct}\n[4] {ApplicationOptions.SearchProduct}\n[5] {ApplicationOptions.SortProducts}\n[6] {ApplicationOptions.Exit}\nType your Choice: ");
+                Assert.AreEqual(consoleOutput, $"\nHello!\nWhat do you want to do?\n[0] {ApplicationOptions.ViewProducts}\n[1] {ApplicationOptions.AddProduct}\n[2] {ApplicationOptions.DeleteProduct}\n[3] {ApplicationOptions.EditProduct}\n[4] {ApplicationOptions.SearchProduct}\n[5] {ApplicationOptions.SortProducts}\n[6] {ApplicationOptions.Exit}\nType your Choice: ");
             });
         }
 
@@ -56,17 +60,22 @@ namespace InventoryManagerTests
 
         [TestCaseSource (nameof(GetEditFieldTestCases))]
         [Test]
-        public void GetEditField_ShallReturnInput_IfInputIsBetween0And3(StringReader inputEditField)
+        public void GetEditField_ReturnsEditFieldAsInt_ForIntegerInputBetween0And3(StringReader inputEditField)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(inputEditField);
+
+            //Act
             int result = inputManager.GetEditField();
-            var consoleOuput = stringWriter.ToString();
+            var consoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.Multiple(() =>
             {
                 Assert.True((result>=0) && (result<=3));    
-                Assert.AreEqual(consoleOuput, $"Choose the Information that must be edited : \n[0] {UserEditChoice.EditProductName}\n[1] {UserEditChoice.EditProductId}\n[2] {UserEditChoice.EditProductPrice}\n[3] {UserEditChoice.EditProductQuantity} \nType your Choice: ");
+                Assert.AreEqual(consoleOutput, $"Choose the Information that must be edited : \n[0] {UserEditChoice.EditProductName}\n[1] {UserEditChoice.EditProductId}\n[2] {UserEditChoice.EditProductPrice}\n[3] {UserEditChoice.EditProductQuantity} \nType your Choice: ");
             });
         }
 
@@ -84,17 +93,22 @@ namespace InventoryManagerTests
 
         [TestCaseSource(nameof(GetActionFieldTestCases))]
         [Test]
-        public void GetActionField_ShallReturnInput_IfInputIsBetween0And1(StringReader inputActionField)
+        public void GetActionField_ReturnsActionFieldAsInt_ForIntegerInputAs1Or0(StringReader inputActionField)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(inputActionField);
+
+            //Act
             int result = inputManager.GetActionField();
-            var consoleOuput = stringWriter.ToString();
+            var consoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.Multiple(() =>
             {
                 Assert.True((result >= 0) && (result <= 1));
-                Assert.AreEqual(consoleOuput, $"[0] {NameOrIdChoice.ByName}\n[1] {NameOrIdChoice.ById}\nPerform the action by Name or ID : ");
+                Assert.AreEqual(consoleOutput, $"[0] {NameOrIdChoice.ByName}\n[1] {NameOrIdChoice.ById}\nPerform the action by Name or ID : ");
             });
         }
 
@@ -109,25 +123,35 @@ namespace InventoryManagerTests
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void GetUniqueProductName_ShallReturnInput_IfInputGiven(StringReader stringReader)
+        public void GetUniqueProductName_ReturnsInputString_ForValidString(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.GetUniqueProductName();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "The Product Name is Already Present !\nGive a new Product name : ");
         }
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void ReplaceInvalidInput_ShallReturnInput_IfInputGiven(StringReader stringReader)
+        public void ReplaceInvalidInput_ReturnsInputString_ForValidString(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.ReplaceInvalidInput();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "The Provided input is invalid !!\nProvide the Input again :");
         }
 
@@ -144,49 +168,69 @@ namespace InventoryManagerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetUniqueProductId_ShallReturnInput_IfInputGivenIsInt(StringReader stringReader)
+        public void GetUniqueProductId_ReturnsInputStringAsInt_ForValidInputInteger(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.GetUniqueProductId();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "The Product ID is Already Present !\nGive a new Product ID : ");
         }
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void GetProductName_ShallReturnInput_IfInputGiven(StringReader stringReader)
+        public void GetProductName_ReturnsInputString_ForValidInputString(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.GetProductName();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "Enter the Product Name :  ");
         }
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetProductId_ShallReturnInput_IfInputGivenIsInt(StringReader stringReader)
+        public void GetProductId_ReturnsInputStringAsInt_ForValidInputInteger(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.GetProductId();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "Enter the Product ID :  ");
         }
 
         [TestCaseSource(nameof(GetProductPriceTestCases))]
         [Test]
-        public void GetProductPrice_ShallReturnInput_IfInputGivenIsDecimal(StringReader stringReader)
+        public void GetProductPrice_ReturnsInputStringAsDecimal_ForValidInputDecimal(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             var result = inputManager.GetProductPrice();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "Enter the Product Price :  ");
         }
 
@@ -203,13 +247,18 @@ namespace InventoryManagerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetProductQuantity_ShallReturnInput_IfInputGivenIsInt(StringReader stringReader)
+        public void GetProductQuantity_ReturnsInputStringAsInt_ForValidInputInteger(StringReader stringReader)
         {
+            //Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             Console.SetIn(stringReader);
+
+            //Act
             int result = inputManager.GetProductQuantity();
             string ConsoleOutput = stringWriter.ToString();
+
+            //Assert
             Assert.AreEqual(ConsoleOutput, "Enter the Product Quantity :  ");
         }
 

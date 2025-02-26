@@ -4,10 +4,9 @@ using InventoryManager.InputValidation;
 namespace InventoryManagerTests
 {    
     [TestFixture]
-    public class DataValidationTests
+    internal class DataValidationTests
     {
         DataValidation dataValidation = new DataValidation();
-
 
         [TearDown]
         public void TearDown()
@@ -25,7 +24,7 @@ namespace InventoryManagerTests
         [TestCase("2345678", true)]
         [TestCase(" 0 ", true)]
         [Test]
-        public void IsInputInt_ShallReturnTrue_IfInputIsInt(string inputData, bool isInputInt)
+        public void IsInputInt_ReturnsTrue_ForValidInteger(string inputData, bool isInputInt)
         {
             bool result = dataValidation.IsDataInt(inputData);
             Assert.AreEqual(isInputInt, result);
@@ -40,7 +39,7 @@ namespace InventoryManagerTests
         [TestCase("     ", false)]
         [TestCase("@%^", false)]
         [Test]
-        public void IsInputDecimal_ShallReturnTrue_IfInputIsDecimal(string inputData, bool isInputDecimal)
+        public void IsInputDecimal_ReturnsTrue_ForValidDecimal(string inputData, bool isInputDecimal)
         {
             bool result = dataValidation.IsInputDecimal(inputData);
             Assert.AreEqual(isInputDecimal, result);
@@ -52,7 +51,7 @@ namespace InventoryManagerTests
         [TestCase("", true)]
         [TestCase("Welcome123", false)]
         [Test]
-        public void IsDataEmpty_ShallReturnTrue_IfInputIsNullOrEmpty(string inputData, bool isDataEmpty)
+        public void IsDataEmpty_ReturnsTrue_ForEmptyOrNullInput(string inputData, bool isDataEmpty)
         {
             bool result = dataValidation.IsDataEmpty(inputData);
             Assert.AreEqual(result, isDataEmpty);

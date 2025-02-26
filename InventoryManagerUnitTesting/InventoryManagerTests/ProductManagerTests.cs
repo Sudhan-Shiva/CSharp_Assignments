@@ -11,145 +11,286 @@ namespace InventoryManagerTests
     {
         private ProductManager _productManager;
         private List<Product> _productList;
+        private Mock<InputManager> _mockInputManager;
+        private OutputManager _outputManager;
         int listCount;
 
         [SetUp]
         public void SetUp()
         {
-            Mock<DataValidation> dataValidation = new Mock<DataValidation>();
-            Mock<InputManager> mockInputManager = new Mock<InputManager>(dataValidation.Object);
-            Mock<OutputManager>  mockOutputManager = new Mock<OutputManager>();
+            DataValidation dataValidation = new DataValidation();
+            _mockInputManager = new Mock<InputManager>(dataValidation);
+            _outputManager = new OutputManager();
             List<Product> _productList = new List<Product>();
-            _productManager = new ProductManager(mockInputManager.Object, mockOutputManager.Object);
+            _productManager = new ProductManager(_mockInputManager.Object, _outputManager);
             listCount = 0;
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            Console.SetIn(Console.In);
-            Console.SetOut(Console.Out);
-        }
-
-        [TestCaseSource(nameof(ProductListAddTestCases))]
+        [TestCaseSource(nameof(ProductListTestCases))]
         [Test]
-        public void AddProduct_ShallAddNewProduct_WhenNewProductDetailsGiven(StringReader stringReader)
+        public void AddProduct_ShallAddNewProduct_WhenNewProductDetailsGiven(List<Product> productList)
         {
-            Console.SetIn(stringReader);
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductName()).Returns("BOILER");
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductPrice()).Returns(5);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductQuantity()).Returns(700);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductId()).Returns(21);
+
+            _productManager.productRepository().AddRange(productList);
+            listCount = _productManager.productRepository().Count + 1;
+
+            //Act
             _productManager.AddProduct();
-            listCount++;
+
+            //Assert
             Assert.AreEqual(listCount, _productManager.productRepository().Count);
         }
 
-        private static IEnumerable<object> ProductListAddTestCases()
-        {
-            return new[]
-            {
-               new object[] { new StringReader ("CARROT\n5\n700\n21") },
-               new object[] { new StringReader ("RADISH\n45\n89\n45") },
-               new object[] {  new StringReader ("BEETROOT\n20\n9003\n2781") },
-               new object[] {  new StringReader ("TOMATO\n60\n90\n27") },
-               new object[] {  new StringReader ("POTATO\n30\n3\n81") },
-            };
-        }
-
-        [TestCaseSource(nameof(ProductListDeleteTestCases))]
+        [TestCaseSource(nameof(ProductListTestCases))]
         [Test]
-        public void DeleteProduct_ShallDeleteProduct_WhenProductNameGiven(List<Product> productList, StringReader stringReader)
+        public void DeleteProduct_ShallDeleteProduct_WhenProductNameGiven(List<Product> productList)
         {
-            Console.SetIn(stringReader);
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductName()).Returns("BANANA");
+
             _productManager.productRepository().AddRange(productList);
             listCount = _productManager.productRepository().Count - 1;
+
+            //Act
             _productManager.DeleteProduct();
+
+            //Assert
             Assert.AreEqual(listCount, _productManager.productRepository().Count);
         }
 
-        private static IEnumerable<object> ProductListDeleteTestCases()
+        private static IEnumerable<List<Product>> ProductListTestCases()
         {
-            return new[]
-            {
-               new object[] {new List<Product> { new Product(1,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("APPLE")},
-               new object[] {new List<Product> { new Product(1,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("POTATO")},
-               new object[] {new List<Product> { new Product(1,"BANANA",2,3) , new Product(2, "CARROT", 20, 31) }, new StringReader("CARROT") },
-               new object[] {new List<Product> { new Product(1,"BANANA",2,3) , new Product(2, "CARROT", 20, 31) }, new StringReader("BANANA") },
-            };
+            yield return new List<Product> { new Product(1, "BANANA", 2, 3), new Product(2, "APPLE", 20, 31), new Product(3, "TOMATO", 200, 39), new Product(4, "POTATO", 400, 30) };
+            yield return new List<Product> { new Product(1, "BANANA", 2, 3), new Product(2, "APPLE", 20, 31), new Product(3, "TOMATO", 200, 39), new Product(4, "POTATO", 400, 30) };
+            yield return new List<Product> { new Product(1, "BANANA", 2, 3), new Product(2, "CARROT", 20, 31) };
+            yield return new List<Product> { new Product(1,"BANANA",2,3) , new Product(2, "CARROT", 20, 31) };
         }
 
-        [TestCaseSource(nameof(ProductListEditTestCases))]
+        [TestCaseSource(nameof(ProductListEditTestCasesForProductName))]
         [Test]
-        public void ModifyProduct_ShallEditProduct_WhenEditFieldGiven(List<Product> productList, StringReader editDetails, int productIndex, string editedName, int userEditChoice)
+        public void ModifyProduct_EditsProductName_ForNewInputProductName(List<Product> productList, string oldProductName, string editedProductName, int productIndex)
         {
-            Console.SetIn(editDetails);
+            //Arrange
+            _mockInputManager.SetupSequence(_mockInputManager => _mockInputManager.GetProductName()).Returns(oldProductName).Returns(editedProductName);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetEditField()).Returns(0);
+            
             _productManager.productRepository().AddRange(productList);
+
+            //Act
             _productManager.ModifyProduct();
-            if (userEditChoice == 0)
-            {
-                Assert.AreEqual(_productManager.productRepository()[productIndex].ProductName, editedName);
-            }
-            else if (userEditChoice == 1)
-            {
-                Assert.AreEqual(_productManager.productRepository()[productIndex].ProductId, int.Parse(editedName));
-            }
-            else if (userEditChoice == 2)
-            {
-                Assert.AreEqual(_productManager.productRepository()[productIndex].ProductPrice, decimal.Parse(editedName));
-            }
-            else if (userEditChoice == 3)
-            {
-                Assert.AreEqual(_productManager.productRepository()[productIndex].ProductQuantity, int.Parse(editedName));
-            }
 
+            //Assert
+            Assert.AreEqual(editedProductName, _productManager.productRepository()[productIndex].ProductName);
         }
 
-        private static IEnumerable<object> ProductListEditTestCases()
+        private static IEnumerable<object> ProductListEditTestCasesForProductName()
         {
             return new[]
             {
-               new object[] {new List<Product> { new Product(10,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("APPLE\n0\nPEAR"), 1, "PEAR", 0},
-               new object[] {new List<Product> { new Product(11,"DOG",2,3) , new Product(2, "CAT", 20, 31) , new Product(3, "MOUSE", 200, 39) , new Product(4, "COW", 400, 30) } , new StringReader ("COW\n1\n81"), 3, "81", 1},
-               new object[] {new List<Product> { new Product(12,"BRINJAL",2,3) , new Product(2, "CARROT", 20, 31) }, new StringReader("CARROT\n2\n21.5"), 1 , "21.5", 2},
-               new object[] {new List<Product> { new Product(13,"FROG",2,3) , new Product(2, "GOAT", 20, 31) }, new StringReader("GOAT\n3\n21"), 1 , "21", 3}
+               new object[] {new List<Product> { new Product(10,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE", "PEAR", 1},
+               new object[] {new List<Product> { new Product(11,"DOG",2,3) , new Product(2, "CAT", 20, 31) , new Product(3, "MOUSE", 200, 39) , new Product(4, "COW", 400, 30) } , "COW", "HORSE", 3},
+               new object[] {new List<Product> { new Product(12,"BRINJAL",2,3) , new Product(2, "CARROT", 20, 31) }, "CARROT", "TOMATO", 1},
+               new object[] {new List<Product> { new Product(13,"FROG",2,3) , new Product(2, "GOAT", 20, 31) }, "GOAT", "BOAT", 1}
             };
         }
 
-        [TestCaseSource(nameof(ProductListSortTestCases))]
+        [TestCaseSource(nameof(ProductListEditTestCasesForProductId))]
         [Test]
-        public void SortProduct_ShallSortProductList_WhenSortFieldGiven(List<Product> productList, StringReader stringReader, string firstProductName)
+        public void ModifyProduct_EditsProductId_ForNewInputProductId(List<Product> productList, string productName, int editedProductId, int productIndex)
         {
-            Console.SetIn(stringReader);
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductName()).Returns(productName);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetEditField()).Returns(1);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductId()).Returns(editedProductId);
+
             _productManager.productRepository().AddRange(productList);
+
+            //Act
+            _productManager.ModifyProduct();
+
+            //Assert
+            Assert.AreEqual(editedProductId, _productManager.productRepository()[productIndex].ProductId);
+        }
+
+        private static IEnumerable<object> ProductListEditTestCasesForProductId()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(10,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE", 77, 1},
+               new object[] {new List<Product> { new Product(11,"DOG",2,3) , new Product(2, "CAT", 20, 31) , new Product(3, "MOUSE", 200, 39) , new Product(4, "COW", 400, 30) } , "COW", 89, 3},
+               new object[] {new List<Product> { new Product(12,"BRINJAL",2,3) , new Product(2, "CARROT", 20, 31) }, "CARROT", 1000, 1},
+               new object[] {new List<Product> { new Product(13,"FROG",2,3) , new Product(2, "GOAT", 20, 31) }, "GOAT", 10, 1}
+            };
+        }
+
+        [TestCaseSource(nameof(ProductListEditTestCasesForProductPrice))]
+        [Test]
+        public void ModifyProduct_EditsProductPrice_ForNewInputProductPrice(List<Product> productList, string productName, decimal editedProductPrice, int productIndex)
+        {
+            //Arrange
+            _mockInputManager.SetupSequence(_mockInputManager => _mockInputManager.GetProductName()).Returns(productName);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetEditField()).Returns(2);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductPrice()).Returns(editedProductPrice);
+
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            _productManager.ModifyProduct();
+
+            //Assert
+            Assert.AreEqual(editedProductPrice, _productManager.productRepository()[productIndex].ProductPrice);
+        }
+
+        private static IEnumerable<object> ProductListEditTestCasesForProductPrice()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(10,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE", (decimal) 76.12, 1},
+               new object[] {new List<Product> { new Product(11,"DOG",2,3) , new Product(2, "CAT", 20, 31) , new Product(3, "MOUSE", 200, 39) , new Product(4, "COW", 400, 30) } , "COW", (decimal) 21.09, 3},
+               new object[] {new List<Product> { new Product(12,"BRINJAL",2,3) , new Product(2, "CARROT", 20, 31) }, "CARROT", (decimal) 11, 1},
+               new object[] {new List<Product> { new Product(13,"FROG",2,3) , new Product(2, "GOAT", 20, 31) }, "GOAT", (decimal) 1234.1234, 1}
+            };
+        }
+
+        [TestCaseSource(nameof(ProductListEditTestCasesForProductQuantity))]
+        [Test]
+        public void ModifyProduct_EditsProductQuantity_ForNewInputProductQuantity(List<Product> productList, string productName, int editedProductQuantity, int productIndex)
+        {
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductName()).Returns(productName);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetEditField()).Returns(3);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductQuantity()).Returns(editedProductQuantity);
+
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            _productManager.ModifyProduct();
+
+            //Assert
+            Assert.AreEqual(editedProductQuantity, _productManager.productRepository()[productIndex].ProductQuantity);
+        }
+
+        private static IEnumerable<object> ProductListEditTestCasesForProductQuantity()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(10,"BANANA",2,3) , new Product(2, "APPLE", 20, 31) , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE", 23, 1},
+               new object[] {new List<Product> { new Product(11,"DOG",2,3) , new Product(2, "CAT", 20, 31) , new Product(3, "MOUSE", 200, 39) , new Product(4, "COW", 400, 30) } , "COW", 78, 3},
+               new object[] {new List<Product> { new Product(12,"BRINJAL",2,3) , new Product(2, "CARROT", 20, 31) }, "CARROT", 123, 1},
+               new object[] {new List<Product> { new Product(13,"FROG",2,3) , new Product(2, "GOAT", 20, 31) }, "GOAT", 90, 1}
+            };
+        }
+
+        [TestCaseSource(nameof(ProductListSortTestCasesForProductName))]
+        [Test]
+        public void SortProduct_SortsProductListAccordingToProductName_ForInputActionFieldAs0(List<Product> productList, string firstProductName)
+        {
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetActionField()).Returns(0);
+
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
             _productManager.SortProduct();
+
+            //Assert
             Assert.AreEqual(firstProductName, _productManager.productRepository()[0].ProductName);
         }
 
-        private static IEnumerable<object> ProductListSortTestCases()
+        private static IEnumerable<object> ProductListSortTestCasesForProductName()
         {
             return new[]
             {
-               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("0"), "APE"},
-               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("1"), "BANANA"},
-               new object[] {new List<Product> { new Product(1,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, new StringReader("0") , "BAMBOO"},
-               new object[] {new List<Product> { new Product(2,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, new StringReader("1") , "CARROT"},
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } ,"APE"},
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE"},
+               new object[] {new List<Product> { new Product(1,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) } , "BAMBOO"},
+               new object[] {new List<Product> { new Product(2,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) } , "BANANA"},
             };
         }
 
-        [TestCaseSource(nameof(ProductListSearchTestCases))]
+        [TestCaseSource(nameof(ProductListSortTestCasesForProductId))]
         [Test]
-        public void SearchProduct_ShallSearchForSpecificProduct_WhenProductDetailsGiven(List<Product> productList, StringReader stringReader)
+        public void SortProduct_SortsProductListAccordingToProductId_ForInputActionFieldAs1(List<Product> productList, string firstProductName)
         {
-            Console.SetIn(stringReader);
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetActionField()).Returns(1);
+
             _productManager.productRepository().AddRange(productList);
-            Assert.DoesNotThrow(() => _productManager.SearchProduct());
+
+            //Act
+            _productManager.SortProduct();
+
+            //Assert
+            Assert.AreEqual(firstProductName, _productManager.productRepository()[0].ProductName);
         }
 
-        private static IEnumerable<object> ProductListSearchTestCases()
+        private static IEnumerable<object> ProductListSortTestCasesForProductId()
         {
             return new[]
             {
-               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("0\nA") },
-               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , new StringReader ("0\nTO") },
-               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, new StringReader("1\n19") },
-               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, new StringReader("1\n29") },
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } ,"ZEBRA"},
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "BANANA"},
+               new object[] {new List<Product> { new Product(1,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) } , "BAMBOO"},
+               new object[] {new List<Product> { new Product(2,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) } , "CARROT"},
+            };
+        }
+
+        [TestCaseSource(nameof(ProductListSearchTestCasesByProductName))]
+        [Test]
+        public void SearchProduct_SearchesForSpecificProduct_ForInputAsPartialProductName(List<Product> productList, string productName, int matchingProductsCount)
+        {
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetActionField()).Returns(0);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductName()).Returns(productName);
+
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            int numberOfMatches = _productManager.SearchProduct();
+
+            //Assert
+            Assert.AreEqual(matchingProductsCount, numberOfMatches);
+        }
+        private static IEnumerable<object> ProductListSearchTestCasesByProductName()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , "A", 3 },
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "TO", 2 },
+               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, "X", 0 },
+               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, "M", 1 },
+            };
+        }
+
+        [TestCaseSource(nameof(ProductListSearchTestCasesByProductId))]
+        [Test]
+        public void SearchProduct_SearchesForSpecificProductByProductId_ForInputAsProductId(List<Product> productList, int productId, int matchingProductsCount)
+        {
+            //Arrange
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetActionField()).Returns(1);
+            _mockInputManager.Setup(_mockInputManager => _mockInputManager.GetProductId()).Returns(productId);
+
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            int numberOfMatches = _productManager.SearchProduct();
+
+            //Assert
+            Assert.AreEqual(matchingProductsCount, numberOfMatches);
+        }
+        private static IEnumerable<object> ProductListSearchTestCasesByProductId()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , 40, 0 },
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , 3, 1 },
+               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, 999, 0 },
+               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, 29, 1 },
             };
         }
     }

@@ -63,18 +63,18 @@ namespace InventoryManager.Utility
         /// </summary>
         /// <param name="inputForSearchProductName">The input string which is to be checked</param>
         /// <returns>True if any product name contains the input string, else false</returns>
-        private bool IsContainingProductName(string inputForSearchProductName)
+        private int IsContainingProductName(string inputForSearchProductName)
         {
-            bool isSearchPresent = false;
-            foreach (Product searchproduct in _productList)
+            int numberOfMatchedSearches = 0;
+            foreach (Product searchProduct in _productList)
             {
-                if (searchproduct.ProductName.Contains(inputForSearchProductName))
+                if (searchProduct.ProductName.Contains(inputForSearchProductName))
                 {
-                    PrintConsoleTable(outputManager.SpecificProductInformation(_productList, ReturnValidIndex(searchproduct.ProductName)));
-                    isSearchPresent = true;
+                    PrintConsoleTable(outputManager.SpecificProductInformation(_productList, ReturnValidIndex(searchProduct.ProductName)));
+                    numberOfMatchedSearches++;
                 }
             }
-            return isSearchPresent;
+            return numberOfMatchedSearches;
         }
 
         private int ReturnValidIndex(string viewProduct)
@@ -113,7 +113,7 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To add new products in the list
         /// </summary>
-        public void AddProduct()
+        public virtual void AddProduct()
         {
             string productName = GetDistinctProductName(inputManager.GetProductName());
             int productId = GetDistinctProductId(inputManager.GetProductId());
@@ -128,7 +128,7 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To delete products in the list
         /// </summary>
-        public void DeleteProduct()
+        public virtual void DeleteProduct()
         {
             if (!IsListEmpty())
             {
@@ -153,7 +153,7 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To modify product information in the list
         /// </summary>
-        public void ModifyProduct()
+        public virtual void ModifyProduct()
         {
             if (!IsListEmpty())
             {
@@ -196,7 +196,7 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To sort the products in the list
         /// </summary>
-        public void SortProduct()
+        public virtual void SortProduct()
         {
             if (!IsListEmpty())
             {
@@ -224,7 +224,7 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To view the product names in the list
         /// </summary>
-        public void ViewProduct()
+        public virtual void ViewProduct()
         {
             if (!IsListEmpty())
             {
@@ -239,43 +239,39 @@ namespace InventoryManager.Utility
         /// <summary>
         /// To search for a particular product in the list
         /// </summary>
-        public void SearchProduct()
+        public virtual int SearchProduct()
         {
+            int numberOfMatches = 0;
             if (!IsListEmpty())
             {
-                int searchByChoice = inputManager.GetActionField();
-                bool isSearchPresent = false;
+                int searchByChoice = inputManager.GetActionField();              
                 NameOrIdChoice searchChoice = (NameOrIdChoice) searchByChoice;
                 switch(searchChoice)
-                    {
-                        case NameOrIdChoice.ByName:
-                            string productNameHint = inputManager.GetProductName();
-                            isSearchPresent = IsContainingProductName(productNameHint);
-                        break;
-                        case NameOrIdChoice.ById:
-                            int productIdHint = inputManager.GetProductId();
-                            int searchIndex = ReturnIndexWithId(productIdHint);
-                            if (searchIndex == -1)
-                            { break; }
-                            else
-                            {
-                                PrintConsoleTable(outputManager.SpecificProductInformation(_productList, searchIndex));
-                                isSearchPresent = true;
-                            }                       
-                        break;
-                    default:
-                        OutputManager.PrintInvalidInput();
-                        break;
-                    }
-                if (!isSearchPresent)
                 {
-                   OutputManager.PrintNoMatches();
+                    case NameOrIdChoice.ByName:
+                        string productNameHint = inputManager.GetProductName();
+                        numberOfMatches = IsContainingProductName(productNameHint);
+                        break;
+                    case NameOrIdChoice.ById:
+                        int productIdHint = inputManager.GetProductId();
+                        int searchIndex = ReturnIndexWithId(productIdHint);
+                        if (searchIndex == -1)
+                        { break; }
+                        else
+                        {
+                            PrintConsoleTable(outputManager.SpecificProductInformation(_productList, searchIndex));
+                            numberOfMatches++;
+                        }           
+                        break;
                 }
+
+                if (numberOfMatches == 0)
+                    OutputManager.PrintNoMatches();                             
             }
+
             else
-            {
                 OutputManager.PrintListIsEmpty();
-            }
+            return numberOfMatches;
         }
     }
 }

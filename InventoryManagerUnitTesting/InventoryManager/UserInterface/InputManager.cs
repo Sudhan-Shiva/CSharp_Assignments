@@ -31,7 +31,7 @@ namespace InventoryManager.UserInterface
         public string GetUniqueProductName()
         {
             Console.Write("The Product Name is Already Present !\nGive a new Product name : ");
-            string inputProductName = Console.ReadLine();
+            string inputProductName = GetValidInput(Console.ReadLine());
             return inputProductName;
         }
 
@@ -53,7 +53,7 @@ namespace InventoryManager.UserInterface
         public string ReplaceInvalidInput()
         {
             Console.Write("The Provided input is invalid !!\nProvide the Input again :");
-            string inputParameter = Console.ReadLine();
+            string inputParameter = GetValidInput(Console.ReadLine());
             return inputParameter;
         }
 
@@ -72,7 +72,7 @@ namespace InventoryManager.UserInterface
         /// To get the product name
         /// </summary>
         /// <returns>The name of the product</returns>
-        public string GetProductName()
+        public virtual string GetProductName()
         {
             Console.Write("Enter the Product Name :  ");
             string productName = Console.ReadLine();
@@ -83,7 +83,7 @@ namespace InventoryManager.UserInterface
         /// To get the product ID
         /// </summary>
         /// <returns>The ID of the product</returns>
-        public int GetProductId()
+        public virtual int GetProductId()
         {
             Console.Write("Enter the Product ID :  ");
             string productId = Console.ReadLine();
@@ -94,7 +94,7 @@ namespace InventoryManager.UserInterface
         /// To get the price of the product
         /// </summary>
         /// <returns>The price of the product</returns>
-        public decimal GetProductPrice()
+        public virtual decimal GetProductPrice()
         {
             Console.Write("Enter the Product Price :  ");
             string productPrice = Console.ReadLine();
@@ -105,7 +105,7 @@ namespace InventoryManager.UserInterface
         /// To get the product quantity
         /// </summary>
         /// <returns>The product quantity</returns>
-        public int GetProductQuantity()
+        public virtual int GetProductQuantity()
         {
             Console.Write("Enter the Product Quantity :  ");
             string productQuantity = Console.ReadLine();
@@ -116,7 +116,7 @@ namespace InventoryManager.UserInterface
         /// To get the Editing field(Name/ID/Quantity/price) in the product
         /// </summary>
         /// <returns>String representing the field that must be edited</returns>
-        public int GetEditField()
+        public virtual int GetEditField()
         {
             Console.Write($"Choose the Information that must be edited : \n[0] {UserEditChoice.EditProductName}\n[1] {UserEditChoice.EditProductId}\n[2] {UserEditChoice.EditProductPrice}\n[3] {UserEditChoice.EditProductQuantity} \nType your Choice: ");
             return GetChoiceWithinBounds(3);
@@ -135,7 +135,7 @@ namespace InventoryManager.UserInterface
         /// To get the field(Name/ID) according to whcih the action must be performed
         /// </summary>
         /// <returns>String representing the field</returns>
-        public int GetActionField()
+        public virtual int GetActionField()
         {
             Console.Write($"[0] {NameOrIdChoice.ByName}\n[1] {NameOrIdChoice.ById}\nPerform the action by Name or ID : ");
             return GetChoiceWithinBounds(1);
