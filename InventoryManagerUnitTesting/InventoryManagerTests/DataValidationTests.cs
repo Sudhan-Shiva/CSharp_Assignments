@@ -8,53 +8,85 @@ namespace InventoryManagerTests
     {
         DataValidation dataValidation = new DataValidation();
 
-        [TearDown]
-        public void TearDown()
-        {
-            Console.SetIn(Console.In);
-            Console.SetOut(Console.Out);
-        }
-
-        [TestCase("abcd", false)]
-        [TestCase("ab123", false)]
-        [TestCase("", false)]
-        [TestCase("     ", false)]
-        [TestCase("@%^", false)]
-        [TestCase("123", true)]
-        [TestCase("2345678", true)]
-        [TestCase(" 0 ", true)]
+        [TestCase("123")]
+        [TestCase("2345678")]
+        [TestCase(" 0 ")]
         [Test]
-        public void IsInputInt_ReturnsTrue_ForValidInteger(string inputData, bool isInputInt)
+        public void IsInputInt_ReturnsTrue_ForValidIntegerString(string inputData)
         {
+            //Act
             bool result = dataValidation.IsDataInt(inputData);
-            Assert.AreEqual(isInputInt, result);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestCase("abcd")]
+        [TestCase("ab123")]
+        [TestCase("")]
+        [TestCase("     ")]
+        [TestCase("@%^")]
+        [Test]
+        public void IsInputInt_ReturnsFalse_ForInvalidIntegerString(string inputData)
+        {
+            //Act
+            bool result = dataValidation.IsDataInt(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
         }
 
 
-        [TestCase("21.67", true)]
-        [TestCase("123", true)]
-        [TestCase(" 0.0000 ", true)]
-        [TestCase("ab123", false)]
-        [TestCase("", false)]
-        [TestCase("     ", false)]
-        [TestCase("@%^", false)]
+        [TestCase("21.67")]
+        [TestCase("123")]
+        [TestCase(" 0.0000 ")]
         [Test]
-        public void IsInputDecimal_ReturnsTrue_ForValidDecimal(string inputData, bool isInputDecimal)
+        public void IsInputDecimal_ReturnsTrue_ForValidDecimalString(string inputData)
         {
+            //Act
             bool result = dataValidation.IsInputDecimal(inputData);
-            Assert.AreEqual(isInputDecimal, result);
+
+            //Assert
+            Assert.IsTrue(result);
         }
 
-        [TestCase("5435", false)]
-        [TestCase(null, true)]
-        [TestCase("hello", false)]
-        [TestCase("", true)]
-        [TestCase("Welcome123", false)]
+        [TestCase("ab123")]
+        [TestCase("")]
+        [TestCase("     ")]
+        [TestCase("@%^")]
         [Test]
-        public void IsDataEmpty_ReturnsTrue_ForEmptyOrNullInput(string inputData, bool isDataEmpty)
+        public void IsInputDecimal_ReturnsFalse_ForInvalidDecimalString(string inputData)
         {
+            //Act
+            bool result = dataValidation.IsInputDecimal(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [Test]
+        public void IsDataEmpty_ReturnsTrue_ForNullOrEmptyInputString(string inputData)
+        {
+            //Act
             bool result = dataValidation.IsDataEmpty(inputData);
-            Assert.AreEqual(result, isDataEmpty);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestCase("5435")]
+        [TestCase("hello")]
+        [TestCase("Welcome123")]
+        [Test]
+        public void IsDataEmpty_ReturnsFalse_ForValidInputString(string inputData)
+        {
+            //Act
+            bool result = dataValidation.IsDataEmpty(inputData);
+
+            //Assert
+            Assert.IsFalse(result);
         }
     }
 }
