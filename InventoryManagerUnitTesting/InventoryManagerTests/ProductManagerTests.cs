@@ -293,5 +293,83 @@ namespace InventoryManagerTests
                new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, 29, 1 },
             };
         }
+
+        [TestCaseSource(nameof(ReturnValidIndexTestCases))]
+        [Test]
+        public void ReturnValidIndex_ReturnsValidIndex_ForInputProductListAndProductIndex(List<Product> productList, string initialSearchName, StringReader stringReader, int expectedIndex)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            int actualIndex = _productManager.ReturnValidIndex(initialSearchName);
+
+            //Assert
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
+        private static IEnumerable<object> ReturnValidIndexTestCases()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , "ZOMATO", new StringReader("a\nAS\nPOTATO"), 3 },
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "3", new StringReader("TOMATO"), 2 },
+               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, "none", new StringReader("BAMBOO"), 0 },
+               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, "Peas", new StringReader("q\nqw\nCARROT") , 1},
+            };
+        }
+
+        [TestCaseSource(nameof(GetDistinctProductNameTestCases))]
+        [Test]
+        public void GetDistinctProductName_ReturnsDistinctProductName_ForInputProductList(List<Product> productList, string initialProductName, StringReader stringReader, string expectedProductName)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            string actualDistinctProductName = _productManager.GetDistinctProductName(initialProductName);
+
+            //Assert
+            Assert.AreEqual(expectedProductName, actualDistinctProductName);
+        }
+
+        private static IEnumerable<object> GetDistinctProductNameTestCases()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , "ZEBRA", new StringReader("APE\nPOTATO\nANIMAL"), "ANIMAL" },
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , "APPLE", new StringReader("BANANA\nTOMATO\nZOMATO"), "ZOMATO" },
+               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, "BAMBOO", new StringReader("CUCKOO\nBIRD"), "BIRD" },
+               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, "BANANA", new StringReader("CARROT\nBIRD"), "BIRD" },
+            };
+        }
+
+        [TestCaseSource(nameof(GetDistinctProductIdTestCases))]
+        [Test]
+        public void GetDistinctProductId_ReturnsDistinctProductId_ForInputProductList(List<Product> productList, int initialProductId, StringReader stringReader, int expectedProductId)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            _productManager.productRepository().AddRange(productList);
+
+            //Act
+            int actualDistinctProductId = _productManager.GetDistinctProductId(initialProductId);
+
+            //Assert
+            Assert.AreEqual(expectedProductId, actualDistinctProductId);
+        }
+
+        private static IEnumerable<object> GetDistinctProductIdTestCases()
+        {
+            return new[]
+            {
+               new object[] {new List<Product> { new Product(1,"ZEBRA",2,3) , new Product(2, "APE", 20, 31) , new Product(3, "TIGER", 200, 39) , new Product(4, "POTATO", 400, 30) } , 1, new StringReader("2\n3\n7"), 7 },
+               new object[] {new List<Product> { new Product(2,"APPLE", 20, 31), new Product(1,"BANANA",2,3)  , new Product(3, "TOMATO", 200, 39) , new Product(4, "POTATO", 400, 30) } , 2, new StringReader("1\n3\n4\n5"), 5 },
+               new object[] {new List<Product> { new Product(19,"BAMBOO",2,3) , new Product(2, "CUCKOO", 20, 31) }, 19, new StringReader("2\n3"), 3 },
+               new object[] {new List<Product> { new Product(29,"BANANA",2,3) , new Product(1, "CARROT", 20, 31) }, 29, new StringReader("1\n2"), 2 },
+            };
+        }
     }
 }

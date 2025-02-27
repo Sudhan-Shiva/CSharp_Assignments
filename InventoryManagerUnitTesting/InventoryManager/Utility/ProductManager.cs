@@ -1,6 +1,8 @@
 ﻿using InventoryManager.UserInterface;
 using InventoryManager.Model;
 using ConsoleTables;
+using System.Runtime.CompilerServices;
+[assembly:InternalsVisibleTo("InventoryManagerTests")]
 
 namespace InventoryManager.Utility
 {
@@ -77,7 +79,7 @@ namespace InventoryManager.Utility
             return numberOfMatchedSearches;
         }
 
-        private int ReturnValidIndex(string viewProduct)
+        internal int ReturnValidIndex(string viewProduct)
         {
             int printIndex = ReturnIndexWithName(viewProduct);
             while (printIndex == -1)
@@ -88,7 +90,7 @@ namespace InventoryManager.Utility
             return printIndex;
         }
 
-        private string GetDistinctProductName(string inputProductName)
+        internal string GetDistinctProductName(string inputProductName)
         {
             while (ReturnIndexWithName(inputProductName) != -1)
             {
@@ -97,7 +99,7 @@ namespace InventoryManager.Utility
             return inputProductName;
         }
 
-        private int GetDistinctProductId(int inputProductId)
+        internal int GetDistinctProductId(int inputProductId)
         {
             while (ReturnIndexWithId(inputProductId) != -1)
             {

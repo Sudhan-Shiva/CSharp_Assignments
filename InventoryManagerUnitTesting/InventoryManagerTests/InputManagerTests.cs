@@ -261,7 +261,78 @@ namespace InventoryManagerTests
             //Assert
             Assert.AreEqual(ConsoleOutput, "Enter the Product Quantity :  ");
         }
+        [TestCaseSource(nameof(GetValidIntegerTestCases))]
+        [Test]
+        public void GetValidInteger_ReturnsInputStringAsInteger_ForValidInputInteger(StringReader stringReader, int expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
 
+            //Act
+            int result = inputManager.GetValidInteger(Console.ReadLine());
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidIntegerTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader("a\nab12\n123") , 123},
+                new object[] { new StringReader("a\na\n*abc\n456") , 456},
+                new object[] { new StringReader("789") , 789},
+                new object[] { new StringReader("ac23\nsd\n100") , 100},
+            };
+        }
+
+        [TestCaseSource(nameof(GetValidDecimalTestCases))]
+        [Test]
+        public void GetValidDate_ReturnsInputStringAsDecimal_ForValidInputDecimal(StringReader stringReader, decimal expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+
+            //Act
+            decimal result = inputManager.GetValidDecimal(Console.ReadLine());
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidDecimalTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader("a\nab12\n11.23") , decimal.Parse("11.23")},
+                new object[] { new StringReader("a\na\n*abc\n12") , decimal.Parse("12")},
+                new object[] { new StringReader("12.234455") , decimal.Parse("12.234455")},
+                new object[] { new StringReader("ac23\nsd\n0") , decimal.Parse("0")},
+            };
+        }
+
+        [TestCaseSource(nameof(GetValidInputTestCases))]
+        [Test]
+        public void GetValidInput_ReturnsInputString_ForValidInputString(StringReader stringReader, string expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            //Act
+            string result = inputManager.GetValidInput(Console.ReadLine());
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidInputTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader($"{null}\n\n123") , "123"},
+                new object[] { new StringReader("Hi") , "Hi"},
+                new object[] { new StringReader($"{null}\n{null}\n{null}789") , "789"},
+                new object[] { new StringReader("\n\n100") , "100"},
+            };
+        }
         private static IEnumerable<object> InputManagerIntegerMethodsTestCases()
         {
             return new[]

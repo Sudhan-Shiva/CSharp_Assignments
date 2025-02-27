@@ -1,5 +1,7 @@
-﻿using InventoryManager.InputValidation;
+﻿using System.Runtime.CompilerServices;
+using InventoryManager.InputValidation;
 using InventoryManager.Model;
+[assembly:InternalsVisibleTo("InventoryManagerTests")]
 
 namespace InventoryManager.UserInterface
 {
@@ -146,7 +148,7 @@ namespace InventoryManager.UserInterface
         /// </summary>
         /// <param name="inputParameter">The input that is validated</param>
         /// <returns>A valid input which is not null or empty string</returns>
-        private string GetValidInput(string inputParameter)
+        internal string GetValidInput(string inputParameter)
         {
             while (dataValidation.IsDataEmpty(inputParameter))
             {
@@ -160,7 +162,7 @@ namespace InventoryManager.UserInterface
         /// </summary>
         /// <param name="inputParameter">The input that is validated for the datatype</param>
         /// <returns>A valid input which is integer</returns>
-        private int GetValidInteger(string inputParameter)
+        internal int GetValidInteger(string inputParameter)
         {
             while (!dataValidation.IsDataInt(inputParameter))
             {
@@ -175,7 +177,7 @@ namespace InventoryManager.UserInterface
         /// </summary>
         /// <param name="inputParameter">The input that is validated for the datatype</param>
         /// <returns>A valid input which is decimal</returns>
-        private decimal GetValidDecimal(string inputParameter)
+        internal decimal GetValidDecimal(string inputParameter)
         {
             while (!dataValidation.IsInputDecimal(inputParameter))
             {
