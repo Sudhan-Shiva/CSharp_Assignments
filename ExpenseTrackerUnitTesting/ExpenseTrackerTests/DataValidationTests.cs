@@ -8,13 +8,6 @@ namespace ExpenseTrackerTests
     {
         DataValidation dataValidation = new DataValidation();
 
-        [TearDown]
-        public void TearDown()
-        {
-            Console.SetIn(Console.In);
-            Console.SetOut(Console.Out);
-        }
-
         [TestCase("123")]
         [TestCase("000234")]
         [TestCase("2345678")]

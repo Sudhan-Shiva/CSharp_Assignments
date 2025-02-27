@@ -9,13 +9,14 @@ namespace ExpenseTrackerTests
     [TestFixture]
     public class InputManagerTests
     {
-        InputManager inputManager;
+        private InputManager _inputManager;
+        private DataValidation _dataValidation;
 
         [SetUp]
         public void SetUp()
         {
-            Mock<DataValidation> _mockDataValidation = new Mock<DataValidation>();
-            inputManager = new InputManager(_mockDataValidation.Object);
+            _dataValidation = new DataValidation();
+            _inputManager = new InputManager(_dataValidation);
         }
 
         [TearDown]
@@ -27,7 +28,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetUserOptions_ShallReturnInput_IfInputIsInt(string inputUserOptions)
+        public void GetUserOptions_ReturnsInputStringAsApplicationOptions_ForValidInputInteger(string inputUserOptions)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -36,7 +37,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            ApplicationOptions result = inputManager.GetUserChoice();
+            ApplicationOptions result = _inputManager.GetUserChoice();
 
             //Assert
             Assert.Multiple(() =>
@@ -48,7 +49,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetModifyChoice_ShallReturnInput_IfInputIsInt(string inputEditField)
+        public void GetModifyChoice_ReturnsInputStringAsModifyChoice_ForValidInputInteger(string inputEditField)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -57,7 +58,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            UserEditChoice result = inputManager.GetModifyChoice();
+            UserEditChoice result = _inputManager.GetModifyChoice();
 
             //Assert
             Assert.Multiple(() =>
@@ -70,7 +71,7 @@ namespace ExpenseTrackerTests
         [TestCase("0")]
         [TestCase("1")]
         [Test]
-        public void GetTransactionType_ShallReturnInput_IfInputIsBetween0And1(string inputTransactionType)
+        public void GetTransactionType_ReturnsInputStringAsTransactionType_ForValidInputInteger(string inputTransactionType)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -79,7 +80,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            TransactionType result = inputManager.GetTransactionType();
+            TransactionType result = _inputManager.GetTransactionType();
 
             //Assert
             Assert.Multiple(() =>
@@ -91,7 +92,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void ReplaceInvalidInput_ShallReturnInput_IfInputGiven(string inputValidInput)
+        public void ReplaceInvalidInput_ReturnsInputString_ForValidInputString(string inputValidInput)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -100,7 +101,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            var result = inputManager.ReplaceInvalidInput();
+            var result = _inputManager.ReplaceInvalidInput();
 
             //Assert
             Assert.Multiple(() =>
@@ -112,7 +113,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void GetExpenseCategory_ShallReturnInput_IfInputGivenIsNotNullOrEmpty(string inputExpenseCategory)
+        public void GetExpenseCategory_ReturnsInputString_ForValidInputString(string inputExpenseCategory)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -121,7 +122,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            var result = inputManager.GetExpenseCategory();
+            var result = _inputManager.GetExpenseCategory();
 
             //Assert
             Assert.Multiple(() =>
@@ -133,7 +134,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerStringMethodsTestCases))]
         [Test]
-        public void GetIncomeSource_ShallReturnInput_IfInputGivenIsNotNullOrEmpty(string inputIncomeSource)
+        public void GetIncomeSource_ReturnsInputString_ForValidInputString(string inputIncomeSource)
         {
             //Arrange
             var stringReader = new StringReader(inputIncomeSource);
@@ -142,7 +143,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            string result = inputManager.GetIncomeSource();
+            string result = _inputManager.GetIncomeSource();
 
             //Assert
             Assert.Multiple(() =>
@@ -154,7 +155,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetTransactionAmount_ShallReturnInput_IfInputGivenIsInt(string inputTransactionAmount)
+        public void GetTransactionAmount_ReturnInputStringAsInteger_ForValidInputInteger(string inputTransactionAmount)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -163,7 +164,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            var result = inputManager.GetTransactionAmount();
+            var result = _inputManager.GetTransactionAmount();
 
             //Assert
             Assert.Multiple(() =>
@@ -177,7 +178,7 @@ namespace ExpenseTrackerTests
         [TestCase("06/07/12")]
         [TestCase("12/12/2012")]
         [Test]
-        public void GetTransactionDate_ShallReturnInput_IfInputGivenIsDate(string inputTransactionDate)
+        public void GetTransactionDate_ReturnInputStringAsDate_ForValidInputDate(string inputTransactionDate)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -186,7 +187,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            var result = inputManager.GetTransactionDate();
+            var result = _inputManager.GetTransactionDate();
 
             //Assert
             Assert.Multiple(() =>
@@ -198,7 +199,7 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(InputManagerIntegerMethodsTestCases))]
         [Test]
-        public void GetTransactionIndex_ShallReturnInput_IfInputGivenIsInt(string inputTransactionIndex)
+        public void GetTransactionIndex_ReturnInputStringAsInteger_ForValidInputInteger(string inputTransactionIndex)
         {
             //Arrange
             var stringWriter = new StringWriter();
@@ -207,7 +208,7 @@ namespace ExpenseTrackerTests
             Console.SetIn(stringReader);
 
             //Act
-            int result = inputManager.GetTransactionIndex();
+            int result = _inputManager.GetTransactionIndex();
 
             //Assert
             Assert.Multiple(() =>
@@ -216,6 +217,80 @@ namespace ExpenseTrackerTests
                 Assert.AreEqual("Select the transaction index : ", stringWriter.ToString());
             });
         }
+
+        [TestCaseSource(nameof(GetValidIntegerTestCases))]
+        [Test]
+        public void GetValidInteger_ReturnsInputStringAsInteger_ForValidInputInteger(StringReader stringReader, int expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            
+            //Act
+            int result = _inputManager.GetValidInteger(Console.ReadLine());
+            
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidIntegerTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader("a\nab12\n123") , 123},
+                new object[] { new StringReader("a\na\n*abc\n456") , 456},
+                new object[] { new StringReader("789") , 789},
+                new object[] { new StringReader("ac23\nsd\n100") , 100},
+            };
+        }
+
+        [TestCaseSource(nameof(GetValidDateTestCases))]
+        [Test]
+        public void GetValidDate_ReturnsInputStringAsDate_ForValidInputDate(StringReader stringReader, DateOnly expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+
+            //Act
+            DateOnly result = _inputManager.GetValidDate(Console.ReadLine());
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidDateTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader("a\nab12\n12/12/2021") , DateOnly.Parse("12/12/2021")},
+                new object[] { new StringReader("a\na\n*abc\n12/12/2021") , DateOnly.Parse("12/12/2021")},
+                new object[] { new StringReader("12/12/2021") , DateOnly.Parse("12/12/2021")},
+                new object[] { new StringReader("ac23\nsd\n12/12/2021") , DateOnly.Parse("12/12/2021")},
+            };
+        }
+
+        [TestCaseSource(nameof(GetValidInputTestCases))]
+        [Test]
+        public void GetValidInput_ReturnsInputString_ForValidInputString(StringReader stringReader, string expectedResult)
+        {
+            //Arrange
+            Console.SetIn(stringReader);
+            //Act
+            string result = _inputManager.GetValidInput(Console.ReadLine());
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        private static IEnumerable<object> GetValidInputTestCases()
+        {
+            return new[]
+            {
+                new object[] { new StringReader($"{null}\n\n123") , "123"},
+                new object[] { new StringReader("Hi") , "Hi"},
+                new object[] { new StringReader($"{null}\n{null}\n{null}789") , "789"},
+                new object[] { new StringReader("\n\n100") , "100"},
+            };
+        }
+
         private static IEnumerable<object> InputManagerStringMethodsTestCases()
         {
             return new[]

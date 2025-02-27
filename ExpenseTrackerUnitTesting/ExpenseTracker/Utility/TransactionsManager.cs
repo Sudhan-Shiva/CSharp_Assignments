@@ -1,5 +1,7 @@
 ﻿using ExpenseTracker.Model;
 using ExpenseTracker.ConsoleUI;
+using System.Runtime.CompilerServices;
+[assembly:InternalsVisibleTo("ExpenseTrackerTests")]
 
 /// <summary>
 /// Defines the transaction list and operations in the application.
@@ -40,7 +42,7 @@ public class TransactionsManager
     /// <summary>
     /// To view the transaction list.
     /// </summary>
-    public void ViewTransactions()
+    public virtual void ViewTransactions()
     {
         if (!isListEmpty())
             _outputManager.PrintTable(_trackerList);
@@ -51,7 +53,7 @@ public class TransactionsManager
     /// <summary>
     /// To add a new transaction to the transaction list
     /// </summary>
-    public void AddTransaction()
+    public virtual void AddTransaction()
     {
         TransactionType transactionChoice = _inputManager.GetTransactionType();
         switch (transactionChoice)
@@ -87,7 +89,7 @@ public class TransactionsManager
     /// <summary>
     /// To delete a transaction from the list
     /// </summary>
-    public void DeleteTransaction()
+    public virtual void DeleteTransaction()
     {
         if (!isListEmpty())
         {
@@ -111,7 +113,7 @@ public class TransactionsManager
     /// <summary>
     /// To modify the transaction details of a transaction
     /// </summary>
-    public void ModifyTransaction()
+    public virtual void ModifyTransaction()
     {
         if (!isListEmpty())
         {
@@ -196,14 +198,14 @@ public class TransactionsManager
         }
     }
 
-    private void EditToExpense(int transactionIndex)
+    internal void EditToExpense(int transactionIndex)
     {
         Expense expenseTransaction = new Expense("EXPENSE", _trackerList[transactionIndex].Amount, _trackerList[transactionIndex].DateOfTransaction, _inputManager.GetExpenseCategory());
         _trackerList[transactionIndex] = expenseTransaction;
         _outputManager.PrintSuccessfulModification();
     }
 
-    private void EditToIncome(int transactionIndex)
+    internal void EditToIncome(int transactionIndex)
     {
         Income incomeTransaction = new Income("INCOME", _trackerList[transactionIndex].Amount, _trackerList[transactionIndex].DateOfTransaction, _inputManager.GetIncomeSource());
         _trackerList[transactionIndex] = incomeTransaction;
@@ -213,7 +215,7 @@ public class TransactionsManager
     /// <summary>
     /// To search for a particular transaction
     /// </summary>
-    public void SearchTransaction()
+    public virtual int SearchTransaction()
     {
         if (!isListEmpty())
         {
@@ -240,21 +242,26 @@ public class TransactionsManager
                     _outputManager.PrintSpecificTransactionInformation(transaction);
                 }
             }
+
             if (numberOfMatchingChoices == 0)
             {
                 _outputManager.PrintNoMatches();
             }
+
+            return numberOfMatchingChoices;
         }
         else
         {
             _outputManager.PrintListIsEmpty();
         }
+
+        return 0;
     }
 
     /// <summary>
     /// To get the transaction summary
     /// </summary>
-    public void GetSummaryOfTransaction()
+    public virtual void GetSummaryOfTransaction()
     {
         if (!isListEmpty())
         {
@@ -322,7 +329,7 @@ public class TransactionsManager
         return -1;
     }
 
-    private void FindMatchingChoices(string userChoiceOfType, out DateOnly userChoiceOfDate, out int numberOfMatchingChoices)
+    private int FindMatchingChoices(string userChoiceOfType, out DateOnly userChoiceOfDate, out int numberOfMatchingChoices)
     {
         userChoiceOfDate = _inputManager.GetTransactionDate();
         numberOfMatchingChoices = 0;
@@ -340,6 +347,8 @@ public class TransactionsManager
                 }
             }
         }
+
+        return numberOfMatchingChoices;
     }
 
     private string AssignTransactionType()

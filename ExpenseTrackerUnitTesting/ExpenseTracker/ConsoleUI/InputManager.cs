@@ -1,5 +1,8 @@
-﻿using ExpenseTracker.InputValidation;
+﻿using System.Runtime.CompilerServices;
+using ExpenseTracker.InputValidation;
 using ExpenseTracker.Model;
+
+[assembly:InternalsVisibleTo("ExpenseTrackerTests")]
 
 namespace ExpenseTracker.ConsoleUI
 {
@@ -37,7 +40,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the type of the input transaction
         /// </summary>
         /// <returns>Integer corresponding to the type of the transaction</returns>
-        public TransactionType GetTransactionType()
+        public virtual TransactionType GetTransactionType()
         {
             Console.Write($"[0] {TransactionType.Income}\n[1] {TransactionType.Expense}\nEnter the Transaction Type :  ");
             int transactionType = GetValidInteger(Console.ReadLine());
@@ -52,7 +55,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the amount of the transaction
         /// </summary>
         /// <returns>The amount of the transaction</returns>
-        public int GetTransactionAmount()
+        public virtual int GetTransactionAmount()
         {
             Console.Write("Enter the Transaction Amount :  ");
             int transactionAmount = GetValidInteger(Console.ReadLine());
@@ -63,7 +66,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the date of the transaction
         /// </summary>
         /// <returns>The date of the transaction</returns>
-        public DateOnly GetTransactionDate()
+        public virtual DateOnly GetTransactionDate()
         {
             Console.Write("Enter the Date of Transaction (DD/MM/YYYY) :  ");
             DateOnly transactionDate = GetValidDate(Console.ReadLine());
@@ -74,7 +77,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the source of the income
         /// </summary>
         /// <returns>The source of the income</returns>
-        public string GetIncomeSource()
+        public virtual string GetIncomeSource()
         {
             Console.Write("Enter the Source of Income : ");
             string incomeSource = GetValidInput(Console.ReadLine());
@@ -85,7 +88,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the category of the expense
         /// </summary>
         /// <returns>The category of the expense</returns>
-        public string GetExpenseCategory()
+        public virtual string GetExpenseCategory()
         {
             Console.Write("Enter the Category of expense : ");
             string expenseCategory = GetValidInput(Console.ReadLine());
@@ -119,7 +122,7 @@ namespace ExpenseTracker.ConsoleUI
         /// </summary>
         /// <param name="inputParameter">The input that is validated</param>
         /// <returns>A valid input which is not null or empty string</returns>
-        private string GetValidInput(string inputParameter)
+        internal string GetValidInput(string inputParameter)
         {
             while (_dataValidation.IsDataEmpty(inputParameter))
             {
@@ -133,7 +136,7 @@ namespace ExpenseTracker.ConsoleUI
         /// </summary>
         /// <param name="inputParameter">The input that is validated for the datatype</param>
         /// <returns>A valid input which is integer</returns>
-        private int GetValidInteger(string inputParameter)
+        internal int GetValidInteger(string inputParameter)
         {
             while (!_dataValidation.IsInputInt(inputParameter))
             {
@@ -148,7 +151,7 @@ namespace ExpenseTracker.ConsoleUI
         /// </summary>
         /// <param name="inputParameter">The input that is validated for the datatype</param>
         /// <returns>A valid input which is DateOnly</returns>
-        private DateOnly GetValidDate(string inputParameter)
+        internal DateOnly GetValidDate(string inputParameter)
         {
             while (!_dataValidation.IsInputDate(inputParameter))
             {
@@ -162,7 +165,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the transaction detail that must be modified
         /// </summary>
         /// <returns>Integer corresponding to the detail that must be modified</returns>
-        public UserEditChoice GetModifyChoice()
+        public virtual UserEditChoice GetModifyChoice()
         {
             Console.Write($"\n[0] {UserEditChoice.EditTransactionType}\n[1] {UserEditChoice.EditTransactionAmount}\n[2] {UserEditChoice.EditTransactionDate}\n[3] {UserEditChoice.EditTransactionDetails}\nSelect the field to edit :");
             int fieldToEdit = GetValidInteger(Console.ReadLine());
@@ -173,7 +176,7 @@ namespace ExpenseTracker.ConsoleUI
         /// To get the index of the transaction that must be accessed in the printed transactions
         /// </summary>
         /// <returns>The index of the transaction that must be accessed in the printed transactions</returns>
-        public int GetTransactionIndex()
+        public virtual int GetTransactionIndex()
         {
             Console.Write("Select the transaction index : ");
             int userChoiceTransactionIndex = GetValidInteger(Console.ReadLine());

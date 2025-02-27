@@ -9,88 +9,120 @@ namespace ExpenseTrackerTests
     public class TransactionsManagerTests
     {
         private TransactionsManager _transactionsManager;
+        private DataValidation _dataValidation;
+        private Mock<InputManager> _mockInputManager;
+        private OutputManager _outputManager;
 
         [SetUp]
         public void SetUp()
         {
-            Mock<DataValidation> dataValidation = new Mock<DataValidation>();
-            Mock<InputManager> mockInputManager = new Mock<InputManager>(dataValidation.Object);
-            Mock<OutputManager> mockOutputManager = new Mock<OutputManager>();
-            _transactionsManager = new TransactionsManager(mockInputManager.Object, mockOutputManager.Object);
+            _dataValidation = new DataValidation();
+            _mockInputManager = new Mock<InputManager>(_dataValidation);
+            _outputManager = new OutputManager();
+            _transactionsManager = new TransactionsManager(_mockInputManager.Object, _outputManager);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            Console.SetIn(Console.In);
-            Console.SetOut(Console.Out);
-        }
-
-        [TestCaseSource(nameof(TrackerListAddTestCases))]
+        [TestCaseSource(nameof(TrackerListAddTestCasesForIncome))]
         [Test]
-        public void AddTransaction_ShallAddNewTransaction_WhenNewTransactionDetailsGiven(List<Transaction> transactionList, StringReader stringReader, int transactionType)
+        public void AddTransaction_AddsNewTransactionAsIncome_ForValidIncomeDetails(List<Transaction> transactionList, DateOnly transactionDate, int transactionAmount, string incomeSource)
         {
             //Arrange
-            Console.SetIn(stringReader);
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Income);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(transactionDate);
+            _mockInputManager.Setup(i => i.GetTransactionAmount()).Returns(transactionAmount);
+            _mockInputManager.Setup(i => i.GetIncomeSource()).Returns(incomeSource);
+
             _transactionsManager.transactionRepository().AddRange(transactionList);
-            int listCount = transactionList.Count;
+            int listCount = _transactionsManager.transactionRepository().Count;
 
             //Act
             _transactionsManager.AddTransaction();
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsTrue((transactionType == 0) ? (_transactionsManager.transactionRepository()[listCount] is Income) : (_transactionsManager.transactionRepository()[listCount] is Expense));
-                Assert.AreEqual(listCount + 1, _transactionsManager.transactionRepository().Count);
-            });
+            Assert.AreEqual(listCount + 1, _transactionsManager.transactionRepository().Count);
         }
 
-        private static IEnumerable<object> TrackerListAddTestCases()
+        private static IEnumerable<object> TrackerListAddTestCasesForIncome()
         {
             return new[]
             {
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, new StringReader("0\n12\n12/12/12\nSalary"), 0 },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },new StringReader("1\n1000\n1/1/1\nFood"), 1 },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },new StringReader("0\n120\n1/1/2012\nRent"), 0 },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },new StringReader("1\n999\n02/12/2002\nMovie"), 1 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, DateOnly.Parse("12/12/12") , 1000, "Rent" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },DateOnly.Parse("01/12/2012") , 100000, "Salary" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },DateOnly.Parse("2/2/2") , 0, "Shop" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },DateOnly.Parse("12/2/2000") , 400, "Salary" },
+            };
+        }
+
+        [TestCaseSource(nameof(TrackerListAddTestCasesForExpense))]
+        [Test]
+        public void AddTransaction_AddsNewTransactionAsExpense_ForValidExpenseDetails(List<Transaction> transactionList, DateOnly transactionDate, int transactionAmount, string expenseCategory)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Expense);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(transactionDate);
+            _mockInputManager.Setup(i => i.GetTransactionAmount()).Returns(transactionAmount);
+            _mockInputManager.Setup(i => i.GetExpenseCategory()).Returns(expenseCategory);
+
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = _transactionsManager.transactionRepository().Count;
+
+            //Act
+            _transactionsManager.AddTransaction();
+
+            //Assert
+            Assert.AreEqual(listCount + 1, _transactionsManager.transactionRepository().Count);
+        }
+
+        private static IEnumerable<object> TrackerListAddTestCasesForExpense()
+        {
+            return new[]
+            {
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, DateOnly.Parse("12/12/12") , 1000, "Food" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },DateOnly.Parse("01/12/2012") , 100000, "Entertainment" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },DateOnly.Parse("2/2/2") , 0, "Shop" },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },DateOnly.Parse("12/2/2000") , 400, "Cinema" },
             };
         }
 
         [TestCaseSource(nameof(TrackerListDeleteTestCases))]
         [Test]
-        public void DeleteTransaction_ShallDeleteTransaction_WhenTransactionDetailsGiven(List<Transaction> transactionList, StringReader stringReader)
+        public void DeleteTransaction_DeletesTransaction_ForValidTransactionDetails(List<Transaction> transactionList, TransactionType transactionType, DateOnly transactionDate, int transactionIndex)
         {
             //Arrange
-            Console.SetIn(stringReader);
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(transactionType);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(transactionDate);
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(transactionIndex);
             _transactionsManager.transactionRepository().AddRange(transactionList);
-            int listCount = transactionList.Count;
+            int listCount = _transactionsManager.transactionRepository().Count;
 
             //Act
             _transactionsManager.DeleteTransaction();
 
             //Assert
             Assert.AreEqual(listCount - 1, _transactionsManager.transactionRepository().Count);
-
         }
 
         private static IEnumerable<object> TrackerListDeleteTestCases()
         {
             return new[]
             {
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, new StringReader("0\n12/12/12\n2") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") },new StringReader("1\n12/12/12\n1") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },new StringReader("1\n01/1/2001\n3") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },new StringReader("0\n12/12/2012\n1") },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") },TransactionType.Income, DateOnly.Parse("12/12/2012"), 2 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, TransactionType.Expense, DateOnly.Parse("12/12/2012"), 1 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") }, TransactionType.Expense, DateOnly.Parse("1/1/1"), 3 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") }, TransactionType.Income, DateOnly.Parse("12/12/2012"), 1 },
             };
         }
 
-        [TestCaseSource(nameof(TrackerListEditTestCases))]
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
         [Test]
-        public void ModifyTransaction_ShallModifyTransaction_WhenEditingDetailsGiven(List<Transaction> transactionList, StringReader stringReader, int inputIndex, int editField, string editedField)
+        public void ModifyTransaction_ModifiesTransactionTypeFromIncomeToExpense_ForValidIncomeChosenAndExpenseCategoryGiven(List<Transaction> transactionList)
         {
             //Arrange
-            Console.SetIn(stringReader);
+            _mockInputManager.SetupSequence(i => i.GetTransactionType()).Returns(TransactionType.Income).Returns(TransactionType.Expense);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(DateOnly.Parse("12/12/12"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionType);
+            _mockInputManager.Setup(i => i.GetExpenseCategory()).Returns("Food");
             _transactionsManager.transactionRepository().AddRange(transactionList);
             int listCount = transactionList.Count;
 
@@ -98,45 +130,127 @@ namespace ExpenseTrackerTests
             _transactionsManager.ModifyTransaction();
 
             //Assert
-            if (editField == 0)
+            Assert.Multiple(() =>
             {
-                Assert.AreEqual(editedField, _transactionsManager.transactionRepository()[inputIndex].Type);
-            }
-            else if (editField == 1)
-            {
-                Assert.AreEqual(int.Parse(editedField), _transactionsManager.transactionRepository()[inputIndex].Amount);
-            }
-            else if (editField == 2)
-            {
-                Assert.AreEqual(DateOnly.Parse(editedField), _transactionsManager.transactionRepository()[inputIndex].DateOfTransaction);
-            }
-            else if (editField == 3)
-            {
-                if (_transactionsManager.transactionRepository()[inputIndex] is Income income)
-                {
-                    Assert.AreEqual(editedField, income.Source);
-                }
-                else if (_transactionsManager.transactionRepository()[inputIndex] is Expense expense)
-                {
-                    Assert.AreEqual(editedField, expense.Category);
-                }
-            }
+                Assert.AreEqual("EXPENSE", _transactionsManager.transactionRepository()[3].Type);
+                Assert.AreEqual("Food", ((Expense)_transactionsManager.transactionRepository()[3]).Category);
+            });
         }
 
-        private static IEnumerable<object> TrackerListEditTestCases()
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
+        [Test]
+        public void ModifyTransaction_ModifiesTransactionTypeFromExpenseToIncome_ForValidExpenseChosenAndIncomeSourceGiven(List<Transaction> transactionList)
+        {
+            //Arrange
+            _mockInputManager.SetupSequence(i => i.GetTransactionType()).Returns(TransactionType.Expense).Returns(TransactionType.Income);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(DateOnly.Parse("1/1/1"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionType);
+            _mockInputManager.Setup(i => i.GetIncomeSource()).Returns("Salary");
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = transactionList.Count;
+
+            //Act
+            _transactionsManager.ModifyTransaction();
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual("INCOME", _transactionsManager.transactionRepository()[2].Type);
+                Assert.AreEqual("Salary", ((Income)_transactionsManager.transactionRepository()[2]).Source);
+            });
+        }
+
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
+        [Test]
+        public void ModifyTransaction_ModifiesTransactionAmount_ForValidInputTransactionAmount(List<Transaction> transactionList)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Expense);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(DateOnly.Parse("1/1/1"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionAmount);
+            _mockInputManager.Setup(i => i.GetTransactionAmount()).Returns(700);
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = transactionList.Count;
+
+            //Act
+            _transactionsManager.ModifyTransaction();
+
+            //Assert
+            Assert.AreEqual(700, _transactionsManager.transactionRepository()[2].Amount);
+        }
+
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
+        [Test]
+        public void ModifyTransaction_ModifiesTransactionDate_ForValidInputTransactionDate(List<Transaction> transactionList)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Expense);
+            _mockInputManager.SetupSequence(i => i.GetTransactionDate()).Returns(DateOnly.Parse("1/1/1")).Returns(DateOnly.Parse("12/12/12"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionDate);
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = transactionList.Count;
+
+            //Act
+            _transactionsManager.ModifyTransaction();
+
+            //Assert
+            Assert.AreEqual(DateOnly.Parse("12/12/12"), _transactionsManager.transactionRepository()[2].DateOfTransaction);
+        }
+
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
+        [Test]
+        public void ModifyTransaction_ModifiesIncomeSource_ForValidIncomeChosenAndValidIncomeSourceGiven(List<Transaction> transactionList)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Income);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(DateOnly.Parse("12/12/12"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionDetails);
+            _mockInputManager.Setup(i => i.GetIncomeSource()).Returns("Shop");
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = transactionList.Count;
+
+            //Act
+            _transactionsManager.ModifyTransaction();
+
+            //Assert
+            Assert.AreEqual("Shop", ((Income) _transactionsManager.transactionRepository()[3]).Source);
+        }
+
+        [TestCaseSource(nameof(TrackerListEditTestCase))]
+        [Test]
+        public void ModifyTransaction_ModifiesExpenseCategory_ForValidExpenseChosenAndValidExpenseCategoryGiven(List<Transaction> transactionList)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(TransactionType.Expense);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(DateOnly.Parse("1/1/1"));
+            _mockInputManager.Setup(i => i.GetTransactionIndex()).Returns(2);
+            _mockInputManager.Setup(i => i.GetModifyChoice()).Returns(UserEditChoice.EditTransactionDetails);
+            _mockInputManager.Setup(i => i.GetExpenseCategory()).Returns("Travel");
+            _transactionsManager.transactionRepository().AddRange(transactionList);
+            int listCount = transactionList.Count;
+
+            //Act
+            _transactionsManager.ModifyTransaction();
+
+            //Assert
+            Assert.AreEqual("Travel",((Expense) _transactionsManager.transactionRepository()[2]).Category);
+        }
+
+        private static IEnumerable<object> TrackerListEditTestCase()
         {
             return new[]
             {
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, new StringReader("0\n12/12/12\n2\n1\n1000") , 2, 1, "1000"},
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") },new StringReader("1\n12/12/12\n1\n0\n0\nBONUS") , 1, 0 , "INCOME"},
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },new StringReader("1\n1/1/1\n3\n2\n12/12/12"), 3, 2, "12/12/12" },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },new StringReader("0\n12/12/2012\n1\n3\nSHOP RENT"), 0, 3, "SHOP RENT" },
+                new object[] { new List<Transaction> {new Income("INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") } }
             };
         }
 
         [TestCaseSource(nameof(TrackerListSummaryTestCases))]
         [Test]
-        public void GetSummaryOfTransaction_ShallPrintTransactionSummary_WhenTrackerListIsGiven(List<Transaction> transactionList, string expectedTransactionSummary)
+        public void GetSummaryOfTransaction_PrintsTransactionSummary_ForValidTrackerList(List<Transaction> transactionList, string expectedTransactionSummary)
         {
             //Arrange
             var transactionSummary = new StringWriter();
@@ -164,26 +278,88 @@ namespace ExpenseTrackerTests
 
         [TestCaseSource(nameof(TrackerListSearchTestCases))]
         [Test]
-        public void SearchTransaction_ShallSearchForSpecificTransaction_WhenTransactionDetailsGiven(List<Transaction> trackerList, StringReader stringReader)
+        public void SearchTransaction_SearchesForSpecificTransactionsAndReturnsCountOfMatchingTransactions_ForTransactionDetails(List<Transaction> trackerList, TransactionType transactionType, DateOnly transactionDate, int numberOfMatchingChoices)
         {
             //Arrange
-            Console.SetIn(stringReader);
-
-            //Act
+            _mockInputManager.Setup(i => i.GetTransactionType()).Returns(transactionType);
+            _mockInputManager.Setup(i => i.GetTransactionDate()).Returns(transactionDate);
             _transactionsManager.transactionRepository().AddRange(trackerList);
 
+            //Act
+            int matchedChoicesCount = _transactionsManager.SearchTransaction();
+
             //Assert
-            Assert.DoesNotThrow(() => _transactionsManager.SearchTransaction());
+            Assert.AreEqual(numberOfMatchingChoices, matchedChoicesCount);
         }
 
         private static IEnumerable<object> TrackerListSearchTestCases()
         {
             return new[]
             {
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, new StringReader("0\n12/12/12") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") },new StringReader("1\n12/12/12") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") },new StringReader("1\n01/1/2001") },
-                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") },new StringReader("0\n12/12/2012") },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, TransactionType.Income, DateOnly.Parse("12/12/12"), 2 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, TransactionType.Expense, DateOnly.Parse("12/12/12"), 1 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") }, TransactionType.Expense, DateOnly.Parse("1/1/1"), 3 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") }, TransactionType.Expense, DateOnly.Parse("12/12/12"), 0 }
+            };
+        }
+
+        [TestCaseSource(nameof(TrackerListEditToExpenseTestCases))]
+        [Test]
+        public void EditToExpense_EditsToExpense_ForTransactionIndexAndExpenseCategory(List<Transaction> trackerList, int transactionIndex)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetExpenseCategory()).Returns("Shop");
+            _transactionsManager.transactionRepository().AddRange(trackerList);
+
+            //Act
+            _transactionsManager.EditToExpense(transactionIndex);
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual("Shop", ((Expense)(_transactionsManager.transactionRepository()[transactionIndex])).Category);
+                Assert.IsTrue(_transactionsManager.transactionRepository()[transactionIndex] is Expense);
+            });
+        }
+
+
+        private static IEnumerable<object> TrackerListEditToExpenseTestCases()
+        {
+            return new[]
+            {
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, 0  },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, 0 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") }, 0 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY") }, 0 }
+            };
+        }
+
+        [TestCaseSource(nameof(TrackerListEditToIncomeTestCases))]
+        [Test]
+        public void EditToIncome_EditsToIncome_ForTransactionIndexAndIncomeSource(List<Transaction> trackerList, int transactionIndex)
+        {
+            //Arrange
+            _mockInputManager.Setup(i => i.GetIncomeSource()).Returns("Salary");
+            _transactionsManager.transactionRepository().AddRange(trackerList);
+
+            //Act
+            _transactionsManager.EditToIncome(transactionIndex);
+
+            //Assert
+            {
+                Assert.AreEqual("Salary", ((Income)(_transactionsManager.transactionRepository()[transactionIndex])).Source);
+                Assert.IsTrue(_transactionsManager.transactionRepository()[transactionIndex] is Income);
+            }
+        }
+
+        private static IEnumerable<object> TrackerListEditToIncomeTestCases()
+        {
+            return new[]
+            {
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Income("INCOME", 1200, DateOnly.Parse("12/12/2012"), "RENT") }, 1  },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("12/12/12"), "FOOD") }, 1 },
+                new object[] {new List<Transaction> { new Income ( "INCOME", 100, DateOnly.Parse("12/12/12"), "SALARY"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD"), new Expense("EXPENSE", 1, DateOnly.Parse("1/1/1"), "FOOD") }, 3 },
+                new object[] {new List<Transaction> { new Income ( "EXPENSE", 100, DateOnly.Parse("12/12/12"), "SHOP") }, 0 }
             };
         }
     }
