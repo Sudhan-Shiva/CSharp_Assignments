@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyMetadata(1)", "AssemblyMetadata(1)\AssemblyMetadata(1).csproj", "{9827AA92-957E-4411-870A-C29CCC52BA8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicObjectInspector(2)", "DynamicObjectInspector(2)\DynamicObjectInspector(2).csproj", "{A15ED204-4664-40A1-A2F5-447639B03BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9827AA92-957E-4411-870A-C29CCC52BA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9827AA92-957E-4411-870A-C29CCC52BA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9827AA92-957E-4411-870A-C29CCC52BA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A15ED204-4664-40A1-A2F5-447639B03BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A15ED204-4664-40A1-A2F5-447639B03BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A15ED204-4664-40A1-A2F5-447639B03BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A15ED204-4664-40A1-A2F5-447639B03BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
