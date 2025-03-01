@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicObjectInspector(2)",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicMethodInvoker(3)", "DynamicMethodInvoker(3)\DynamicMethodInvoker(3).csproj", "{1850989A-640A-47F7-BD32-05964C38DC5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicTypeBuilder(4)", "DynamicTypeBuilder(4)\DynamicTypeBuilder(4).csproj", "{8A4CE08D-9558-4ECF-854B-EED63722985A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1850989A-640A-47F7-BD32-05964C38DC5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1850989A-640A-47F7-BD32-05964C38DC5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1850989A-640A-47F7-BD32-05964C38DC5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A4CE08D-9558-4ECF-854B-EED63722985A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A4CE08D-9558-4ECF-854B-EED63722985A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A4CE08D-9558-4ECF-854B-EED63722985A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A4CE08D-9558-4ECF-854B-EED63722985A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
