@@ -322,7 +322,6 @@ namespace ExpenseTrackerTests
             });
         }
 
-
         private static IEnumerable<object> TrackerListEditToExpenseTestCases()
         {
             return new[]

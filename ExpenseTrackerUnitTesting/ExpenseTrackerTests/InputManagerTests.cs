@@ -10,13 +10,13 @@ namespace ExpenseTrackerTests
     public class InputManagerTests
     {
         private InputManager _inputManager;
-        private DataValidation _dataValidation;
+        private Mock<DataValidation> _dataValidation;
 
         [SetUp]
         public void SetUp()
         {
-            _dataValidation = new DataValidation();
-            _inputManager = new InputManager(_dataValidation);
+            _dataValidation = new Mock<DataValidation>();
+            _inputManager = new InputManager(_dataValidation.Object);
         }
 
         [TearDown]
@@ -224,10 +224,10 @@ namespace ExpenseTrackerTests
         {
             //Arrange
             Console.SetIn(stringReader);
-            
+
             //Act
             int result = _inputManager.GetValidInteger(Console.ReadLine());
-            
+
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
@@ -268,26 +268,41 @@ namespace ExpenseTrackerTests
             };
         }
 
-        [TestCaseSource(nameof(GetValidInputTestCases))]
         [Test]
-        public void GetValidInput_ReturnsInputString_ForValidInputString(StringReader stringReader, string expectedResult)
+        public void GetValidInput_ReturnsInputString_ForValidInputString()
         {
             //Arrange
-            Console.SetIn(stringReader);
+            _dataValidation.Setup(i => i.IsDataEmpty(It.IsAny<string>())).Returns(false);
+            string expectedResult = "Test";
+
             //Act
-            string result = _inputManager.GetValidInput(Console.ReadLine());
+            string result = _inputManager.GetValidInput(expectedResult);
+
             //Assert
             Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestCaseSource(nameof(GetValidInputTestCases))]
+        [Test]
+        public void GetValidInput_ReturnsInputStringAfterReplacement_ForInvalidInputString(string invalidString, StringReader validStringReader, string validString)
+        {
+            //Arrange
+            _dataValidation.SetupSequence(i => i.IsDataEmpty(It.IsAny<string>())).Returns(true).Returns(false);
+            Console.SetIn(validStringReader);
+
+            //Act
+            string result = _inputManager.GetValidInput(invalidString);
+
+            //Assert
+            Assert.AreEqual(validString, result);
         }
 
         private static IEnumerable<object> GetValidInputTestCases()
         {
             return new[]
             {
-                new object[] { new StringReader($"{null}\n\n123") , "123"},
-                new object[] { new StringReader("Hi") , "Hi"},
-                new object[] { new StringReader($"{null}\n{null}\n{null}789") , "789"},
-                new object[] { new StringReader("\n\n100") , "100"},
+                new object[] { "", new StringReader("Test1"), "Test1" },
+                new object[] { null, new StringReader("Test2"), "Test2" }
             };
         }
 

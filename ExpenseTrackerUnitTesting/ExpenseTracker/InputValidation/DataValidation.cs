@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="inputProductField">The input that must be checked</param>
         /// <returns>True if the input is null or empty string, else false</returns>
-        public bool IsDataEmpty(string inputProductField)
+        public virtual bool IsDataEmpty(string inputProductField)
         {
             return (inputProductField == null || inputProductField == "");
         }
