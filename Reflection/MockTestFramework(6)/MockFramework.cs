@@ -1,5 +1,5 @@
 ﻿using MockFramework;
-using NUnit.Framework;
+using Xunit;
 
 namespace MockTestFramework
 {
@@ -8,40 +8,39 @@ namespace MockTestFramework
         private InstanceCreator _instanceCreator;
         private IMockInterface _mockInterface;
 
-        [SetUp]
-        public void Setup()
+        public MockTest()
         {
             _instanceCreator = new InstanceCreator();
             _mockInterface = _instanceCreator.CreateDynamicTypeInstance() as IMockInterface;
         }
 
-        [TestCase("Circle")]
-        [TestCase("Square")]
-        [TestCase("Rectangle")]
-        [TestCase("Triangle")]
-        [Test]
+        [Theory]
+        [InlineData("Circle")]
+        [InlineData("Square")]
+        [InlineData("Rectangle")]
+        [InlineData("Triangle")]
         public void GetNoOfSides_ReturnsDefaultValue_ForShapeName(string shapeName)
         {
             var result = _mockInterface.GetNoOfSides(shapeName);
-            Assert.AreEqual(10, result);
+            Assert.Equal(10, result);
         }
 
-        [TestCase(10, 20)]
-        [TestCase(20, 30)]
-        [TestCase(30, 40)]
-        [TestCase(40, 50)]
-        [Test]
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(20, 30)]
+        [InlineData(30, 40)]
+        [InlineData(40, 50)]
         public void CalculateArea_ReturnsDefaultValue_ForFirstSideAndSecondSide(int firstSide, int secondSide)
         {
             var result = _mockInterface.CalculateArea(firstSide, secondSide);
-            Assert.AreEqual(10.50, result);
+            Assert.Equal(10.50, result);
         }
 
-        [Test]
+        [Fact]
         public void GetShapeName_ReturnsDefaultValue_WhenInterfaceMethodIsCalled()
         {
             var result = _mockInterface.GetShapeName();
-            Assert.AreEqual("Default", result);
+            Assert.Equal("Default", result);
         }
     }
 }
