@@ -18,7 +18,7 @@ class Program
             Console.WriteLine($"Request error: {e.Message}");
         }
 
-        Console.ReadLine();
+        Console.ReadKey();
     }
 
     private static async Task<string> GetUrlContent(string url)
