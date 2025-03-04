@@ -1,8 +1,14 @@
 ﻿using System.Reflection;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
-    public static void Main()
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
+    static void Main()
     {
         string assemblyPath = "../../../../MethodHelper.dll";
         var assembly = Assembly.LoadFrom(assemblyPath);

@@ -2,9 +2,15 @@
 using DynamicObjectInspector;
 using Pastel;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
-    public static void Main()
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
+    static void Main()
     {
         string assemblyPath = "../../../../ProductClass.dll";
         var assembly = Assembly.LoadFrom(assemblyPath);

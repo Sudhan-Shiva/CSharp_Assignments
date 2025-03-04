@@ -15,7 +15,6 @@ namespace MockTestFramework
             _mockInterface = _instanceCreator.CreateDynamicTypeInstance() as IMockInterface;
         }
 
-
         [TestCase("Circle")]
         [TestCase("Square")]
         [TestCase("Rectangle")]

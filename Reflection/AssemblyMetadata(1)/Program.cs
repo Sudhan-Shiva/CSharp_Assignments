@@ -1,17 +1,24 @@
 ﻿using System.Reflection;
 using Pastel;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
-    public static void Main()
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
+    static void Main()
     {
+        //Path of the assembly
         string assemblyPath = "../../../../EventsAndDelegates(1).dll";
         var assembly = Assembly.LoadFrom(assemblyPath);
         var types = assembly.GetTypes();
 
         foreach (var type in types)
         {
-            Console.WriteLine("\nTYPE :\n".Pastel(ConsoleColor.Magenta));
+            Console.WriteLine("\nTYPE :\n".Pastel(ConsoleColor.Cyan));
             Console.WriteLine(type.FullName);
 
             Console.WriteLine("\nMETHODS :\n".Pastel(ConsoleColor.Magenta));
