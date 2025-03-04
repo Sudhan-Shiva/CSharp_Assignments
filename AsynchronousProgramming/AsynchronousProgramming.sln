@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsynchronousDownloader(1)",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskParallelLibrary(2)", "TaskParallelLibrary(2)\TaskParallelLibrary(2).csproj", "{325E489F-7A6C-4AB1-A497-301DE7B12454}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreading(3)", "MultiThreading(3)\MultiThreading(3).csproj", "{3071ACFD-8C55-43B4-8A2E-FB133B47247E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{325E489F-7A6C-4AB1-A497-301DE7B12454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{325E489F-7A6C-4AB1-A497-301DE7B12454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{325E489F-7A6C-4AB1-A497-301DE7B12454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3071ACFD-8C55-43B4-8A2E-FB133B47247E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3071ACFD-8C55-43B4-8A2E-FB133B47247E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3071ACFD-8C55-43B4-8A2E-FB133B47247E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3071ACFD-8C55-43B4-8A2E-FB133B47247E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
