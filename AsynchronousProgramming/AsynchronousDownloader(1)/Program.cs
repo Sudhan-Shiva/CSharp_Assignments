@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-class Program
+﻿public class Program
 {
     static async Task Main(string[] args)
     {
