@@ -1,8 +1,14 @@
 ﻿using System.Diagnostics;
 using Pastel;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
     static async Task Main()
     {
         Console.WriteLine("Running with ConfigureAwait(false)....".Pastel(ConsoleColor.Magenta));
@@ -22,6 +28,10 @@ public class Program
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// To simulate performing a complex calculation which runs on a different context if awaited.
+    /// </summary>
+    /// <returns>The result of the complex calculation</returns>
     static async Task<int> MethodA()
     {
         Console.WriteLine("Thread ID Before Delay : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
@@ -36,6 +46,10 @@ public class Program
         return result;
     }
 
+    /// <summary>
+    /// To simulate further calculation of data from another method
+    /// </summary>
+    /// <returns>The final result after calculations</returns>
     static async Task<int> MethodB()
     {
         Console.WriteLine("Thread ID Before Calling MethodA : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
@@ -49,6 +63,10 @@ public class Program
         return result;
     }
 
+    /// <summary>
+    /// To simulate performing a complex calculation which runs on the same context if awaited.
+    /// </summary>
+    /// <returns>The result of the complex calculation</returns>
     static async Task<int> MethodAWithSameContext()
     {
         Console.WriteLine("Thread ID Before Delay : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
@@ -63,6 +81,10 @@ public class Program
         return result;
     }
 
+    /// <summary>
+    /// To simulate further calculation of data from another method
+    /// </summary>
+    /// <returns>The final result after calculations</returns>
     static async Task<int> MethodBWithSameContext()
     {
         Console.WriteLine("Thread ID Before Calling MethodA : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
