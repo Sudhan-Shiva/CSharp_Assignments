@@ -30,6 +30,7 @@ public class Program
         {
             result += (i * i);
         }
+
         await Task.Delay(1000).ConfigureAwait(false);
         Console.WriteLine("Thread ID After delay : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
         return result;
@@ -43,6 +44,7 @@ public class Program
         {
             result += (i * i);
         }
+
         Console.WriteLine("Thread ID After Calling MethodA : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
         return result;
     }
@@ -55,6 +57,7 @@ public class Program
         {
             result += (i * i);
         }
+
         await Task.Delay(1000);
         Console.WriteLine("Thread ID After delay : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
         return result;
@@ -68,6 +71,7 @@ public class Program
         {
             result += (i * i);
         }
+
         Console.WriteLine("Thread ID After Calling MethodA : ".Pastel(ConsoleColor.Yellow) + Thread.CurrentThread.ManagedThreadId);
         return result;
     }

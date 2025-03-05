@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreading(3)", "MultiT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadTracking(6)", "ThreadTracking(6)\ThreadTracking(6).csproj", "{B49D29CB-1340-4BEB-9F5C-A597DC7CAC3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilayeredOperations(4)", "MultilayeredOperations(4)\MultilayeredOperations(4).csproj", "{626B9B7A-704D-45FA-A76E-C790B72F54D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B49D29CB-1340-4BEB-9F5C-A597DC7CAC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B49D29CB-1340-4BEB-9F5C-A597DC7CAC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B49D29CB-1340-4BEB-9F5C-A597DC7CAC3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
