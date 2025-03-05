@@ -8,8 +8,8 @@
 
     static async Task DeadlockMethod()
     {
-        var asyncResult = SomeAsyncOperation().Result;
-        //Result blocks main thread from execution till the result is returned frm the SomeAsyncOperation().
+        var asyncResult = await SomeAsyncOperation();
+        //Here, await continues the execution asynchronously by returning the main thread to the thread pool.
 
         Console.WriteLine(asyncResult);
     }
@@ -18,7 +18,9 @@
     {
         await Task.Delay(2000);
         //Here, await continues the execution on the main thread asynchronously as the delay occurs.
-        //The execution is attemped to continue on the main thread but the main thread is blocked by the
+        //The execution is attempted to continue on the main thread.
+        //This doesn't cause deadlock since the main thread is available for execution since await is an non-blocking operation.
+
         return "Hello, World!";
     }
 }
