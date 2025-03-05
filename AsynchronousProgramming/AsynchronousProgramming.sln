@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadTracking(6)", "Thread
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilayeredOperations(4)", "MultilayeredOperations(4)\MultilayeredOperations(4).csproj", "{626B9B7A-704D-45FA-A76E-C790B72F54D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadLockCondition(5)", "DeadLockCondition(5)\DeadLockCondition(5).csproj", "{1CF6BF7C-4C2F-4E0E-99AC-1C86AB8EB8F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{626B9B7A-704D-45FA-A76E-C790B72F54D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF6BF7C-4C2F-4E0E-99AC-1C86AB8EB8F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF6BF7C-4C2F-4E0E-99AC-1C86AB8EB8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF6BF7C-4C2F-4E0E-99AC-1C86AB8EB8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF6BF7C-4C2F-4E0E-99AC-1C86AB8EB8F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

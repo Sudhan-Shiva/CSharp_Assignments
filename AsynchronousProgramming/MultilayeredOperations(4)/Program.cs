@@ -52,6 +52,6 @@ public class Program
         string result = await MethodB();
         Console.WriteLine("\nMethodC => ".Pastel(ConsoleColor.Yellow) + "Calculating the number of Key-Value pairs from the URL Content...");
         var keyValuePairs = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
-        return keyValuePairs.Count();
+        return keyValuePairs.Count;
     }
 }
