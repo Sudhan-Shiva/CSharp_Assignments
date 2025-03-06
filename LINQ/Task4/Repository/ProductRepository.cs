@@ -2,15 +2,29 @@
 
 namespace Task4.Repository
 {
-    public class ProductRepository
+    /// <summary>
+    /// Represents the repository which contains the collection of products
+    /// </summary>
+    public class ProductRepository : IRepository<Product>
     {
+        /// <summary>
+        /// Represents the list of products
+        /// </summary>
         private List<Product> _productList = new List<Product>();
 
-        public void AddProduct(Product product)
+        /// <summary>
+        /// To add a product into the list of products
+        /// </summary>
+        /// <param name="product">The product which is to be added into the list</param>
+        public void AddToRepository(Product product)
         {
             _productList.Add(product);
         }
 
-        public List<Product> GetProductList() => _productList;
+        /// <summary>
+        /// Returns the list of products
+        /// </summary>
+        /// <returns>The list of products</returns>
+        public IEnumerable<Product> GetRepository() => _productList;
     }
 }

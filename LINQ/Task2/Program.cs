@@ -2,22 +2,28 @@
 using ConsoleTables;
 using Task2.Repository;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
     static void Main()
     {
         ProductRepository productRepository = new ProductRepository();
 
-        productRepository.AddProduct(new Product("Phone", 1, 200, "Electronics"));
-        productRepository.AddProduct(new Product("Apple", 2, 20, "Food"));
-        productRepository.AddProduct(new Product("Tablet", 3, 400, "Electronics"));
-        productRepository.AddProduct(new Product("Laptop", 4, 450, "Electronics"));
-        productRepository.AddProduct(new Product("Ball", 5, 20, "Sports"));
-        productRepository.AddProduct(new Product("Play Station", 6, 1000, "Electronics"));
-        productRepository.AddProduct(new Product("Gaming Laptop", 7, 700, "Electronics"));
-        productRepository.AddProduct(new Product("Pizza", 8, 120, "Food"));
+        productRepository.AddToRepository(new Product("Phone", 1, 200, "Electronics"));
+        productRepository.AddToRepository(new Product("Apple", 2, 20, "Food"));
+        productRepository.AddToRepository(new Product("Tablet", 3, 400, "Electronics"));
+        productRepository.AddToRepository(new Product("Laptop", 4, 450, "Electronics"));
+        productRepository.AddToRepository(new Product("Ball", 5, 20, "Sports"));
+        productRepository.AddToRepository(new Product("Play Station", 6, 1000, "Electronics"));
+        productRepository.AddToRepository(new Product("Gaming Laptop", 7, 700, "Electronics"));
+        productRepository.AddToRepository(new Product("Pizza", 8, 120, "Food"));
 
-        var groupProductsByCategory = productRepository.GetProductList().GroupBy(product => product.ProductCategory);
+        var groupProductsByCategory = productRepository.GetRepository().GroupBy(product => product.ProductCategory);
 
         var productCountInEachCategory = groupProductsByCategory.Select(product => 
             (product.First().ProductCategory,
@@ -49,17 +55,17 @@ public class Program
 
         SupplierRepository supplierRepository = new SupplierRepository();
 
-        supplierRepository.AddSupplier(new Supplier ("Supplier1", 10, 1) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier2", 11, 2) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier3", 12, 6) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier4", 13, 4) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier5", 14, 5) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier6", 15, 8) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier7", 15, 7) );
-        supplierRepository.AddSupplier(new Supplier ("Supplier8", 16, 3) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier1", 10, 1) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier2", 11, 2) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier3", 12, 6) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier4", 13, 4) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier5", 14, 5) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier6", 15, 8) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier7", 15, 7) );
+        supplierRepository.AddToRepository(new Supplier ("Supplier8", 16, 3) );
 
-        var productAndSupplierJoin = productRepository.GetProductList()
-            .Join(supplierRepository.GetSupplierList(), 
+        var productAndSupplierJoin = productRepository.GetRepository()
+            .Join(supplierRepository.GetRepository(), 
             product => product.ProductId, 
             supplier => supplier.ProductId,
             (product , supplier) => new { supplierName = supplier.SupplierName ,productName = product.ProductName, commonId = product.ProductId });

@@ -8,22 +8,22 @@
         /// <summary>
         /// The name of the product
         /// </summary>
-        public string ProductName;
+        public string ProductName { get; set; }
 
         /// <summary>
         /// The ID of the Product
         /// </summary>
-        public int ProductId;
+        public int ProductId { get; set; }
 
         /// <summary>
         /// The price of the product
         /// </summary>
-        public decimal ProductPrice;
+        public decimal ProductPrice { get; set; }
 
         /// <summary>
         /// The category of the product
         /// </summary>
-        public string ProductCategory;
+        public string ProductCategory { get; set; }
 
         /// <summary>
         /// The constructor block

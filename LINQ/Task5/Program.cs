@@ -3,10 +3,16 @@ using Task5.Repository;
 using ConsoleTables;
 using Task5.Utility;
 
+/// <summary>
+/// Entry class of the application
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main method which acts as the Entry point to the program
+    /// </summary>
     static void Main()
-    {    
+    {
         IRepository<Product> productRepository = new ProductRepository();
         QueryBuilder<Product> queryBuilder = new QueryBuilder<Product>(productRepository.GetRepository());
 
@@ -46,10 +52,14 @@ public class Program
         supplierRepository.AddToRepository(new Supplier("Supplier8", 17, 3));
 
         var resultList = queryBuilderForSupplier.SortBy(s => s.ProductId)
-                                       .Filter(s => s.SupplierId > 13 )
-                                       .Execute();
+                                               .Filter(s => s.SupplierId > 1)
+                                               .Join(productRepository.GetRepository(),
+                                                     s => s.ProductId,
+                                                     p => p.ProductId,
+                                                     (s, p) => new Supplier(s.SupplierName + $" : {p.ProductName}", s.SupplierId, s.ProductId))
+                                               .Execute();
 
-        ConsoleTable resultantSuppliers = new("Supplier Name", "Supplier ID", "Product ID");
+        ConsoleTable resultantSuppliers = new("Supplier Name + Product Name", "Supplier ID", "Product ID");
 
         foreach (var filteredSupplier in resultList)
         {

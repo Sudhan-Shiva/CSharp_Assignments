@@ -1,4 +1,4 @@
-﻿namespace Task5.Model
+﻿namespace Task4.Model
 {
     /// <summary>
     /// Represents the Repository which contains the collection
